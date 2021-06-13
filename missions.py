@@ -1,5 +1,7 @@
 #For python 3
 
+#define the list of missions
+#TODO: put in external files or db
 missions = {
     1: { 
         'title': "Rescate", 
@@ -49,28 +51,34 @@ missions = {
     8:{'title':"Undefined"},
 }
 
+#define the initial missions
 available = [1,2,3]
 
-
+#start printing the available missions
 print("Misiones disponibles:");
 for i in available:
     print(str(i) + '. ' + missions.get(i)['title'])
 
+#select the current mission
 selected = int( input("seleccione la mission: ") )
 
 print ("-------------------------")
 print (missions.get(selected)['title'])
 print (missions.get(selected)['desc'])
 
+#print the possible endings of the selected missions
 print ("Los posibles finales para la aventura son:")
 for i in missions.get(selected)['endings']:
     print(str(i) + '. ' + missions.get(selected)['endings'][i]['title'])
 
+#select the ending
 ending = int( input("seleccione el final logrado: ") )
 
 print ("-------------------------")
 print(missions.get(selected)['endings'][ending]['title'])
 print(missions.get(selected)['endings'][ending]['desc'])
+
+#check for forced missions
 
 if 'forced_next' in missions.get(selected)['endings'][ending].keys():
     print("hay una mision forzada")
@@ -85,7 +93,7 @@ for i in available:
 #Add new missions
 available.extend(missions.get(selected)['next'])
 
-print(available)
+print ("-------------------------")
 print("siguientes misiones:")
 for i in available:
     print(str(i) + '. ' + missions.get(i)['title'])
