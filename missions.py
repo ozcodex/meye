@@ -12,7 +12,7 @@ missions = {
             2: {'title':"El objetivo no fue rescatado",'desc':'Luego de fracasar en su mision el grupo se entera de que la mision era falsa, realmente era un secuestro camuflado, son fichados como cazadores no eticos'},
             3: {'title':"Muerte del objetivo",'desc': "la doncella muere, quedan fichados como criminales hasta que demuestren su inocencia"},
             },
-        'next': [7,8],
+        'next': [8,9],
         'limited': True,
         },
     2: { 
@@ -26,7 +26,7 @@ missions = {
             4: {'title':"Muchos pobladores murieron, pero el pueblo quedo en buen estado",'desc':'So pena de la muerte de muchas personas lograron limpiar el pueblo de las creatiuras invasoras'},
             5: {'title':"El pueblo fue destruido y muchas personas murieron",'desc':'A pesar de los efuerzos la mision ha fracasado, con un pueblo destruido y una poblacion '}
             },
-        'next': [7,8,9],
+        'next': [8,9],
         'limited': False,
         
         },
@@ -40,7 +40,7 @@ missions = {
             3:{'title':"Uno o mas integrantes son atrapados",'desc':'Algunos miembros del grupo han sido atrapados, su responsabilidad como cazadores es no dejarlos atras', 'forced_next':5},
             4:{'title':"Escapan pero no lograr robar el objeto",'desc':'La mision ha fallado, la mala reputacion empieza a cernirse sobre el grupo'}
             },
-        'next': [7,8],
+        'next': [8,9],
         'limited': False,
         
         },
@@ -61,14 +61,14 @@ missions = {
         'desc':"El general del fuerte les ofrece al grupo de cazadores, a cambio de liberar a los prisioneros, una mision de asesinato",
         'default_ending': 3,
         'endings':{
-            1:{'title':"Los cazadores aceptan el trato",'desc':""},
-            2:{'title':"Los cazadores se niegan al trato",'desc':""},
+            1:{'title':"Los cazadores aceptan el trato",'desc':"Ahora los cazadores han quedado comprometidos con el general y una nueva mision los aguarda", "forced_next":6},
+            2:{'title':"Los cazadores se niegan al trato",'desc':"Al negarse al trato son decrarados como enemigos y ahora deben rescatar a los capturados","forced_next":7},
         },
-        'next': [7,8],
+        'next': [8,9],
         'limited':True,
         },
-    6:{'title':"Undefined"},
-    7:{'title':"Undefined"},
+    6:{'title':"Asesinato"},
+    7:{'title':"Escape"},
     8:{'title':"Undefined"},
     9:{'title':"Undefined"},
 }
