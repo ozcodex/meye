@@ -31,7 +31,6 @@ input:
 	{
 		material
 		type
-		level
 		dimension
 		thickness
 		quality
@@ -51,29 +50,31 @@ output:
 	}
 */
 
-function createWeapon(params) {
+function getRequiredLevel(quality){
+
+}
+
+function createBaseWeapon(params) {
 	const material = materials[params.material];
 	const raw_material = createRaw({
 		material: params.material,
-		dimension: params.dimension,
+		dimension: weapons.dimension[params.dimension],
 		thickness: params.thickness,
 	});
-
-	const weapon = weapons[params.type];
-	const size = weapon.size;
+	const weapon_type = weapons.type[params.type];
 	return {
 		damage: 0, //todo
-		resistence: 0, //todo
 		slice: 0, //todo
 		bleeding: 0, //todo
-		size: 0, //todo
-		throwing: 0, //todo
-		weight: 0, //todo
+		resistence: material.resistence,
+		size: raw_material.size,
+		throwing: raw_material.weight * weapon_type.throwing,
+		weight: raw_material.weight,
 		damping: min(
 			(params.thickness / 5) * material.damping,
 			material.damping
 		),
-		useful_life: 0, //todo
+		useful_life: params.quality * material.useful_life,
 		price: {
 			raw: raw_material.price,
 			crafting: 0, //todo
@@ -84,5 +85,5 @@ function createWeapon(params) {
 
 module.exports = {
 	createRaw,
-	createWeapon,
+	createBaseWeapon,
 };

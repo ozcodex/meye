@@ -22,7 +22,7 @@
 		"small": 0.25,
 		"short": 0.5,
 		"half": 1,
-		"long": 3,
+		"large": 3,
 		"two_handed": 5
 	},
 	"level": {
