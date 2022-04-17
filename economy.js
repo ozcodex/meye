@@ -1,27 +1,28 @@
 const materials = require("./materials.json");
 const weapons = require("./weapons.json");
-
+const min = Math.min;
 /*
 input:
 	{
 		material
-		size
+		dimension
 		thickness
 	}
 output:
 	{
 		weight
 		price
+		size
 	}
 */
 
 function createRaw(params) {
-	const absolute_size = params.size * params.thickness;
+	const size = params.dimension * params.thickness;
 	const material = materials[params.material];
 	return {
-		weight: material.weight * absolute_size,
-		price: material.price.base * absolute_size,
-		size: absolute_size,
+		weight: material.weight * size,
+		price: material.price.base * size,
+		size,
 	};
 }
 
@@ -29,34 +30,59 @@ function createRaw(params) {
 input:
 	{
 		material
+		type
+		level
+		dimension
 		thickness
+		quality
 	}
 output:
 	{
-		resistence
-		lance*
-		damping
-		absolute_size
-		price
 		damage
-		desangre*
-		corte*
+		resistence
+		slice
+		bleeding
+		size
+		throwing
 		weight
-		size_restrictions
+		damping
+		useful_life
+		price
 	}
 */
 
-module.exports.createDagger = (params) => {
-	const weapon = weapons["daga"];
-	const size = weapon.size;
-	const raw_material = createRaw({ size, ...params });
+function createWeapon(params) {
 	const material = materials[params.material];
+	const raw_material = createRaw({
+		material: params.material,
+		dimension: params.dimension,
+		thickness: params.thickness,
+	});
+
+	const weapon = weapons[params.type];
+	const size = weapon.size;
 	return {
-		damping: (params.thickness / 5) * material.damping,
+		damage: 0, //todo
+		resistence: 0, //todo
+		slice: 0, //todo
+		bleeding: 0, //todo
+		size: 0, //todo
+		throwing: 0, //todo
+		weight: 0, //todo
+		damping: min(
+			(params.thickness / 5) * material.damping,
+			material.damping
+		),
+		useful_life: 0, //todo
+		price: {
+			raw: raw_material.price,
+			crafting: 0, //todo
+			fee: 0, //todo,
+		},
 	};
-};
+}
 
 module.exports = {
 	createRaw,
-	createDagger,
+	createWeapon,
 };

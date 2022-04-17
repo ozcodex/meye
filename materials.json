@@ -1,10 +1,10 @@
 {
 	"cristal": {
-		"damage": 27.5,
-		"resistence": 2,
+		"damage": 60,
+		"resistence": 5,
 		"damping": 5,
 		"useful_life": 1,
-		"weight": 1,
+		"weight": 4,
 		"price": {
 			"base": 20,
 			"damage": 2,

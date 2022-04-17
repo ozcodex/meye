@@ -1,6 +1,34 @@
 {
-	"daga":{
-		"size": 0.25
+	"type": {
+		"projectile ": {
+			"variable_damage": 0,
+			"throwing": 0.5
+		},
+		"piercing": {
+			"variable_damage": 0.3,
+			"throwing": 1
+		},
+		"blade": {
+			"variable_damage": 0.5,
+			"throwing": 2
+		},
+		"blunt": {
+			"variable_damage": 0.8,
+			"throwing": 3
+		}
+	},
+	"dimension": {
+		"ultra_small": 0.1,
+		"small": 0.25,
+		"short": 0.5,
+		"half": 1,
+		"long": 3,
+		"two_handed": 5
+	},
+	"level": {
+		"trainee": { "quality": 0.1 },
+		"function": { "quality": 0.3 },
+		"discipline": { "quality": 0.7 },
+		"science": { "quality": 1 }
 	}
-
 }
