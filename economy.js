@@ -3,6 +3,7 @@ const weapons = require("./weapons.json");
 const min = Math.min;
 const max = Math.max;
 const floor = Math.floor;
+const round = Math.round;
 const abs = Math.abs;
 /*
 input:
@@ -87,11 +88,11 @@ function calculateDamage(params) {
 			//damage calculed by damping
 			base_damage = max(
 				0,
-				floor((calculateDamping(params) * dimension_value) / 10)
+				round((calculateDamping(params) * dimension_value) / 10)
 			);
 			break;
 		default:
-			base_damage = floor(
+			base_damage = round(
 				weapon_type.damage[0] +
 					weapon_type.damage[1] * dimension_value +
 					weapon_type.damage[2] * dimension_value ** 2
@@ -101,7 +102,7 @@ function calculateDamage(params) {
 	base_damage = min(material.damage, base_damage);
 	//reduce variable damage percent by quality
 	damage = base_damage * (1 - variable_damage * (1 - params.quality));
-	return floor(damage);
+	return round(damage);
 }
 
 /*
@@ -123,7 +124,7 @@ function calculateSlice(params) {
 			0;
 			break;
 		default:
-			slice = floor(
+			slice = round(
 				weapon_type.slice[0] +
 					weapon_type.slice[1] * thickness +
 					weapon_type.slice[2] * thickness ** 2
@@ -152,7 +153,7 @@ function calculateBleeding(params) {
 			0;
 			break;
 		default:
-			bleeding = floor(
+			bleeding = round(
 				weapon_type.bleeding[0] +
 					weapon_type.bleeding[1] * thickness +
 					weapon_type.bleeding[2] * thickness ** 2
@@ -166,18 +167,29 @@ function calculateBleeding(params) {
 input:
 	{
 		dimension
-		weight
+		thickness
+		material
 	}
 output:
-	[restrictions]
+	[
+		{
+			restriction
+			reduction
+		}
+	]
 */
 function calculateRestrictions(params) {
-	const restrictions = weapons.dimension[params.dimension].restrictions;
-	const reduction = params.weight / restrictions.length;
-	
-	console.log(restrictions.map((r) => {
-		r: reduction;
-	}));
+	let restrictions = weapons.dimension[params.dimension].restrictions;
+	const raw_material = createRaw(params);
+	const weight = raw_material.weight;
+	const reduction = floor(weight / restrictions.length);
+
+	restrictions = restrictions.map((r) => ({ restriction: r, reduction }));
+	const missing = weight - reduction * restrictions.length;
+	for (let i = 0; i < missing; i++) {
+		restrictions[i].reduction++;
+	}
+	return restrictions;
 }
 
 /*
@@ -217,8 +229,9 @@ output:
 		size
 		throwing
 		weight
-		damping
+		restrictions
 		range
+		damping
 		useful_life
 		crafting_level
 		price
@@ -241,6 +254,7 @@ function createWeapon(params) {
 		size: raw_material.size,
 		throwing: raw_material.weight * weapon_type.throwing,
 		weight: raw_material.weight,
+		restrictions: calculateRestrictions(params),
 		range: [floor(range / 2), range],
 		damping: calculateDamping(params),
 		useful_life: floor(useful_life),
@@ -262,14 +276,20 @@ function test(test_case) {
 }
 
 test({
-	material: "steel",
-	type: "blade",
+	material: "wood",
+	type: "tension",
 	dimension: "large",
-	thickness: "3",
+	thickness: "2",
 	quality: 0.7,
 });
 
-calculateRestrictions({ weight: 9, dimension: "large" });
+test({
+	material: "iron",
+	type: "projectile",
+	dimension: "small",
+	thickness: "0.5",
+	quality: 0.7,
+});
 
 //exports
 module.exports = {
