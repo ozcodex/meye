@@ -21,7 +21,7 @@
 		"weight": 4,
 		"level": 0,
 		"price": {
-			"base": 20,
+			"base": 1000,
 			"useful_life": 0
 		}
 	},
