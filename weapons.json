@@ -3,21 +3,21 @@
 		"projectile ": {
 			"variable_damage": 0,
 			"throwing": 0.5,
-			"damage": [],
+			"damage": [-0.165, 4.13, -0.0202],
 			"slice": [],
 			"range": 0
 		},
 		"piercing": {
 			"variable_damage": 0.3,
 			"throwing": 1,
-			"damage": [],
+			"damage": [-0.8, 6.62, 0.294],
 			"slice": [],
 			"range": 5
 		},
 		"blade": {
 			"variable_damage": 0.5,
 			"throwing": 2,
-			"damage": [],
+			"damage": [-1.74, 12.3, 0.0323],
 			"slice": [],
 			"range": 3
 		},
@@ -31,11 +31,11 @@
 		"shear": {
 			"variable_damage": 0.5,
 			"throwing": 3,
-			"damage": [],
+			"damage": [1.32, 11.8, -0.816],
 			"slice": [],
 			"range": 4
 		},
-		"shear": {
+		"tension": {
 			"variable_damage": 0.5,
 			"throwing": 3,
 			"damage": [],
@@ -46,27 +46,33 @@
 	"dimension": {
 		"ultra_small": {
 			"value": 0.1,
-			"level": 2
+			"level": 2,
+			"restrictions": "R",
 		},
 		"small": {
 			"value": 0.25,
-			"level": 0
+			"level": 0,
+			"restrictions": "R",
 		},
 		"short": {
 			"value": 0.5,
-			"level": 0
+			"level": 0,
+			"restrictions": "RF",
 		},
 		"half": {
 			"value": 1,
-			"level": 0
+			"level": 0,
+			"restrictions": "RF",
 		},
 		"large": {
 			"value": 3,
-			"level": 1
+			"level": 1,
+			"restrictions": "RFV",
 		},
 		"two_handed": {
 			"value": 5,
-			"level": 1
+			"level": 1,
+			"restrictions": "RFVA",
 		}
 	},
 	"level": {

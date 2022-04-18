@@ -20,7 +20,8 @@ output:
 */
 
 function createRaw(params) {
-	const size = params.dimension * params.thickness;
+	const dimension_value = weapons.dimension[params.dimension].value;
+	const size = dimension_value * params.thickness;
 	const material = materials[params.material];
 	return {
 		weight: material.weight * size,
@@ -70,10 +71,52 @@ output:
 	damage
 */
 function calculateDamage(params) {
-	if (params.type === "blunt") {
-		//calculations based on weight
-		return 0;
+	let base_damage;
+	const material = materials[params.material];
+	const dimension_value = weapons.dimension[params.dimension].value;
+	const raw_material = createRaw(params);
+	const weapon_type = weapons.type[params.type];
+	const variable_damage = weapon_type.variable_damage;
+	const damping = calculateDamping(params)
+	switch (params.type) {
+		case "blunt":
+			//calculations based on weight
+			base_damage = raw_material.weight;
+			break;
+		case "tension":
+			//damage calculed by damping
+			base_damage = max(0,floor(calculateDamping(params)*dimension_value/10))
+			break;
+		default:
+			base_damage = floor(
+				weapon_type.damage[0] +
+				weapon_type.damage[1] * dimension_value +
+				weapon_type.damage[2] * dimension_value ** 2);
+			break;
 	}
+	base_damage = min(material.damage, base_damage)
+	//reduce variable damage percent by quality
+	damage = base_damage * (1 - variable_damage * (1 - params.quality));
+	return floor(damage);
+}
+
+/*
+input:
+	{
+		material
+		thickness
+	}
+output:
+	damping
+*/
+
+function calculateDamping(params){
+	const material = materials[params.material];
+	const damping = min(
+			(params.thickness / 5) * material.damping,
+			material.damping
+		)
+	return damping
 }
 
 /*
@@ -105,18 +148,13 @@ output:
 function createWeapon(params) {
 	const material = materials[params.material];
 	const dimension_value = weapons.dimension[params.dimension].value;
-	const raw_material = createRaw({
-		material: params.material,
-		dimension: dimension_value,
-		thickness: params.thickness,
-	});
+	const raw_material = createRaw(params);
 	const useful_life = params.quality * material.useful_life;
 	const weapon_type = weapons.type[params.type];
 	const level = getRequiredLevel(params);
 	const range = dimension_value * weapon_type.range;
-	console.log(dimension_value - params.thickness)
 	return {
-		damage: 0, //todo
+		damage: calculateDamage(params),
 		slice: 0, //todo
 		bleeding: 0, //todo
 		resistence: material.resistence,
@@ -124,10 +162,7 @@ function createWeapon(params) {
 		throwing: raw_material.weight * weapon_type.throwing,
 		weight: raw_material.weight,
 		range: [floor(range / 2), range],
-		damping: min(
-			(params.thickness / 5) * material.damping,
-			material.damping
-		),
+		damping: calculateDamping(params),
 		useful_life: floor(useful_life),
 		crafting_level: level,
 		price: {
@@ -147,31 +182,15 @@ function test(test_case) {
 }
 
 test({
-	material: "iron",
-	type: "blunt",
+	material: "steel",
+	type: "blade",
 	dimension: "large",
-	thickness: "5",
-	quality: 0.7,
-});
-
-test({
-	material: "iron",
-	type: "blade",
-	dimension: "half",
-	thickness: "2",
-	quality: 0.7,
-});
-
-test({
-	material: "black_iron",
-	type: "blade",
-	dimension: "two_handed",
-	thickness: "2",
+	thickness: "3",
 	quality: 0.7,
 });
 
 
-//exports 
+//exports
 module.exports = {
 	createRaw,
 	createWeapon,
