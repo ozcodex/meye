@@ -1,169 +1,193 @@
 {
-	"cristal": {
+	"crystal": {
 		"damage": 60,
 		"resistence": 5,
 		"damping": 5,
 		"useful_life": 1,
 		"weight": 4,
+		"level": 0,
 		"price": {
 			"base": 20,
-			"damage": 2,
 			"useful_life": 0
 		}
 	},
-	"cuero": {
+	"leather": {
 		"damage": 1,
 		"resistence": 5,
 		"damping": 20,
 		"useful_life": 10,
 		"weight": 0.2,
+		"level": 0,
 		"price": {
 			"base": 10,
-			"damage": 1,
 			"useful_life": 1
 		}
 	},
-	"madera": {
+	"wood": {
 		"damage": 5,
 		"resistence": 10,
 		"damping": 40,
 		"useful_life": 20,
 		"weight": 0.25,
+		"level": 0,
 		"price": {
 			"base": 5,
-			"damage": 1,
 			"useful_life": 1
 		}
 	},
-	"roca": {
+	"wothe_wood": {
+		"damage": 5,
+		"resistence": 10,
+		"damping": 40,
+		"useful_life": 20,
+		"weight": 0.25,
+		"level": 4,
+		"price": {
+			"base": 1000,
+			"useful_life": 1
+		}
+	},
+	"stone": {
 		"damage": 10,
 		"resistence": 10,
 		"damping": 20,
 		"useful_life": 50,
 		"weight": 3,
+		"level": 0,
 		"price": {
 			"base": 10,
-			"damage": 1,
 			"useful_life": 1
 		}
 	},
-	"laton": {
+	"brass": {
 		"damage": 20,
 		"resistence": 10,
 		"damping": 20,
 		"useful_life": 40,
 		"weight": 1,
+		"level": 0,
 		"price": {
 			"base": 20,
-			"damage": 1,
 			"useful_life": 1
 		}
 	},
-	"bronce": {
+	"bronze": {
 		"damage": 20,
 		"resistence": 20,
 		"damping": 40,
 		"useful_life": 60,
 		"weight": 1,
+		"level": 0,
 		"price": {
 			"base": 200,
-			"damage": 1,
 			"useful_life": 20
 		}
 	},
-	"hierro": {
+	"iron": {
 		"damage": 30,
 		"resistence": 30,
 		"damping": 80,
 		"useful_life": 100,
 		"weight": 2,
+		"level": 1,
 		"price": {
 			"base": 20,
-			"damage": 2,
 			"useful_life": 1
 		}
 	},
-	"oro": {
+	"ferro_iron": {
+		"damage": 30,
+		"resistence": 30,
+		"damping": 80,
+		"useful_life": 100,
+		"weight": 2,
+		"level": 1,
+		"price": {
+			"base": 5000,
+			"useful_life": 1
+		}
+	},
+	"gold": {
 		"damage": 20,
 		"resistence": 5,
 		"damping": 10,
 		"useful_life": 60,
 		"weight": 4,
+		"level": 2,
 		"price": {
 			"base": 20000,
-			"damage": 1,
 			"useful_life": 2
 		}
 	},
-	"plata": {
+	"silver": {
 		"damage": 30,
 		"resistence": 10,
 		"damping": 60,
 		"useful_life": 40,
 		"weight": 2,
+		"level": 2,
 		"price": {
 			"base": 2000,
-			"damage": 1,
 			"useful_life": 1
 		}
 	},
-	"acero": {
+	"steel": {
 		"damage": 40,
 		"resistence": 40,
 		"damping": 120,
 		"useful_life": 200,
 		"weight": 1,
+		"level": 2,
 		"price": {
 			"base": 50,
-			"damage": 3,
 			"useful_life": 2
 		}
 	},
-	"platino": {
+	"platinum": {
 		"damage": 20,
 		"resistence": 30,
 		"damping": 60,
 		"useful_life": 250,
 		"weight": 4,
+		"level": 2,
 		"price": {
 			"base": 3000,
-			"damage": 1,
 			"useful_life": 1
 		}
 	},
-	"hierro_negro": {
+	"black_iron": {
 		"damage": 30,
 		"resistence": 50,
 		"damping": 100,
 		"useful_life": 300,
 		"weight": 1,
+		"level": 4,
 		"price": {
 			"base": 30000,
-			"damage": 1,
 			"useful_life": 1
 		}
 	},
-	"acero_negro": {
+	"black_steel": {
 		"damage": 40,
 		"resistence": 60,
 		"damping": 200,
 		"useful_life": 500,
 		"weight": 0.5,
+		"level": 4,
 		"price": {
 			"base": 50000,
-			"damage": 2,
 			"useful_life": 2
 		}
 	},
-	"acero_celeste": {
+	"celestial_steel": {
 		"damage": 60,
 		"resistence": 80,
 		"damping": 300,
 		"useful_life": 600,
 		"weight": 0.5,
+		"level": 4,
 		"price": {
 			"base": 100000,
-			"damage": 5,
 			"useful_life": 2
 		}
 	}

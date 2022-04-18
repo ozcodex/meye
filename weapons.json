@@ -2,33 +2,98 @@
 	"type": {
 		"projectile ": {
 			"variable_damage": 0,
-			"throwing": 0.5
+			"throwing": 0.5,
+			"damage": [],
+			"slice": [],
+			"range": 0
 		},
 		"piercing": {
 			"variable_damage": 0.3,
-			"throwing": 1
+			"throwing": 1,
+			"damage": [],
+			"slice": [],
+			"range": 5
 		},
 		"blade": {
 			"variable_damage": 0.5,
-			"throwing": 2
+			"throwing": 2,
+			"damage": [],
+			"slice": [],
+			"range": 3
 		},
 		"blunt": {
 			"variable_damage": 0.8,
-			"throwing": 3
+			"throwing": 3,
+			"damage": [],
+			"slice": [],
+			"range": 4
+		},
+		"shear": {
+			"variable_damage": 0.5,
+			"throwing": 3,
+			"damage": [],
+			"slice": [],
+			"range": 4
+		},
+		"shear": {
+			"variable_damage": 0.5,
+			"throwing": 3,
+			"damage": [],
+			"slice": [],
+			"range": 4
 		}
 	},
 	"dimension": {
-		"ultra_small": 0.1,
-		"small": 0.25,
-		"short": 0.5,
-		"half": 1,
-		"large": 3,
-		"two_handed": 5
+		"ultra_small": {
+			"value": 0.1,
+			"level": 2
+		},
+		"small": {
+			"value": 0.25,
+			"level": 0
+		},
+		"short": {
+			"value": 0.5,
+			"level": 0
+		},
+		"half": {
+			"value": 1,
+			"level": 0
+		},
+		"large": {
+			"value": 3,
+			"level": 1
+		},
+		"two_handed": {
+			"value": 5,
+			"level": 1
+		}
 	},
 	"level": {
-		"trainee": { "quality": 0.1 },
-		"function": { "quality": 0.3 },
-		"discipline": { "quality": 0.7 },
-		"science": { "quality": 1 }
+		"trainee": {
+			"score": 0,
+			"quality": 0.1,
+			"fee": 10
+		},
+		"function": {
+			"score": 1,
+			"quality": 0.3,
+			"fee": 30
+		},
+		"discipline": {
+			"score": 2,
+			"quality": 0.7,
+			"fee": 50
+		},
+		"science": {
+			"score": 3,
+			"quality": 1,
+			"fee": 100
+		},
+		"mystic": {
+			"score": 4,
+			"quality": 1,
+			"fee": 200
+		}
 	}
 }
