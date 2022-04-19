@@ -35,19 +35,12 @@
 		"blunt": {
 			"variable_damage": 0.8,
 			"throwing": 3,
-			"damage": [],
-			"slice": [],
-			"bleeding": [],
 			"range": 4
 		},
 
 		"tension": {
 			"variable_damage": 0.5,
-			"throwing": 3,
-			"damage": [],
-			"slice": [],
-			"bleeding": [],
-			"range": 0
+			"throwing": 3
 		}
 	},
 	"dimension": {

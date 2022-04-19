@@ -5,6 +5,7 @@ const max = Math.max;
 const floor = Math.floor;
 const round = Math.round;
 const abs = Math.abs;
+const ln = Math.log;
 /*
 input:
 	{
@@ -112,7 +113,7 @@ input:
 		type
 	}
 output:
-	damage
+	slice
 */
 function calculateSlice(params) {
 	let slice;
@@ -121,7 +122,7 @@ function calculateSlice(params) {
 	switch (params.type) {
 		case "blunt":
 		case "tension":
-			0;
+			slice = 0;
 			break;
 		default:
 			slice = round(
@@ -141,7 +142,7 @@ input:
 		type
 	}
 output:
-	damage
+	bleeding
 */
 function calculateBleeding(params) {
 	let bleeding;
@@ -150,7 +151,7 @@ function calculateBleeding(params) {
 	switch (params.type) {
 		case "blunt":
 		case "tension":
-			0;
+			bleeding = 0;
 			break;
 		default:
 			bleeding = round(
@@ -162,7 +163,31 @@ function calculateBleeding(params) {
 	}
 	return bleeding;
 }
+/*
+input:
+	{
+		dimension
+		type
+	}
+output:
+	[range]
+*/
 
+function calculateRange(params) {
+	let range, range_max;
+	const dimension_value = weapons.dimension[params.dimension].value;
+	const weapon_type = weapons.type[params.type];
+	switch (params.type) {
+		case "tension":
+			range_max = round(abs(290 + 140 * ln(dimension_value)) / 10) * 10;
+			break;
+		default:
+			range_max = round(dimension_value * weapon_type.range);
+			break;
+	}
+	range = floor(range_max / 2);
+	return [range, range_max];
+}
 /*
 input:
 	{
@@ -191,7 +216,6 @@ function calculateRestrictions(params) {
 	}
 	return restrictions;
 }
-
 /*
 input:
 	{
@@ -245,7 +269,6 @@ function createWeapon(params) {
 	const useful_life = params.quality * material.useful_life;
 	const weapon_type = weapons.type[params.type];
 	const level = getRequiredLevel(params);
-	const range = dimension_value * weapon_type.range;
 	return {
 		damage: calculateDamage(params),
 		slice: calculateSlice(params),
@@ -255,7 +278,7 @@ function createWeapon(params) {
 		throwing: raw_material.weight * weapon_type.throwing,
 		weight: raw_material.weight,
 		restrictions: calculateRestrictions(params),
-		range: [floor(range / 2), range],
+		range: calculateRange(params),
 		damping: calculateDamping(params),
 		useful_life: floor(useful_life),
 		crafting_level: level,
@@ -278,7 +301,7 @@ function test(test_case) {
 test({
 	material: "wood",
 	type: "tension",
-	dimension: "large",
+	dimension: "short",
 	thickness: "2",
 	quality: 0.7,
 });
@@ -287,8 +310,8 @@ test({
 	material: "iron",
 	type: "projectile",
 	dimension: "small",
-	thickness: "0.5",
-	quality: 0.7,
+	thickness: "2",
+	quality: 0.1,
 });
 
 //exports
