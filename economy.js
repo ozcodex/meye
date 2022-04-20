@@ -37,23 +37,29 @@ input:
 	{
 		material
 		dimension
+		thickness
 		quality
 	}
 output:
 	level
 */
 
-function getRequiredLevel(params) {
+function calculateRequiredLevel(params) {
 	let quality_score = Infinity;
+	const dimension_value = weapons.dimension[params.dimension].value;
 	Object.values(weapons.level).forEach((e) => {
 		if (e.quality >= params.quality && e.score < quality_score) {
 			quality_score = e.score;
 		}
 	});
+	const out_of_limits =
+		(params.thickness < floor(dimension_value / 2)) *
+		weapons.level["mystic"].score;
 	const score = max(
 		materials[params.material].level,
 		weapons.dimension[params.dimension].level,
-		quality_score
+		quality_score,
+		out_of_limits
 	);
 	return Object.keys(weapons.level).find(
 		(k) => weapons.level[k].score == score
@@ -268,7 +274,7 @@ function createWeapon(params) {
 	const raw_material = createRaw(params);
 	const useful_life = params.quality * material.useful_life;
 	const weapon_type = weapons.type[params.type];
-	const level = getRequiredLevel(params);
+	const level = calculateRequiredLevel(params);
 	return {
 		damage: calculateDamage(params),
 		slice: calculateSlice(params),
@@ -309,8 +315,8 @@ test({
 test({
 	material: "iron",
 	type: "projectile",
-	dimension: "small",
-	thickness: "2",
+	dimension: "large",
+	thickness: "0.25",
 	quality: 0.1,
 });
 
