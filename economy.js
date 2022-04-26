@@ -1,11 +1,6 @@
 const materials = require("./materials.json");
 const weapons = require("./weapons.json");
-const min = Math.min;
-const max = Math.max;
-const floor = Math.floor;
-const round = Math.round;
-const abs = Math.abs;
-const ln = Math.log;
+
 /*
 input:
 	{
@@ -44,7 +39,7 @@ output:
 	level
 */
 
-function calculateRequiredLevel(params) {
+function calculateRequiredLevelWeapon(params) {
 	let quality_score = Infinity;
 	const dimension_value = weapons.dimension[params.dimension].value;
 	Object.values(weapons.level).forEach((e) => {
@@ -53,9 +48,9 @@ function calculateRequiredLevel(params) {
 		}
 	});
 	const out_of_limits =
-		(params.thickness < floor(dimension_value / 2)) *
+		(params.thickness < Math.floor(dimension_value / 2)) *
 		weapons.level["mystic"].score;
-	const score = max(
+	const score = Math.max(
 		materials[params.material].level,
 		weapons.dimension[params.dimension].level,
 		quality_score,
@@ -93,23 +88,23 @@ function calculateDamage(params) {
 			break;
 		case "tension":
 			//damage calculed by damping
-			base_damage = max(
+			base_damage = Math.max(
 				0,
-				round((calculateDamping(params) * dimension_value) / 10)
+				Math.round((calculateDamping(params) * dimension_value) / 10)
 			);
 			break;
 		default:
-			base_damage = round(
+			base_damage = Math.round(
 				weapon_type.damage[0] +
 					weapon_type.damage[1] * dimension_value +
 					weapon_type.damage[2] * dimension_value ** 2
 			);
 			break;
 	}
-	base_damage = min(material.damage, base_damage);
+	base_damage = Math.min(material.damage, base_damage);
 	//reduce variable damage percent by quality
 	damage = base_damage * (1 - variable_damage * (1 - params.quality));
-	return round(damage);
+	return Math.round(damage);
 }
 
 /*
@@ -131,7 +126,7 @@ function calculateSlice(params) {
 			slice = 0;
 			break;
 		default:
-			slice = round(
+			slice = Math.round(
 				weapon_type.slice[0] +
 					weapon_type.slice[1] * thickness +
 					weapon_type.slice[2] * thickness ** 2
@@ -160,7 +155,7 @@ function calculateBleeding(params) {
 			bleeding = 0;
 			break;
 		default:
-			bleeding = round(
+			bleeding = Math.round(
 				weapon_type.bleeding[0] +
 					weapon_type.bleeding[1] * thickness +
 					weapon_type.bleeding[2] * thickness ** 2
@@ -185,13 +180,13 @@ function calculateRange(params) {
 	const weapon_type = weapons.type[params.type];
 	switch (params.type) {
 		case "tension":
-			range_max = round(abs(290 + 140 * ln(dimension_value)) / 10) * 10;
+			range_max = Math.round(Math.abs(290 + 140 * Math.log(dimension_value)) / 10) * 10;
 			break;
 		default:
-			range_max = round(dimension_value * weapon_type.range);
+			range_max = Math.round(dimension_value * weapon_type.range);
 			break;
 	}
-	range = floor(range_max / 2);
+	range = Math.floor(range_max / 2);
 	return [range, range_max];
 }
 /*
@@ -213,7 +208,7 @@ function calculateRestrictions(params) {
 	let restrictions = weapons.dimension[params.dimension].restrictions;
 	const raw_material = createRaw(params);
 	const weight = raw_material.weight;
-	const reduction = floor(weight / restrictions.length);
+	const reduction = Math.floor(weight / restrictions.length);
 
 	restrictions = restrictions.map((r) => ({ restriction: r, reduction }));
 	const missing = weight - reduction * restrictions.length;
@@ -234,7 +229,7 @@ output:
 
 function calculateDamping(params) {
 	const material = materials[params.material];
-	const damping = min(
+	const damping = Math.min(
 		(params.thickness / 5) * material.damping,
 		material.damping
 	);
@@ -274,7 +269,7 @@ function createWeapon(params) {
 	const raw_material = createRaw(params);
 	const useful_life = params.quality * material.useful_life;
 	const weapon_type = weapons.type[params.type];
-	const level = calculateRequiredLevel(params);
+	const level = calculateRequiredLevelWeapon(params);
 	return {
 		damage: calculateDamage(params),
 		slice: calculateSlice(params),
@@ -286,25 +281,25 @@ function createWeapon(params) {
 		restrictions: calculateRestrictions(params),
 		range: calculateRange(params),
 		damping: calculateDamping(params),
-		useful_life: floor(useful_life),
+		useful_life: Math.floor(useful_life),
 		crafting_level: level,
 		price: {
 			raw: raw_material.price,
 			crafting:
 				material.price.useful_life * useful_life +
-				raw_material.price * abs(dimension_value - params.thickness),
+				raw_material.price * Math.abs(dimension_value - params.thickness),
 			fee: weapons.level[level].fee,
 		},
 	};
 }
 
 //test cases
-function test(test_case) {
+function testWeapon(test_case) {
 	console.log(test_case);
 	console.log(createWeapon(test_case));
 }
 
-test({
+testWeapon({
 	material: "wood",
 	type: "tension",
 	dimension: "short",
@@ -312,9 +307,9 @@ test({
 	quality: 0.7,
 });
 
-test({
+testWeapon({
 	material: "iron",
-	type: "projectile",
+	type: "blade",
 	dimension: "large",
 	thickness: "0.25",
 	quality: 0.1,
