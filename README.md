@@ -1,7 +1,3 @@
 # meye
 
-
-## Tools
-
-* missions: a mission generator with random quests
-* costs: calculator for the cost of goods
+calculator to create items using the rules of the game.

@@ -1,0 +1,76 @@
+{
+	"type": {
+		"cuirass": {
+			"max_thickness": 5,
+			"restrictions": ["R", "F", "V", "A"],
+			"level": 0,
+		},
+		"plates": {
+			"max_thickness": 4,
+			"restrictions": ["R", "F", "V"],
+			"level": 0,
+		},
+		"scales": {
+			"max_thickness": 3,
+			"restrictions": ["R", "F"],
+			"level": 0,
+		},
+		"studded": {
+			"max_thickness": 2,
+			"restrictions": ["R", "F"],
+			"level": 0,
+		},
+		"mail": {
+			"max_thickness": 1,
+			"restrictions": ["R"],
+			"level": 0,
+		}
+	},
+	"dimension": {
+		"ultra_small": {
+			"value": 0.1,
+		},
+		"small": {
+			"value": 0.25,
+		},
+		"short": {
+			"value": 0.5,
+		},
+		"half": {
+			"value": 1,
+		},
+		"large": {
+			"value": 3,
+		},
+		"two_handed": {
+			"value": 5,
+		}
+	},
+	"level": {
+		"trainee": {
+			"score": 0,
+			"quality": 0.1,
+			"fee": 10
+		},
+		"function": {
+			"score": 1,
+			"quality": 0.3,
+			"fee": 30
+		},
+		"discipline": {
+			"score": 2,
+			"quality": 0.7,
+			"fee": 50
+		},
+		"science": {
+			"score": 3,
+			"quality": 1,
+			"fee": 100
+		},
+		"mystic": {
+			"score": 4,
+			"quality": 1,
+			"fee": 200
+		}
+	}
+}

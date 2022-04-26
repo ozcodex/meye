@@ -73,6 +73,11 @@
 			"value": 5,
 			"level": 1,
 			"restrictions": ["R", "F", "V", "A"]
+		},
+		"gigantic": {
+			"value": 8,
+			"level": 1,
+			"restrictions": ["R", "F", "V", "A"]
 		}
 	},
 	"level": {

@@ -1,31 +1,6 @@
-const materials = require("./materials.json");
-const weapons = require("./weapons.json");
-
-/*
-input:
-	{
-		material
-		dimension
-		thickness
-	}
-output:
-	{
-		weight
-		price
-		size
-	}
-*/
-
-function createRaw(params) {
-	const dimension_value = weapons.dimension[params.dimension].value;
-	const size = dimension_value * params.thickness;
-	const material = materials[params.material];
-	return {
-		weight: material.weight * size,
-		price: material.price.base * size,
-		size,
-	};
-}
+const weapons = require("./def/weapons.json");
+const createRaw = require("./raw").create;
+const util = require("./util")
 
 /*
 input:
@@ -39,26 +14,30 @@ output:
 	level
 */
 
-function calculateRequiredLevelWeapon(params) {
+function calculateRequiredLevel(params) {
+	const dimension_key = util.getKeyByParamLess(
+		weapons.dimension,
+		"value",
+		params.dimension
+	);
+	const raw_material = createRaw(params);
+	const material = raw_material.material;
 	let quality_score = Infinity;
-	const dimension_value = weapons.dimension[params.dimension].value;
 	Object.values(weapons.level).forEach((e) => {
 		if (e.quality >= params.quality && e.score < quality_score) {
 			quality_score = e.score;
 		}
 	});
 	const out_of_limits =
-		(params.thickness < Math.floor(dimension_value / 2)) *
+		(params.thickness < Math.floor(params.dimension / 2)) *
 		weapons.level["mystic"].score;
 	const score = Math.max(
-		materials[params.material].level,
-		weapons.dimension[params.dimension].level,
+		material.level,
+		weapons.dimension[dimension_key].level,
 		quality_score,
 		out_of_limits
 	);
-	return Object.keys(weapons.level).find(
-		(k) => weapons.level[k].score == score
-	);
+	return util.getKeyByParam(weapons.level,'score',score)
 }
 
 /*
@@ -75,12 +54,11 @@ output:
 */
 function calculateDamage(params) {
 	let base_damage;
-	const material = materials[params.material];
-	const dimension_value = weapons.dimension[params.dimension].value;
 	const raw_material = createRaw(params);
+	const material = raw_material.material;
 	const weapon_type = weapons.type[params.type];
 	const variable_damage = weapon_type.variable_damage;
-	const damping = calculateDamping(params);
+	const damping = raw_material.damping;
 	switch (params.type) {
 		case "blunt":
 			//calculations based on weight
@@ -90,14 +68,14 @@ function calculateDamage(params) {
 			//damage calculed by damping
 			base_damage = Math.max(
 				0,
-				Math.round((calculateDamping(params) * dimension_value) / 10)
+				Math.round((damping * params.dimension) / 10)
 			);
 			break;
 		default:
 			base_damage = Math.round(
 				weapon_type.damage[0] +
-					weapon_type.damage[1] * dimension_value +
-					weapon_type.damage[2] * dimension_value ** 2
+					weapon_type.damage[1] * params.dimension +
+					weapon_type.damage[2] * params.dimension ** 2
 			);
 			break;
 	}
@@ -176,14 +154,16 @@ output:
 
 function calculateRange(params) {
 	let range, range_max;
-	const dimension_value = weapons.dimension[params.dimension].value;
 	const weapon_type = weapons.type[params.type];
 	switch (params.type) {
 		case "tension":
-			range_max = Math.round(Math.abs(290 + 140 * Math.log(dimension_value)) / 10) * 10;
+			range_max =
+				Math.round(
+					Math.abs(290 + 140 * Math.log(params.dimension)) / 10
+				) * 10;
 			break;
 		default:
-			range_max = Math.round(dimension_value * weapon_type.range);
+			range_max = Math.round(params.dimension * weapon_type.range);
 			break;
 	}
 	range = Math.floor(range_max / 2);
@@ -205,7 +185,12 @@ output:
 	]
 */
 function calculateRestrictions(params) {
-	let restrictions = weapons.dimension[params.dimension].restrictions;
+	const dimension_key = util.getKeyByParamLess(
+		weapons.dimension,
+		"value",
+		params.dimension
+	);
+	let restrictions = weapons.dimension[dimension_key].restrictions;
 	const raw_material = createRaw(params);
 	const weight = raw_material.weight;
 	const reduction = Math.floor(weight / restrictions.length);
@@ -216,24 +201,6 @@ function calculateRestrictions(params) {
 		restrictions[i].reduction++;
 	}
 	return restrictions;
-}
-/*
-input:
-	{
-		material
-		thickness
-	}
-output:
-	damping
-*/
-
-function calculateDamping(params) {
-	const material = materials[params.material];
-	const damping = Math.min(
-		(params.thickness / 5) * material.damping,
-		material.damping
-	);
-	return damping;
 }
 
 /*
@@ -252,6 +219,7 @@ output:
 		slice
 		bleeding
 		size
+		dimension_type
 		throwing
 		weight
 		restrictions
@@ -263,60 +231,43 @@ output:
 	}
 */
 
-function createWeapon(params) {
-	const material = materials[params.material];
-	const dimension_value = weapons.dimension[params.dimension].value;
+function create(params) {
+	const dimension_key = util.getKeyByParamLess(
+		weapons.dimension,
+		"value",
+		params.dimension
+	);
 	const raw_material = createRaw(params);
+	const material = raw_material.material;
 	const useful_life = params.quality * material.useful_life;
 	const weapon_type = weapons.type[params.type];
-	const level = calculateRequiredLevelWeapon(params);
+	const level = calculateRequiredLevel(params);
 	return {
 		damage: calculateDamage(params),
 		slice: calculateSlice(params),
 		bleeding: calculateBleeding(params),
 		resistence: material.resistence,
 		size: raw_material.size,
+		dimension_type: dimension_key,
 		throwing: raw_material.weight * weapon_type.throwing,
 		weight: raw_material.weight,
 		restrictions: calculateRestrictions(params),
 		range: calculateRange(params),
-		damping: calculateDamping(params),
+		damping: raw_material.damping,
 		useful_life: Math.floor(useful_life),
 		crafting_level: level,
 		price: {
 			raw: raw_material.price,
 			crafting:
 				material.price.useful_life * useful_life +
-				raw_material.price * Math.abs(dimension_value - params.thickness),
+				raw_material.price *
+					Math.abs(params.dimension - params.thickness),
 			fee: weapons.level[level].fee,
 		},
 	};
 }
 
-//test cases
-function testWeapon(test_case) {
-	console.log(test_case);
-	console.log(createWeapon(test_case));
-}
-
-testWeapon({
-	material: "wood",
-	type: "tension",
-	dimension: "short",
-	thickness: "2",
-	quality: 0.7,
-});
-
-testWeapon({
-	material: "iron",
-	type: "blade",
-	dimension: "large",
-	thickness: "0.25",
-	quality: 0.1,
-});
-
 //exports
 module.exports = {
-	createRaw,
-	createWeapon,
+	create,
 };
