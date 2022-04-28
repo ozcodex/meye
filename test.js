@@ -1,9 +1,15 @@
 const createWeapon = require("./weapon").create;
+const createArmor = require("./armor").create;
+
+function testArmor(test_case) {
+	console.log({ class: "armor", ...createArmor(test_case) });
+}
+
+function testWeapon(test_case) {
+	console.log({ class: "weapon", ...createWeapon(test_case) });
+}
 
 //test cases
-function testWeapon(test_case) {
-	console.log({ class: "weapon", ...test_case, ...createWeapon(test_case) });
-}
 
 testWeapon({
 	material: "wood",
@@ -19,4 +25,12 @@ testWeapon({
 	dimension: "3",
 	thickness: "0.25",
 	quality: 0.1,
+});
+
+testArmor({
+	material: "iron",
+	type: "scales",
+	dimension: "3",
+	thickness: 5,
+	quality: 0.7,
 });

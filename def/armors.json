@@ -3,47 +3,44 @@
 		"cuirass": {
 			"max_thickness": 5,
 			"restrictions": ["R", "F", "V", "A"],
-			"level": 0,
+			"level": 0
 		},
 		"plates": {
 			"max_thickness": 4,
 			"restrictions": ["R", "F", "V"],
-			"level": 0,
+			"level": 0
 		},
 		"scales": {
 			"max_thickness": 3,
 			"restrictions": ["R", "F"],
-			"level": 0,
+			"level": 0
 		},
 		"studded": {
 			"max_thickness": 2,
 			"restrictions": ["R", "F"],
-			"level": 0,
+			"level": 0
 		},
 		"mail": {
 			"max_thickness": 1,
 			"restrictions": ["R"],
-			"level": 0,
+			"level": 0
 		}
 	},
 	"dimension": {
-		"ultra_small": {
-			"value": 0.1,
-		},
 		"small": {
-			"value": 0.25,
+			"value": 0.25
 		},
-		"short": {
-			"value": 0.5,
+		"half_piece": {
+			"value": 0.5
 		},
-		"half": {
-			"value": 1,
+		"piece": {
+			"value": 1
 		},
-		"large": {
-			"value": 3,
+		"half_body": {
+			"value": 3
 		},
-		"two_handed": {
-			"value": 5,
+		"full_body": {
+			"value": 5
 		}
 	},
 	"level": {

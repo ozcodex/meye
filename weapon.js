@@ -219,7 +219,7 @@ output:
 		slice
 		bleeding
 		size
-		dimension_type
+		size_type
 		throwing
 		weight
 		restrictions
@@ -248,7 +248,7 @@ function create(params) {
 		bleeding: calculateBleeding(params),
 		resistence: material.resistence,
 		size: raw_material.size,
-		dimension_type: dimension_key,
+		size_type: dimension_key,
 		throwing: raw_material.weight * weapon_type.throwing,
 		weight: raw_material.weight,
 		restrictions: calculateRestrictions(params),
