@@ -96,6 +96,8 @@ output:
 */
 function calculateSlice(params) {
 	let slice;
+	const raw_material = createRaw(params);
+	const material = raw_material.material;
 	const weapon_type = weapons.type[params.type];
 	const thickness = params.thickness;
 	switch (params.type) {
@@ -111,7 +113,7 @@ function calculateSlice(params) {
 			);
 			break;
 	}
-	return slice;
+	return Math.min(slice,material.slice);
 }
 
 /*
