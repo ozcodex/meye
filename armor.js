@@ -113,7 +113,7 @@ function create(params) {
 		bleeding: 0,
 		resistence: material.resistence,
 		size: raw_material.size,
-		size_type: `${dimension_key}/${params.dimension} pieces`,
+		size_type: params.type == 'shield'?dimension_key:`${params.dimension} pieces`,
 		throwing: raw_material.weight * 2,
 		weight: raw_material.weight,
 		restrictions: calculateRestrictions(params),

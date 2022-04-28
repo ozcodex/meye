@@ -29,8 +29,8 @@ testWeapon({
 
 testArmor({
 	material: "iron",
-	type: "scales",
+	type: "shield",
 	dimension: "3",
-	thickness: 5,
+	thickness: 3,
 	quality: 0.7,
 });

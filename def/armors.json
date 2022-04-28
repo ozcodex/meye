@@ -1,5 +1,10 @@
 {
 	"type": {
+		"shield": {
+			"max_thickness": 5,
+			"restrictions": ["R", "F", "V", "A"],
+			"level": 0
+		},
 		"cuirass": {
 			"max_thickness": 5,
 			"restrictions": ["R", "F", "V", "A"],
@@ -46,12 +51,12 @@
 	"level": {
 		"trainee": {
 			"score": 0,
-			"quality": 0.1,
+			"quality": 0.3,
 			"fee": 10
 		},
 		"function": {
 			"score": 1,
-			"quality": 0.3,
+			"quality": 0.5,
 			"fee": 30
 		},
 		"discipline": {
