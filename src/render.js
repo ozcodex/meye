@@ -38,6 +38,7 @@ context.fillRect(0, 2020, width, height);
 // create card
 
 async function create(params) {
+	const name = `${s(params.type)}`.toCap();
 	const desc = `${s(params.type)} ${s(params.size_type)}`.toCap();
 
 	await image("background", [0, 0], [width, height]);
@@ -45,7 +46,7 @@ async function create(params) {
 	context.fillRect(0, 2020, width, height);
 
 	// draw card
-	text(params.name || desc, [100, 200], 70, "start", "#000", "bold");
+	text(params.name || name, [100, 200], 70, "start", "#000", "bold");
 	text(desc, [100, 300], 50, "start", "#555", "italic");
 
 	text(s("size"), [1220, 150], 40, "center", "#555", "bold");
@@ -55,9 +56,10 @@ async function create(params) {
 	const dimension = +(Math.round(params.dimension + "e+1") + "e-1");
 	text(dimension + " D", [1230, 270], 40, "start");
 
-	context.fillStyle = "#777";
+	//todo: set a color by parameter
+	context.fillStyle = "#777"
 	context.fillRect(100, 375, 1300, 700);
-	await image("shield", [100, 375], [1300, 700]);
+	await image(params.type, [100, 375], [1300, 700]);
 	text(`#${params.code}`, [110, 425], 40, "start");
 	text(s(params.material).toCap(), [1375, 1050], 40, "end", "#000", "bold");
 

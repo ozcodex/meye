@@ -23,7 +23,7 @@ const testCases = [
 	},
 	{
 		class: "weapon",
-		material: "platinum",
+		material: "ferro_iron",
 		type: "blade",
 		dimension: "3",
 		thickness: "2",
