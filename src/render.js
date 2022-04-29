@@ -68,16 +68,21 @@ async function create(params) {
 	text(s("resistence").toCap(), [350, 1500], 50, "start");
 	text(s("useful_life").toCap(), [350, 1600], 50, "start");
 
-	text(s(params.throwing).toCap(), [1000, 1200], 50, "end");
-	text(s(params.weight).toCap(), [1000, 1300], 50, "end");
-	text(s(params.damping).toCap(), [1000, 1400], 50, "end");
-	text(s(params.resistence).toCap(), [1000, 1500], 50, "end");
-	text(s(params.useful_life).toCap(), [1000, 1600], 50, "end");
+	text(s(params.throwing).toCap(), [900, 1200], 50, "end");
+	text(s(params.weight).toCap(), [900, 1300], 50, "end");
+	text(s(params.damping).toCap(), [900, 1400], 50, "end");
+	text(s(params.resistence).toCap(), [900, 1500], 50, "end");
+	text(s(params.useful_life).toCap(), [900, 1600], 50, "end");
 
 	let point = 1250;
+	let breaking = Math.ceil(params.restrictions.length / 2) * 100;
 	params.restrictions.forEach((rest) => {
 		let restriction = `${-rest.reduction} ${rest.restriction}`;
-		text(restriction, [1250, point], 70, "center");
+		if (point >= breaking + 1250) {
+			text(restriction, [1300, point - breaking], 50, "center");
+		} else {
+			text(restriction, [1100, point], 50, "center");
+		}
 		point += 100;
 	});
 
