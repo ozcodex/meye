@@ -21,10 +21,18 @@ const testCases = [
 		thickness: "0.5",
 		quality: 0.3,
 	},
+	{
+		class: "weapon",
+		material: "platinum",
+		type: "blade",
+		dimension: "3",
+		thickness: "2",
+		quality: 0.7,
+	},
 ];
 
 testCases.forEach((test) => console.log(create(test)));
 
-console.log(decode("IIVX"));
+console.log(decode("EELX"));
 
-render(create(decode("IIVX")))
+render(create(testCases[2]))

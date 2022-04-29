@@ -22,7 +22,7 @@
 			"damage": [-1.74, 12.3, 0.0323],
 			"slice": [69.4, -24.9, 2.18],
 			"bleeding": [5.62, -1.25, 0.0359],
-			"range": 3
+			"range": 3.2
 		},
 		"shear": {
 			"variable_damage": 0.5,

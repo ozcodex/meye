@@ -40,14 +40,20 @@ context.fillRect(0, 2020, width, height);
 async function create(params) {
 	const desc = `${s(params.type)} ${s(params.size_type)}`.toCap();
 
+	await image("background", [0, 0], [width, height]);
+	context.fillStyle = "#000";
+	context.fillRect(0, 2020, width, height);
+
 	// draw card
 	text(params.name || desc, [100, 200], 70, "start", "#000", "bold");
-	text(desc, [100, 300], 50, "start", "#888", "italic");
+	text(desc, [100, 300], 50, "start", "#555", "italic");
 
 	text(params.size, [1300, 200], 70, "end", "#000", "bold");
 	text(params.thickness + " G", [1330, 150], 40, "start");
 	text(params.dimension + " D", [1330, 220], 40, "start");
 
+	context.fillStyle = "#777";
+	context.fillRect(100, 400, 1300, 700);
 	await image("shield", [100, 400], [1300, 700]);
 	text(`#${params.code}`, [110, 450], 40, "start");
 	text(s(params.material).toCap(), [1350, 1050], 40, "end", "#000", "bold");
@@ -79,15 +85,15 @@ async function create(params) {
 	params.range.forEach((unit) => {
 		range += `${unit}—`;
 	});
-	text(s("range"), [400, 1700], 40, "center", "#888");
+	text(s("range"), [400, 1700], 40, "center", "#555");
 	text(range, [400, 1800], 50, "center");
 
 	let data = `${params.damage} / ${params.slice} / ${params.bleeding}`;
 	text(data, [400, 1900], 70, "center");
 	let label = `${s("damage")} / ${s("slice")} / ${s("bleeding")}`;
-	text(label, [400, 1970], 30, "center", "#888");
+	text(label, [400, 1970], 30, "center", "#555");
 
-	text(s("price"), [1150, 1700], 40, "center", "#888");
+	text(s("price"), [1150, 1700], 40, "center", "#555");
 	await image("raw", [800, 1750], [150, 150]);
 	await image("crafting", [1050, 1750], [150, 150]);
 	await image("fee", [1300, 1750], [150, 150]);
@@ -95,7 +101,7 @@ async function create(params) {
 	text(`${s(params.price.crafting)} R`, [1125, 1970], 40, "center");
 	text(`${s(params.price.fee)} R`, [1375, 1970], 40, "center");
 
-	text(s("Effectos y Habilidades"), [50, 2075], 30, "start", "#888");
+	text(s("Effectos y Habilidades"), [50, 2075], 30, "start", "#555");
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");

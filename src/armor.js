@@ -76,6 +76,21 @@ output:
 	rarity
 */
 function calculateRarity(params) {
+	const level = calculateRequiredLevel(params);
+	let rarity = 'common'
+	if (params.quality == 1) rarity = 'masterly'
+	switch(level){
+		case 'science':
+			if (rarity != 'masterly') rarity = 'rare'
+		break;
+		case 'mystic':
+			rarity = 'special'
+		break;
+		case 'divine':
+			rarity = 'legendary'
+		break;
+	}
+	//todo: supernatural
 	return "rare";
 }
 
