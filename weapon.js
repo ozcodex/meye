@@ -245,6 +245,7 @@ function create(params) {
 	const weapon_type = weapons.type[params.type];
 	const level = calculateRequiredLevel(params);
 	return {
+		...params,
 		damage: calculateDamage(params),
 		slice: calculateSlice(params),
 		bleeding: calculateBleeding(params),

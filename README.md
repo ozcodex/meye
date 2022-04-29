@@ -12,14 +12,19 @@ features:
 
 
 item code, generate and recover
+export card
 explosives
 common objects
+item generator
+graphical interface
+
+v2:
+mystical effects
+
+v3:
+rarity calculator
 poison, venom, toxins and acids
 edibles
 fluids and containers
-rarity calculator
-item generator
-graphical interface
-export card
 write down all the rules for item creation
 generate tables

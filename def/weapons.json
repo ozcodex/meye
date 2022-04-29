@@ -105,6 +105,11 @@
 			"score": 4,
 			"quality": 1,
 			"fee": 200
+		},
+		"divine": {
+			"score": 5,
+			"quality": 1,
+			"fee": -1
 		}
 	}
 }
