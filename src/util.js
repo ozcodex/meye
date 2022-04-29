@@ -26,7 +26,6 @@ function decode(code) {
 		raw.charCodeAt(2) +
 		(raw.charCodeAt(1) << 8) +
 		(raw.charCodeAt(0) << 16);
-		console.log(data)
 	const item_class = getKeyByParam(dict.classes, "value", (data >> 15) & 0x7);
 	const name = dict.collection[code].name;
 	const result = {

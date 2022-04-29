@@ -1,5 +1,6 @@
 const create = require("./index").create;
 const decode = require("./src/util").decode;
+const render = require("./src/render").create;
 
 //test cases
 
@@ -25,3 +26,5 @@ const testCases = [
 testCases.forEach((test) => console.log(create(test)));
 
 console.log(decode("IIVX"));
+
+render(create(decode("IIVX")))
