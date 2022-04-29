@@ -6,10 +6,11 @@ features:
 - allow to create weapons
 - allow tho create armors and shields
 - easy to maintain materials
+- more materials!!
 
 ## To do
 
-add more materials
+
 item code, generate and recover
 explosives
 common objects

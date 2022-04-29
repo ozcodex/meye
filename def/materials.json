@@ -1,11 +1,11 @@
 {
 	"crystal": {
 		"damage": 60,
-		"slice": 0,
-		"resistence": 5,
-		"damping": 5,
+		"resistence": 25,
+		"slice": 200,
+		"damping": 20,
 		"useful_life": 1,
-		"weight": 4,
+		"weight": 1,
 		"level": 0,
 		"price": {
 			"base": 20,
@@ -14,11 +14,11 @@
 	},
 	"marine_crystal": {
 		"damage": 60,
-		"slice": 0,
-		"resistence": 5,
-		"damping": 5,
+		"resistence": 25,
+		"slice": 200,
+		"damping": 20,
 		"useful_life": 1,
-		"weight": 4,
+		"weight": 1,
 		"level": 0,
 		"price": {
 			"base": 1000,
@@ -26,12 +26,12 @@
 		}
 	},
 	"leather": {
-		"damage": 1,
-		"slice": 0,
-		"resistence": 5,
-		"damping": 20,
-		"useful_life": 10,
-		"weight": 0.2,
+		"damage": 10,
+		"resistence": 15,
+		"slice": 8,
+		"damping": 50,
+		"useful_life": 60,
+		"weight": 0.1,
 		"level": 0,
 		"price": {
 			"base": 10,
@@ -39,12 +39,12 @@
 		}
 	},
 	"wood": {
-		"damage": 5,
-		"slice": 0,
+		"damage": 10,
 		"resistence": 10,
-		"damping": 40,
-		"useful_life": 20,
-		"weight": 0.25,
+		"slice": 9,
+		"damping": 10,
+		"useful_life": 15,
+		"weight": 0.5,
 		"level": 0,
 		"price": {
 			"base": 5,
@@ -52,12 +52,12 @@
 		}
 	},
 	"wothe_wood": {
-		"damage": 5,
-		"slice": 0,
+		"damage": 10,
 		"resistence": 10,
-		"damping": 40,
-		"useful_life": 20,
-		"weight": 0.25,
+		"slice": 9,
+		"damping": 10,
+		"useful_life": 15,
+		"weight": 0.5,
 		"level": 4,
 		"price": {
 			"base": 1000,
@@ -65,12 +65,12 @@
 		}
 	},
 	"stone": {
-		"damage": 10,
-		"slice": 0,
-		"resistence": 10,
-		"damping": 20,
-		"useful_life": 50,
-		"weight": 3,
+		"damage": 20,
+		"resistence": 9,
+		"slice": 20,
+		"damping": 60,
+		"useful_life": 70,
+		"weight": 1,
 		"level": 0,
 		"price": {
 			"base": 10,
@@ -79,11 +79,11 @@
 	},
 	"brass": {
 		"damage": 20,
-		"slice": 0,
-		"resistence": 10,
-		"damping": 20,
-		"useful_life": 40,
-		"weight": 1,
+		"resistence": 20,
+		"slice": 20,
+		"damping": 65,
+		"useful_life": 70,
+		"weight": 2,
 		"level": 0,
 		"price": {
 			"base": 20,
@@ -92,23 +92,23 @@
 	},
 	"bronze": {
 		"damage": 20,
-		"slice": 0,
-		"resistence": 20,
-		"damping": 40,
-		"useful_life": 60,
-		"weight": 1,
-		"level": 0,
+		"resistence": 25,
+		"slice": 40,
+		"damping": 70,
+		"useful_life": 80,
+		"weight": 2,
+		"level": 1,
 		"price": {
 			"base": 200,
 			"useful_life": 20
 		}
 	},
 	"iron": {
-		"damage": 30,
-		"slice": 0,
-		"resistence": 30,
-		"damping": 80,
-		"useful_life": 100,
+		"damage": 25,
+		"resistence": 25,
+		"slice": 60,
+		"damping": 125,
+		"useful_life": 170,
 		"weight": 2,
 		"level": 1,
 		"price": {
@@ -117,25 +117,25 @@
 		}
 	},
 	"ferro_iron": {
-		"damage": 30,
-		"slice": 0,
+		"damage": 25,
 		"resistence": 30,
-		"damping": 80,
-		"useful_life": 100,
+		"slice": 60,
+		"damping": 125,
+		"useful_life": 170,
 		"weight": 2,
-		"level": 1,
+		"level": 4,
 		"price": {
 			"base": 5000,
 			"useful_life": 1
 		}
 	},
 	"gold": {
-		"damage": 20,
-		"slice": 0,
-		"resistence": 5,
-		"damping": 10,
-		"useful_life": 60,
-		"weight": 4,
+		"damage": 15,
+		"resistence": 35,
+		"slice": 10,
+		"damping": 105,
+		"useful_life": 90,
+		"weight": 5,
 		"level": 2,
 		"price": {
 			"base": 20000,
@@ -143,12 +143,12 @@
 		}
 	},
 	"silver": {
-		"damage": 30,
-		"slice": 0,
-		"resistence": 10,
-		"damping": 60,
-		"useful_life": 40,
-		"weight": 2,
+		"damage": 20,
+		"resistence": 25,
+		"slice": 20,
+		"damping": 25,
+		"useful_life": 50,
+		"weight": 2.5,
 		"level": 2,
 		"price": {
 			"base": 2000,
@@ -157,11 +157,11 @@
 	},
 	"steel": {
 		"damage": 40,
-		"slice": 0,
 		"resistence": 40,
+		"slice": 90,
 		"damping": 120,
-		"useful_life": 200,
-		"weight": 1,
+		"useful_life": 250,
+		"weight": 2,
 		"level": 2,
 		"price": {
 			"base": 50,
@@ -169,24 +169,141 @@
 		}
 	},
 	"platinum": {
-		"damage": 20,
-		"slice": 0,
-		"resistence": 30,
-		"damping": 60,
-		"useful_life": 250,
-		"weight": 4,
-		"level": 2,
+		"damage": 25,
+		"resistence": 60,
+		"slice": 40,
+		"damping": 100,
+		"useful_life": 180,
+		"weight": 5.5,
+		"level": 3,
 		"price": {
 			"base": 3000,
 			"useful_life": 1
 		}
 	},
+	"tin": {
+		"damage": 8,
+		"resistence": 8,
+		"slice": 2,
+		"damping": 30,
+		"useful_life": 20,
+		"weight": 2,
+		"level": 0,
+		"price": {
+			"base": 0,
+			"useful_life": 0
+		}
+	},
+	"lead": {
+		"damage": 8,
+		"resistence": 12,
+		"slice": 5,
+		"damping": 10,
+		"useful_life": 15,
+		"weight": 3,
+		"level": 0,
+		"price": {
+			"base": 0,
+			"useful_life": 0
+		}
+	},
+	"zinc": {
+		"damage": 15,
+		"resistence": 12,
+		"slice": 10,
+		"damping": 5,
+		"useful_life": 10,
+		"weight": 2,
+		"level": 0,
+		"price": {
+			"base": 0,
+			"useful_life": 0
+		}
+	},
+	"aluminium": {
+		"damage": 15,
+		"resistence": 5,
+		"slice": 15,
+		"damping": 40,
+		"useful_life": 60,
+		"weight": 0.5,
+		"level": 0,
+		"price": {
+			"base": 0,
+			"useful_life": 0
+		}
+	},
+	"copper": {
+		"damage": 20,
+		"resistence": 20,
+		"slice": 20,
+		"damping": 100,
+		"useful_life": 100,
+		"weight": 2.5,
+		"level": 0,
+		"price": {
+			"base": 0,
+			"useful_life": 0
+		}
+	},
+	"titanium": {
+		"damage": 35,
+		"resistence": 20,
+		"slice": 70,
+		"damping": 65,
+		"useful_life": 110,
+		"weight": 1,
+		"level": 3,
+		"price": {
+			"base": 0,
+			"useful_life": 0
+		}
+	},
+	"nickel": {
+		"damage": 30,
+		"resistence": 30,
+		"slice": 50,
+		"damping": 110,
+		"useful_life": 200,
+		"weight": 2.5,
+		"level": 3,
+		"price": {
+			"base": 0,
+			"useful_life": 0
+		}
+	},
+	"molybdenum": {
+		"damage": 30,
+		"resistence": 40,
+		"slice": 60,
+		"damping": 135,
+		"useful_life": 220,
+		"weight": 2.5,
+		"level": 3,
+		"price": {
+			"base": 0,
+			"useful_life": 0
+		}
+	},
+	"tungsten": {
+		"damage": 45,
+		"resistence": 80,
+		"slice": 100,
+		"damping": 180,
+		"useful_life": 300,
+		"weight": 5,
+		"level": 3,
+		"price": {
+			"base": 0,
+			"useful_life": 0
+		}
+	},
 	"black_iron": {
 		"damage": 30,
-		"slice": 0,
-		"resistence": 50,
-		"damping": 100,
-		"useful_life": 300,
+		"resistence": 30,
+		"slice": 60,
+		"damping": 125,
+		"useful_life": 170,
 		"weight": 1,
 		"level": 4,
 		"price": {
@@ -195,11 +312,11 @@
 		}
 	},
 	"black_steel": {
-		"damage": 40,
-		"slice": 0,
-		"resistence": 60,
+		"damage": 45,
+		"resistence": 70,
+		"slice": 80,
 		"damping": 200,
-		"useful_life": 500,
+		"useful_life": 400,
 		"weight": 0.5,
 		"level": 4,
 		"price": {
@@ -209,8 +326,8 @@
 	},
 	"celestial_steel": {
 		"damage": 60,
-		"slice": 0,
-		"resistence": 80,
+		"resistence": 100,
+		"slice": 100,
 		"damping": 300,
 		"useful_life": 600,
 		"weight": 0.5,
