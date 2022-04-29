@@ -204,6 +204,21 @@ function calculateRestrictions(params) {
 	}
 	return restrictions;
 }
+/*
+input:
+	{
+		material
+		type
+		dimension
+		thickness
+		quality
+	}
+output:
+	rarity
+*/
+function calculateRarity(params) {
+	return "rare";
+}
 
 /*
 input:
@@ -230,6 +245,8 @@ output:
 		useful_life
 		crafting_level
 		price
+		code
+		rarity
 	}
 */
 
@@ -239,6 +256,7 @@ function create(params) {
 		"value",
 		params.dimension
 	);
+	params.quality = Number(params.quality).toFixed(1);
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
 	const useful_life = params.quality * material.useful_life;
@@ -269,6 +287,7 @@ function create(params) {
 			fee: weapons.level[level].fee,
 		},
 		code: util.encode(params),
+		rarity: calculateRarity(params),
 	};
 }
 

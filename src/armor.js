@@ -63,6 +63,21 @@ function calculateRestrictions(params) {
 	}
 	return restrictions;
 }
+/*
+input:
+	{
+		material
+		type
+		dimension
+		thickness
+		quality
+	}
+output:
+	rarity
+*/
+function calculateRarity(params) {
+	return "rare";
+}
 
 /*
 input:
@@ -89,6 +104,8 @@ output:
 		useful_life
 		crafting_level
 		price
+		code
+		rarity
 	}
 */
 
@@ -102,6 +119,7 @@ function create(params) {
 		params.thickness,
 		armors.type[params.type].max_thickness
 	);
+	params.quality =  Number(params.quality).toFixed(1);
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
 	const useful_life = params.quality * material.useful_life;
@@ -120,7 +138,7 @@ function create(params) {
 		throwing: raw_material.weight * 2,
 		weight: raw_material.weight,
 		restrictions: calculateRestrictions(params),
-		range: Math.round(params.dimension * 4),
+		range: [Math.round(params.dimension * 4)],
 		damping: raw_material.damping,
 		useful_life: Math.floor(useful_life),
 		crafting_level: level,
@@ -134,6 +152,7 @@ function create(params) {
 			fee: armors.level[level].fee,
 		},
 		code: util.encode(params),
+		rarity: calculateRarity(params)
 	};
 }
 

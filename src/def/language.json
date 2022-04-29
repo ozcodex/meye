@@ -1,5 +1,15 @@
 {
 	"shield": "escudo",
 	"half_body": "medio cuerpo",
-	"iron": "hierro"
+	"iron": "hierro",
+	"throwing": "lance",
+	"weight": "peso",
+	"damping": "amortiguado",
+	"resistence": "resistencia",
+	"useful_life": "vida útil",
+	"range": "rango",
+	"damage": "daño",
+	"slice": "corte",
+	"bleeding": "desangre",
+	"price": "costos de fabricación"
 }
