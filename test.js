@@ -34,5 +34,6 @@ const testCases = [
 testCases.forEach((test) => console.log(create(test)));
 
 console.log(decode("EELX"));
+console.log(decode("GgLH"));
 
 render(create(testCases[2]))

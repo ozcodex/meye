@@ -29,9 +29,9 @@ function decode(code) {
 	const result = {
 		material: getKey(dict.materials, data >> 17),
 		class: item_class,
-		type: getKey(dict.classes[item_class].types, (data >> 10) & 0x7),
-		dimension: getKey(dict.sizes, (data >> 7) & 0xf),
-		thickness: getKey(dict.sizes, (data >> 4) & 0xf),
+		type: getKey(dict.classes[item_class].types, (data >> 10) & 0xf),
+		dimension: getKey(dict.sizes, (data >> 7) & 0x7),
+		thickness: getKey(dict.sizes, (data >> 4) & 0x7),
 		quality: ((data & 0xf) * 0.1).toFixed(1),
 	};
 	if (name) {
