@@ -60,19 +60,19 @@ async function create(params) {
 
 	await image(params.crafting_level, [100, 1150], [200, 200]);
 	let rarity_quality = `${params.rarity}_${params.quality * 10}`;
-	await image(rarity_quality, [100, 1400], [200, 200]);
+	await image(rarity_quality, [100, 1350], [200, 200]);
 
-	text(s("throwing").toCap(), [350, 1200], 50, "start");
-	text(s("weight").toCap(), [350, 1280], 50, "start");
-	text(s("damping").toCap(), [350, 1360], 50, "start");
-	text(s("resistence").toCap(), [350, 1440], 50, "start");
-	text(s("useful_life").toCap(), [350, 1520], 50, "start");
+	text(s("throwing").toCap(), [400, 1200], 50, "start");
+	text(s("weight").toCap(), [400, 1280], 50, "start");
+	text(s("damping").toCap(), [400, 1360], 50, "start");
+	text(s("resistence").toCap(), [400, 1440], 50, "start");
+	text(s("useful_life").toCap(), [400, 1520], 50, "start");
 
-	text(s(params.throwing).toCap(), [900, 1200], 50, "end");
-	text(s(params.weight).toCap(), [900, 1280], 50, "end");
-	text(s(params.damping).toCap(), [900, 1360], 50, "end");
-	text(s(params.resistence).toCap(), [900, 1440], 50, "end");
-	text(s(params.useful_life).toCap(), [900, 1520], 50, "end");
+	text(s(params.throwing).toCap(), [920, 1200], 50, "end");
+	text(s(params.weight).toCap(), [920, 1280], 50, "end");
+	text(s(params.damping).toCap(), [920, 1360], 50, "end");
+	text(s(params.resistence).toCap(), [920, 1440], 50, "end");
+	text(s(params.useful_life).toCap(), [920, 1520], 50, "end");
 
 	let point = 1210;
 	params.restrictions = Array(
@@ -100,21 +100,21 @@ async function create(params) {
 	params.range.forEach((unit) => {
 		range += `${unit}—`;
 	});
-	text(s("range"), [400, 1700], 40, "center", "#555", "bold");
-	text(range, [400, 1800], 50, "center");
+	text(s("range"), [400, 1675], 40, "center", "#555", "bold");
+	text(range, [400, 1775], 50, "center");
 
 	let data = `${params.damage} / ${params.slice} / ${params.bleeding}`;
-	text(data, [400, 1900], 70, "center");
+	text(data, [400, 1870], 70, "center");
 	let label = `${s("damage")} / ${s("slice")} / ${s("bleeding")}`;
-	text(label, [400, 1970], 30, "center", "#555", "bold");
+	text(label, [400, 1950], 30, "center", "#555", "bold");
 
-	text(s("price"), [1050, 1700], 40, "center", "#555", "bold");
-	await image("raw", [750, 1750], [150, 150]);
-	await image("crafting", [1000, 1750], [150, 150]);
-	await image("fee", [1250, 1750], [150, 150]);
-	text(`${s(params.price.raw)} R`, [825, 1970], 40, "center");
-	text(`${s(params.price.crafting)} R`, [1075, 1970], 40, "center");
-	text(`${s(params.price.fee)} R`, [1325, 1970], 40, "center");
+	text(s("price"), [1050, 1675], 40, "center", "#555", "bold");
+	await image("raw", [750, 1720], [150, 150]);
+	await image("crafting", [1000, 1720], [150, 150]);
+	await image("fee", [1250, 1720], [150, 150]);
+	text(`${s(params.price.raw)} R`, [825, 1950], 40, "center");
+	text(`${s(params.price.crafting)} R`, [1075, 1950], 40, "center");
+	text(`${s(params.price.fee)} R`, [1325, 1950], 40, "center");
 
 	text(s("Effectos y Habilidades"), [50, 2075], 30, "start", "#555");
 
