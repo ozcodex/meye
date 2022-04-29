@@ -1,5 +1,6 @@
 const createWeapon = require("./weapon").create;
 const createArmor = require("./armor").create;
+const util = require("./util")
 
 function testArmor(test_case) {
 	console.log({ class: "armor", ...createArmor(test_case) });
@@ -34,3 +35,5 @@ testArmor({
 	thickness: 3,
 	quality: 0.7,
 });
+
+console.log(util.decode('IIVX'))
