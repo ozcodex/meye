@@ -1,6 +1,6 @@
 const weapons = require("./def/weapons.json");
 const createRaw = require("./raw").create;
-const util = require("./util")
+const util = require("./util");
 
 /*
 input:
@@ -37,7 +37,7 @@ function calculateRequiredLevel(params) {
 		quality_score,
 		out_of_limits
 	);
-	return util.getKeyByParam(weapons.level,'score',score)
+	return util.getKeyByParam(weapons.level, "score", score);
 }
 
 /*
@@ -113,7 +113,7 @@ function calculateSlice(params) {
 			);
 			break;
 	}
-	return Math.min(slice,material.slice);
+	return Math.min(slice, material.slice);
 }
 
 /*
@@ -261,12 +261,14 @@ function create(params) {
 		crafting_level: level,
 		price: {
 			raw: raw_material.price,
-			crafting:
+			crafting: Math.ceil(
 				material.price.useful_life * useful_life +
-				raw_material.price *
-					Math.abs(params.dimension - params.thickness),
+					raw_material.price *
+						Math.abs(params.dimension - params.thickness)
+			),
 			fee: weapons.level[level].fee,
 		},
+		code: util.encode(params),
 	};
 }
 

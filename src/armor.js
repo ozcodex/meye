@@ -113,7 +113,10 @@ function create(params) {
 		bleeding: 0,
 		resistence: material.resistence,
 		size: raw_material.size,
-		size_type: params.type == 'shield'?dimension_key:`${params.dimension} pieces`,
+		size_type:
+			params.type == "shield"
+				? dimension_key
+				: `${params.dimension} pieces`,
 		throwing: raw_material.weight * 2,
 		weight: raw_material.weight,
 		restrictions: calculateRestrictions(params),
@@ -123,12 +126,14 @@ function create(params) {
 		crafting_level: level,
 		price: {
 			raw: raw_material.price,
-			crafting:
+			crafting: Math.ceil(
 				material.price.useful_life * useful_life +
-				raw_material.price *
-					Math.abs(params.dimension - params.thickness),
+					raw_material.price *
+						Math.abs(params.dimension - params.thickness)
+			),
 			fee: armors.level[level].fee,
 		},
+		code: util.encode(params),
 	};
 }
 

@@ -1,39 +1,27 @@
-const createWeapon = require("./weapon").create;
-const createArmor = require("./armor").create;
-const util = require("./util")
-
-function testArmor(test_case) {
-	console.log({ class: "armor", ...createArmor(test_case) });
-}
-
-function testWeapon(test_case) {
-	console.log({ class: "weapon", ...createWeapon(test_case) });
-}
+const create = require("./index").create;
+const decode = require("./src/util").decode;
 
 //test cases
 
-testWeapon({
-	material: "wood",
-	type: "tension",
-	dimension: "1",
-	thickness: "2",
-	quality: 0.7,
-});
+const testCases = [
+	{
+		class: "armor",
+		material: "iron",
+		type: "shield",
+		dimension: "3",
+		thickness: 3,
+		quality: 0.7,
+	},
+	{
+		class: "weapon",
+		material: "iron",
+		type: "blade",
+		dimension: "3",
+		thickness: "0.5",
+		quality: 0.3,
+	},
+];
 
-testWeapon({
-	material: "iron",
-	type: "blade",
-	dimension: "3",
-	thickness: "0.25",
-	quality: 0.1,
-});
+testCases.forEach((test) => console.log(create(test)));
 
-testArmor({
-	material: "iron",
-	type: "shield",
-	dimension: "3",
-	thickness: 3,
-	quality: 0.7,
-});
-
-console.log(util.decode('IIVX'))
+console.log(decode("IIVX"));
