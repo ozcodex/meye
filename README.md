@@ -7,19 +7,20 @@ features:
 - allow tho create armors and shields
 - easy to maintain materials
 - more materials!!
+- item code, generate and recover
+- export card as image
 
 ## To do
 
 
-item code, generate and recover
-export card
 explosives
 common objects
 item generator
 graphical interface
 
 v2:
-mystical effects
+effects of interpretation with code
+mystical effects with code
 
 v3:
 rarity calculator
