@@ -48,9 +48,12 @@ async function create(params) {
 	text(params.name || desc, [100, 200], 70, "start", "#000", "bold");
 	text(desc, [100, 300], 50, "start", "#555", "italic");
 
-	text(params.size, [1300, 200], 70, "end", "#000", "bold");
-	text(params.thickness + " G", [1330, 150], 40, "start");
-	text(params.dimension + " D", [1330, 220], 40, "start");
+	text(s("size"), [1220, 150], 40, "center", "#555", "bold");
+	text(params.size + 5, [1220, 270], 80, "end", "#000", "bold");
+	const thickness = +(Math.round(params.thickness + "e+1") + "e-1");
+	text(thickness + " G", [1230, 220], 40, "start");
+	const dimension = +(Math.round(params.dimension + "e+1") + "e-1");
+	text(dimension + " D", [1230, 270], 40, "start");
 
 	context.fillStyle = "#777";
 	context.fillRect(100, 375, 1300, 700);
@@ -75,16 +78,6 @@ async function create(params) {
 	text(s(params.useful_life).toCap(), [920, 1520], 50, "end");
 
 	let point = 1210;
-	params.restrictions = Array(
-		{ restriction: "R", reduction: 11 },
-		{ restriction: "F", reduction: 11 },
-		{ restriction: "V", reduction: 11 },
-		{ restriction: "A", reduction: 11 },
-		{ restriction: "I", reduction: 11 },
-		{ restriction: "C", reduction: 11 },
-		{ restriction: "S", reduction: 11 },
-		{ restriction: "W", reduction: 11 }
-	);
 	let breaking = Math.ceil(params.restrictions.length / 2) * 100;
 	params.restrictions.forEach((rest) => {
 		let restriction = `${-rest.reduction} ${rest.restriction}`;
