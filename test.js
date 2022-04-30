@@ -37,8 +37,16 @@ const testCases = [
 		thickness: "4",
 		quality: 1,
 	},
+	{
+		class: "common",
+		material: "platinum",
+		type: "solid",
+		dimension: "5",
+		thickness: "0.1",
+		quality: 0.9,
+	},
 ];
 
 testCases.forEach((test) => console.log(create(test)));
 
-render(create(testCases[3]))
+render(create(testCases[4]))

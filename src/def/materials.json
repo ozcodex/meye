@@ -100,7 +100,7 @@
 		"level": 1,
 		"price": {
 			"base": 200,
-			"useful_life": 20
+			"useful_life": 2
 		}
 	},
 	"iron": {

@@ -302,8 +302,8 @@ function create(params) {
 			raw: raw_material.price,
 			crafting: Math.ceil(
 				material.price.useful_life * useful_life +
-					raw_material.price *
-						Math.abs(params.dimension - params.thickness)
+					0.3*raw_material.price *
+						(0.2 + Math.abs(params.dimension - params.thickness))
 			),
 			fee: objects.crafting_level[level].fee,
 		},

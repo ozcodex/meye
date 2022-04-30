@@ -21,6 +21,13 @@
 				"studded": 4,
 				"mail": 5
 			}
+		},
+		"common": {
+			"value": 2,
+			"types": {
+				"hollow": 0,
+				"solid": 1
+			}
 		}
 	},
 	"sizes": {

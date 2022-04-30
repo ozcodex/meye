@@ -1,6 +1,7 @@
 const { createCanvas, loadImage } = require("canvas");
 const fs = require("fs");
 const s = require("./lang").translate;
+const n = require("./lang").format;
 
 String.prototype.toCap = function () {
 	return this.charAt(0).toUpperCase() + this.slice(1);
@@ -77,11 +78,11 @@ async function create(params) {
 	text(s("resistence").toCap(), [400, 1440], 50, "start");
 	text(s("useful_life").toCap(), [400, 1520], 50, "start");
 
-	text(s(params.throwing).toCap(), [920, 1200], 50, "end");
-	text(s(params.weight).toCap(), [920, 1280], 50, "end");
-	text(s(params.damping).toCap(), [920, 1360], 50, "end");
-	text(s(params.resistence).toCap(), [920, 1440], 50, "end");
-	text(s(params.useful_life).toCap(), [920, 1520], 50, "end");
+	text(params.throwing, [920, 1200], 50, "end");
+	text(params.weight, [920, 1280], 50, "end");
+	text(params.damping, [920, 1360], 50, "end");
+	text(params.resistence, [920, 1440], 50, "end");
+	text(params.useful_life, [920, 1520], 50, "end");
 
 	let point = 1210;
 	let breaking = Math.ceil(params.restrictions.length / 2) * 100;
@@ -111,9 +112,9 @@ async function create(params) {
 	await image("raw", [750, 1720], [150, 150]);
 	await image("crafting", [1000, 1720], [150, 150]);
 	await image("fee", [1250, 1720], [150, 150]);
-	text(`${s(params.price.raw)} R`, [825, 1950], 40, "center");
-	text(`${s(params.price.crafting)} R`, [1075, 1950], 40, "center");
-	text(`${s(params.price.fee)} R`, [1325, 1950], 40, "center");
+	text(`${n(params.price.raw)} R`, [825, 1950], 40, "center");
+	text(`${n(params.price.crafting)} R`, [1075, 1950], 40, "center");
+	text(`${n(params.price.fee)} R`, [1325, 1950], 40, "center");
 
 	text(s("Effectos y Habilidades"), [50, 2075], 30, "start", "#555");
 

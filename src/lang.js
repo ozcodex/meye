@@ -5,6 +5,10 @@ function translate(text) {
 	return language[str] || str;
 }
 
+function format(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 module.exports = {
-	translate,
+	translate,format
 };

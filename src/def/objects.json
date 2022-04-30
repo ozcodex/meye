@@ -145,7 +145,7 @@
 					"weight_factor": 0.5
 				},
 				"solid": {
-					"weight_factor": 2
+					"weight_factor": 1
 				}
 			},
 			"dimension": {
