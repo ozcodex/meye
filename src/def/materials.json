@@ -1,5 +1,6 @@
 {
 	"crystal": {
+		"symbol":"CR",
 		"damage": 60,
 		"resistence": 25,
 		"slice": 200,
@@ -13,6 +14,7 @@
 		}
 	},
 	"marine_crystal": {
+		"symbol":"CR+",
 		"damage": 60,
 		"resistence": 25,
 		"slice": 200,
@@ -26,6 +28,7 @@
 		}
 	},
 	"leather": {
+		"symbol":"CO",
 		"damage": 10,
 		"resistence": 15,
 		"slice": 8,
@@ -39,6 +42,7 @@
 		}
 	},
 	"wood": {
+		"symbol":"MA",
 		"damage": 10,
 		"resistence": 10,
 		"slice": 9,
@@ -52,6 +56,7 @@
 		}
 	},
 	"wothe_wood": {
+		"symbol":"MA+",
 		"damage": 10,
 		"resistence": 10,
 		"slice": 9,
@@ -65,6 +70,7 @@
 		}
 	},
 	"stone": {
+		"symbol":"PI",
 		"damage": 20,
 		"resistence": 9,
 		"slice": 20,
@@ -78,6 +84,7 @@
 		}
 	},
 	"brass": {
+		"symbol":"LA",
 		"damage": 20,
 		"resistence": 20,
 		"slice": 20,
@@ -91,6 +98,7 @@
 		}
 	},
 	"bronze": {
+		"symbol":"BR",
 		"damage": 20,
 		"resistence": 25,
 		"slice": 40,
@@ -104,6 +112,7 @@
 		}
 	},
 	"iron": {
+		"symbol":"Fe",
 		"damage": 25,
 		"resistence": 30,
 		"slice": 60,
@@ -117,6 +126,7 @@
 		}
 	},
 	"ferro_iron": {
+		"symbol":"Fe+",
 		"damage": 25,
 		"resistence": 30,
 		"slice": 60,
@@ -130,6 +140,7 @@
 		}
 	},
 	"gold": {
+		"symbol":"Au",
 		"damage": 15,
 		"resistence": 35,
 		"slice": 10,
@@ -143,6 +154,7 @@
 		}
 	},
 	"silver": {
+		"symbol":"Ag",
 		"damage": 20,
 		"resistence": 19,
 		"slice": 20,
@@ -156,6 +168,7 @@
 		}
 	},
 	"steel": {
+		"symbol":"AC",
 		"damage": 40,
 		"resistence": 40,
 		"slice": 90,
@@ -169,6 +182,7 @@
 		}
 	},
 	"platinum": {
+		"symbol":"Pt",
 		"damage": 25,
 		"resistence": 59,
 		"slice": 40,
@@ -182,6 +196,7 @@
 		}
 	},
 	"tin": {
+		"symbol":"Sn",
 		"damage": 8,
 		"resistence": 8,
 		"slice": 2,
@@ -195,6 +210,7 @@
 		}
 	},
 	"lead": {
+		"symbol":"Pb",
 		"damage": 8,
 		"resistence": 12,
 		"slice": 5,
@@ -208,6 +224,7 @@
 		}
 	},
 	"aluzinc": {
+		"symbol":"AZ",
 		"damage": 15,
 		"resistence": 18,
 		"slice": 10,
@@ -221,6 +238,7 @@
 		}
 	},
 	"aluminium": {
+		"symbol":"Al",
 		"damage": 15,
 		"resistence": 5,
 		"slice": 15,
@@ -234,6 +252,7 @@
 		}
 	},
 	"copper": {
+		"symbol":"Cu",
 		"damage": 20,
 		"resistence": 20,
 		"slice": 20,
@@ -247,6 +266,7 @@
 		}
 	},
 	"titanium": {
+		"symbol":"Ti",
 		"damage": 35,
 		"resistence": 25,
 		"slice": 70,
@@ -260,6 +280,7 @@
 		}
 	},
 	"nickel": {
+		"symbol":"Ni",
 		"damage": 30,
 		"resistence": 30,
 		"slice": 50,
@@ -273,6 +294,7 @@
 		}
 	},
 	"molybdenum": {
+		"symbol":"Mo",
 		"damage": 30,
 		"resistence": 40,
 		"slice": 60,
@@ -286,6 +308,7 @@
 		}
 	},
 	"tungsten": {
+		"symbol":"TU",
 		"damage": 45,
 		"resistence": 75,
 		"slice": 100,
@@ -299,6 +322,7 @@
 		}
 	},
 	"black_iron": {
+		"symbol":"HN",
 		"damage": 30,
 		"resistence": 35,
 		"slice": 60,
@@ -312,6 +336,7 @@
 		}
 	},
 	"black_steel": {
+		"symbol":"AN",
 		"damage": 45,
 		"resistence": 70,
 		"slice": 80,
@@ -325,6 +350,7 @@
 		}
 	},
 	"celestial_steel": {
+		"symbol":"AE",
 		"damage": 60,
 		"resistence": 100,
 		"slice": 100,
