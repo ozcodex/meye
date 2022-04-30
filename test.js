@@ -1,4 +1,4 @@
-const create = require("./index").create;
+const create = require("./src/object").create;
 const decode = require("./src/util").decode;
 const render = require("./src/render").create;
 
@@ -29,11 +29,16 @@ const testCases = [
 		thickness: "2",
 		quality: 0.7,
 	},
+	{
+		class: "armor",
+		material: "aluminium",
+		type: "cuirass",
+		dimension: "3",
+		thickness: "4",
+		quality: 1,
+	},
 ];
 
 testCases.forEach((test) => console.log(create(test)));
 
-console.log(decode("EELX"));
-console.log(decode("GgLH"));
-
-render(create(testCases[2]))
+render(create(testCases[3]))

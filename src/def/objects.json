@@ -1,0 +1,211 @@
+{
+	"class": {
+		"weapon": {
+			"type": {
+				"projectile": {
+					"variable_damage": 0,
+					"throwing": 0.5,
+					"damage": [-0.165, 4.13, -0.0202],
+					"slice": [68.1, -17, 1.58],
+					"bleeding": [4.38, 1.25, -0.0359],
+					"range": 0
+				},
+				"piercing": {
+					"variable_damage": 0.3,
+					"throwing": 1,
+					"damage": [-0.8, 6.62, 0.294],
+					"slice": [70.5, -5.13, -0.0437],
+					"bleeding": [2.19, 0.51, 0],
+					"range": 5
+				},
+				"blade": {
+					"variable_damage": 0.5,
+					"throwing": 2,
+					"damage": [-1.74, 12.3, 0.0323],
+					"slice": [69.4, -24.9, 2.18],
+					"bleeding": [5.62, -1.25, 0.0359],
+					"range": 3.2
+				},
+				"shear": {
+					"variable_damage": 0.5,
+					"throwing": 3,
+					"damage": [1.32, 11.8, -0.816],
+					"slice": [68.1, -16, 1.76],
+					"bleeding": [7.62, -1.25, 0.0359],
+					"range": 4
+				},
+				"blunt": {
+					"variable_damage": 0,
+					"throwing": 3,
+					"range": 4
+				},
+
+				"tension": {
+					"variable_damage": 0.5,
+					"throwing": 3
+				}
+			},
+			"dimension": {
+				"ultra_small": {
+					"value": 0.1,
+					"level": 2
+				},
+				"small": {
+					"value": 0.25,
+					"level": 0
+				},
+				"short": {
+					"value": 0.5,
+					"level": 0
+				},
+				"half": {
+					"value": 1,
+					"level": 0
+				},
+				"large": {
+					"value": 3,
+					"level": 1
+				},
+				"two_handed": {
+					"value": 5,
+					"level": 1
+				},
+				"gigantic": {
+					"value": 8,
+					"level": 1
+				}
+			},
+			"restrictions": {
+				"property": "dimension",
+				"ranges": {
+					"1": ["R"],
+					"2": ["R", "F"],
+					"3": ["R", "F", "V"],
+					"5": ["R", "F", "V", "A"]
+				}
+			}
+		},
+		"armor": {
+			"type": {
+				"shield": {
+					"max_thickness": 5,
+					"level": 0
+				},
+				"cuirass": {
+					"max_thickness": 5,
+					"level": 0
+				},
+				"plates": {
+					"max_thickness": 4,
+					"level": 0
+				},
+				"scales": {
+					"max_thickness": 3,
+					"level": 0
+				},
+				"studded": {
+					"max_thickness": 2,
+					"level": 0
+				},
+				"mail": {
+					"max_thickness": 1,
+					"level": 0
+				}
+			},
+			"dimension": {
+				"small": {
+					"value": 0.25
+				},
+				"half_piece": {
+					"value": 0.5
+				},
+				"piece": {
+					"value": 1
+				},
+				"half_body": {
+					"value": 3
+				},
+				"full_body": {
+					"value": 5
+				}
+			},
+			"restrictions": {
+				"property": "thickness",
+				"ranges": {
+					"1": ["R"],
+					"3": ["R", "F"],
+					"4": ["R", "F", "V"],
+					"5": ["R", "F", "V", "A"]
+				}
+			}
+		},
+		"common": {
+			"type": {
+				"hollow": {
+					"weight_factor": 0.5
+				},
+				"solid": {
+					"weight_factor": 2
+				}
+			},
+			"dimension": {
+				"small": {
+					"value": 0.25
+				},
+				"half_piece": {
+					"value": 0.5
+				},
+				"piece": {
+					"value": 1
+				},
+				"big": {
+					"value": 3
+				},
+				"enormous": {
+					"value": 5
+				}
+			},
+			"restrictions": {
+				"property": "dimension",
+				"ranges": {
+					"1": ["R"],
+					"2": ["R", "F"],
+					"3": ["R", "F", "V"],
+					"5": ["R", "F", "V", "A"]
+				}
+			}
+		}
+	},
+	"crafting_level": {
+		"trainee": {
+			"score": 0,
+			"quality": 0.3,
+			"fee": 10
+		},
+		"function": {
+			"score": 1,
+			"quality": 0.5,
+			"fee": 30
+		},
+		"discipline": {
+			"score": 2,
+			"quality": 0.7,
+			"fee": 50
+		},
+		"science": {
+			"score": 3,
+			"quality": 1,
+			"fee": 100
+		},
+		"mystic": {
+			"score": 4,
+			"quality": 1,
+			"fee": 200
+		},
+		"divine": {
+			"score": 5,
+			"quality": 1,
+			"fee": -1
+		}
+	}
+}

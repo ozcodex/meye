@@ -12,14 +12,15 @@ features:
 
 ## To do
 
-
-explosives
 common objects
 item generator
+explosives
 graphical interface
 
 v2:
 effects of interpretation with code
+  this can varie the ilustration (subtypes) and the item 
+  special properties and effects
 mystical effects with code
 
 v3:

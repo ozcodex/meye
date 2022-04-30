@@ -1,5 +1,5 @@
 const dict = require("./def/dictionary.json");
-const ntob = require('number-to-base64').ntob 
+const ntob = require("number-to-base64").ntob;
 
 function getKey(obj, value) {
 	return Object.keys(obj).find((key) => obj[key] == value);
@@ -11,6 +11,12 @@ function getKeyByParam(obj, param_name, value) {
 
 function getKeyByParamLess(obj, param_name, value) {
 	return Object.keys(obj).find((key) => obj[key][param_name] >= value);
+}
+
+function closest(arr, goal) {
+	return arr.reduce(function (prev, curr) {
+		return Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev;
+	});
 }
 
 //Item code functionality
@@ -51,10 +57,19 @@ function encode(params) {
 	return ntob(result);
 }
 
+// item generator
+
+// pick a class
+// choose a type
+// choose a material using the level as weight
+// random dimension
+// random thickness in a range [-1/2, dim, +1/2]
+
 module.exports = {
 	getKey,
 	getKeyByParam,
 	getKeyByParamLess,
+	closest,
 	decode,
 	encode,
 };

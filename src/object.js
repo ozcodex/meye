@@ -1,68 +1,111 @@
-const weapons = require("./def/weapons.json");
+const objects = require("./def/objects.json");
 const createRaw = require("./raw").create;
 const util = require("./util");
 
 /*
-input:
-	{
-		material
-		dimension
-		thickness
-		quality
-	}
 output:
-	level
+	level_name
 */
 
 function calculateRequiredLevel(params) {
-	const dimension_key = util.getKeyByParamLess(
-		weapons.dimension,
-		"value",
-		params.dimension
-	);
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
 	let quality_score = Infinity;
-	Object.values(weapons.level).forEach((e) => {
+	Object.values(objects.crafting_level).forEach((e) => {
 		if (e.quality >= params.quality && e.score < quality_score) {
 			quality_score = e.score;
 		}
 	});
+	const ranges = objects.class[params.class].dimension;
+	let dim = util.getKeyByParamLess(ranges, "value", params.dimension);
+	const trainee_level = 0;
+	object_level =
+		objects.class[params.class].type[params.type].level ||
+		objects.class[params.class].dimension[dim].level ||
+		trainee_level;
 	const out_of_limits =
 		(params.thickness < Math.floor(params.dimension / 2)) *
-		weapons.level["mystic"].score;
+		objects.crafting_level["mystic"].score;
 	const score = Math.max(
 		material.level,
-		weapons.dimension[dimension_key].level,
+		object_level,
 		quality_score,
 		out_of_limits
 	);
-	return util.getKeyByParam(weapons.level, "score", score);
+	return util.getKeyByParam(objects.crafting_level, "score", score);
 }
 
 /*
-input:
-	{
-		material
-		type
-		dimension
-		thickness
-		quality
+output:
+	[
+		{
+			restriction
+			reduction_amount
+		}
+	]
+*/
+function calculateRestrictions(params) {
+	let restrictions = objects.class[params.class].restrictions;
+	const property = restrictions.property;
+	const range = util.closest(
+		Object.keys(restrictions.ranges),
+		params[property]
+	);
+
+	restrictions = objects.class[params.class].restrictions.ranges[range];
+	const raw_material = createRaw(params);
+	const weight = calculateWeight(params);
+	const reduction = Math.floor(weight / restrictions.length);
+
+	restrictions = restrictions.map((r) => ({ restriction: r, reduction }));
+	const missing = weight - reduction * restrictions.length;
+	for (let i = 0; i < missing; i++) {
+		restrictions[i].reduction++;
 	}
+	return restrictions;
+}
+
+/*
+output:
+	rarity_name
+*/
+function calculateRarity(params) {
+	const level = calculateRequiredLevel(params);
+	let rarity = "common";
+	if (params.quality == 1) rarity = "masterly";
+	switch (level) {
+		case "science":
+			if (rarity != "masterly") rarity = "rare";
+			break;
+		case "mystic":
+			rarity = "special";
+			break;
+		case "divine":
+			rarity = "legendary";
+			break;
+	}
+	//todo: supernatural
+	return rarity;
+}
+
+/*
 output:
 	damage
 */
 function calculateDamage(params) {
 	let base_damage;
 	const raw_material = createRaw(params);
+	if (params.class != "weapon") {
+		return calculateWeight(params);
+	}
 	const material = raw_material.material;
-	const weapon_type = weapons.type[params.type];
+	const weapon_type = objects.class[params.class].type[params.type];
 	const variable_damage = weapon_type.variable_damage;
 	const damping = raw_material.damping;
 	switch (params.type) {
 		case "blunt":
 			//calculations based on weight
-			base_damage = raw_material.weight;
+			base_damage = calculateWeight(params);
 			break;
 		case "tension":
 			//damage calculed by damping
@@ -86,19 +129,17 @@ function calculateDamage(params) {
 }
 
 /*
-input:
-	{
-		thickness
-		type
-	}
 output:
 	slice
 */
 function calculateSlice(params) {
 	let slice;
+	if (params.class != "weapon") {
+		return 0;
+	}
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
-	const weapon_type = weapons.type[params.type];
+	const weapon_type = objects.class[params.class].type[params.type];
 	const thickness = params.thickness;
 	switch (params.type) {
 		case "blunt":
@@ -117,17 +158,15 @@ function calculateSlice(params) {
 }
 
 /*
-input:
-	{
-		thickness
-		type
-	}
 output:
 	bleeding
 */
 function calculateBleeding(params) {
 	let bleeding;
-	const weapon_type = weapons.type[params.type];
+	if (params.class != "weapon") {
+		return 0;
+	}
+	const weapon_type = objects.class[params.class].type[params.type];
 	const thickness = params.thickness;
 	switch (params.type) {
 		case "blunt":
@@ -144,19 +183,44 @@ function calculateBleeding(params) {
 	}
 	return bleeding;
 }
+
 /*
-input:
-	{
-		dimension
-		type
+output:
+	throwing
+*/
+function calculateThrowing(params) {
+	const raw_material = createRaw(params);
+	if (params.class != "weapon") {
+		return calculateWeight(params) * 2;
 	}
+	const weapon_type = objects.class[params.class].type[params.type];
+	return calculateWeight(params) * weapon_type.throwing;
+}
+
+/*
+output:
+	size_type_name
+*/
+function generateSizeType(params) {
+	const ranges = objects.class[params.class].dimension;
+	let type = util.getKeyByParamLess(ranges, "value", params.dimension);
+	if (params.class == "armor") {
+		type = params.type == "shield" ? type : params.dimension;
+	}
+	return type;
+}
+
+/*
 output:
 	[range]
 */
 
 function calculateRange(params) {
 	let range, range_max;
-	const weapon_type = weapons.type[params.type];
+	if (params.class != "weapon") {
+		return [Math.round(params.dimension * 4)];
+	}
+	const weapon_type = objects.class[params.class].type[params.type];
 	switch (params.type) {
 		case "tension":
 			range_max =
@@ -171,79 +235,21 @@ function calculateRange(params) {
 	range = Math.floor(range_max / 2);
 	return [range, range_max];
 }
+
 /*
-input:
-	{
-		dimension
-		thickness
-		material
-	}
 output:
-	[
-		{
-			restriction
-			reduction
-		}
-	]
+	weight
 */
-function calculateRestrictions(params) {
-	const dimension_key = util.getKeyByParamLess(
-		weapons.dimension,
-		"value",
-		params.dimension
-	);
-	let restrictions = weapons.dimension[dimension_key].restrictions;
+function calculateWeight(params) {
 	const raw_material = createRaw(params);
-	const weight = raw_material.weight;
-	const reduction = Math.floor(weight / restrictions.length);
-
-	restrictions = restrictions.map((r) => ({ restriction: r, reduction }));
-	const missing = weight - reduction * restrictions.length;
-	for (let i = 0; i < missing; i++) {
-		restrictions[i].reduction++;
+	const object_type = objects.class[params.class].type[params.type];
+	if (params.class == "common") {
+		return raw_material.weight * object_type.weight_factor;
 	}
-	return restrictions;
-}
-/*
-input:
-	{
-		material
-		type
-		dimension
-		thickness
-		quality
-	}
-output:
-	rarity
-*/
-function calculateRarity(params) {
-	const level = calculateRequiredLevel(params);
-	let rarity = 'common'
-	if (params.quality == 1) rarity = 'masterly'
-	switch(level){
-		case 'science':
-			if (rarity != 'masterly') rarity = 'rare'
-		break;
-		case 'mystic':
-			rarity = 'special'
-		break;
-		case 'divine':
-			rarity = 'legendary'
-		break;
-	}
-	//todo: supernatural
-	return "rare";
+	return raw_material.weight;
 }
 
 /*
-input:
-	{
-		material
-		type
-		dimension
-		thickness
-		quality
-	}
 output:
 	{
 		damage
@@ -266,16 +272,16 @@ output:
 */
 
 function create(params) {
-	const dimension_key = util.getKeyByParamLess(
-		weapons.dimension,
-		"value",
-		params.dimension
-	);
+	if (params.class == "armor") {
+		params.thickness = Math.min(
+			params.thickness,
+			objects.class[params.class].type[params.type].max_thickness
+		);
+	}
 	params.quality = Number(params.quality).toFixed(1);
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
 	const useful_life = params.quality * material.useful_life;
-	const weapon_type = weapons.type[params.type];
 	const level = calculateRequiredLevel(params);
 	return {
 		...params,
@@ -284,9 +290,9 @@ function create(params) {
 		bleeding: calculateBleeding(params),
 		resistence: material.resistence,
 		size: raw_material.size,
-		size_type: dimension_key,
-		throwing: raw_material.weight * weapon_type.throwing,
-		weight: raw_material.weight,
+		size_type: generateSizeType(params),
+		throwing: calculateThrowing(params),
+		weight: calculateWeight(params),
 		restrictions: calculateRestrictions(params),
 		range: calculateRange(params),
 		damping: raw_material.damping,
@@ -299,7 +305,7 @@ function create(params) {
 					raw_material.price *
 						Math.abs(params.dimension - params.thickness)
 			),
-			fee: weapons.level[level].fee,
+			fee: objects.crafting_level[level].fee,
 		},
 		code: util.encode(params),
 		rarity: calculateRarity(params),

@@ -39,7 +39,11 @@ context.fillRect(0, 2020, width, height);
 
 async function create(params) {
 	const name = `${s(params.type)}`.toCap();
-	const desc = `${s(params.type)} ${s(params.size_type)}`.toCap();
+	let suffix = "";
+	if (!isNaN(params.size_type)) {
+		suffix = params.size_type == 1 ? "piece" : "pieces";
+	}
+	const desc = `${s(params.type)} ${s(params.size_type)} ${s(suffix)}`.toCap();
 
 	await image("background", [0, 0], [width, height]);
 	context.fillStyle = "#000";
@@ -57,7 +61,7 @@ async function create(params) {
 	text(dimension + " D", [1230, 270], 40, "start");
 
 	//todo: set a color by parameter
-	context.fillStyle = "#777"
+	context.fillStyle = "#777";
 	context.fillRect(100, 375, 1300, 700);
 	await image(params.type, [100, 375], [1300, 700]);
 	text(`#${params.code}`, [110, 425], 40, "start");
