@@ -1,6 +1,7 @@
 const create = require("./src/object").create;
 const decode = require("./src/util").decode;
 const render = require("./src/render").create;
+const material = require("./src/material");
 
 //test cases
 
@@ -47,6 +48,18 @@ const testCases = [
 	},
 ];
 
-testCases.forEach((test) => console.log(create(test)));
+//testCases.forEach((test) => console.log(create(test)));
+//console.log(decode('EELX'))
+//render(create(testCases[4]))
 
-render(create(testCases[4]))
+console.log(
+	material.table([
+		"damage",
+		"resistence",
+		"slice",
+		"damping",
+		"useful_life",
+		"level",
+		"weight",
+	])
+);
