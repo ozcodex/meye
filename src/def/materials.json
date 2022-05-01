@@ -72,7 +72,7 @@
 	"stone": {
 		"symbol":"PI",
 		"damage": 20,
-		"resistence": 9,
+		"resistence": 10,
 		"slice": 20,
 		"damping": 60,
 		"useful_life": 70,
