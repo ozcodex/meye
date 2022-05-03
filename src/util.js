@@ -59,11 +59,29 @@ function encode(params) {
 
 // item generator
 
-// pick a class
+// given class
 // choose a type
 // choose a material using the level as weight
 // random dimension
 // random thickness in a range [-1/2, dim, +1/2]
+
+function randomObject(itemClass){
+  const pick = (items) => items[Math.floor(Math.random()*items.length)]
+
+  const itemType = pick(Object.keys(dict.classes[itemClass].types))
+  const material = pick(Object.keys(dict.materials))
+  const dimension = pick(Object.keys(dict.sizes))
+  const thickness = pick(Object.keys(dict.sizes))
+  const quality = (Math.random() || 0.1 ).toFixed(1)
+  return {
+    class: itemClass,
+    type: itemType,
+    material,
+    dimension,
+    thickness,
+    quality
+  }
+}
 
 module.exports = {
 	getKey,
@@ -72,4 +90,5 @@ module.exports = {
 	closest,
 	decode,
 	encode,
+  randomObject
 };
