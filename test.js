@@ -1,7 +1,6 @@
 const create = require("./src/object").create;
-const decode = require("./src/util").decode;
+const util = require("./src/util");
 const render = require("./src/render").create;
-const material = require("./src/material");
 
 //test cases
 
@@ -49,17 +48,8 @@ const testCases = [
 ];
 
 //testCases.forEach((test) => console.log(create(test)));
-//console.log(decode('EELX'))
+//console.log(util.decode('EELX'))
 //render(create(testCases[4]))
 
-console.log(
-	material.table([
-		"damage",
-		"resistence",
-		"slice",
-		"damping",
-		"useful_life",
-		"level",
-		"weight",
-	])
-);
+console.log(util.randomObject('weapon'))
+console.log(util.randomObject('armor'))
