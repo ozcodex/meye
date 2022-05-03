@@ -9,13 +9,13 @@ features:
 - more materials!!
 - item code, generate and recover
 - export card as image
+- common objects
 
 ## To do
-
-common objects
 item generator
+add more types of common objects
 explosives
-graphical interface
+poison, venom, toxins and acids
 
 v2:
 effects of interpretation with code
@@ -24,9 +24,8 @@ effects of interpretation with code
 mystical effects with code
 
 v3:
-rarity calculator
-poison, venom, toxins and acids
+graphical interface
 edibles
 fluids and containers
 write down all the rules for item creation
-generate tables
+generate tables (export data in csv)

@@ -20,7 +20,7 @@ function closest(arr, goal) {
 }
 
 //Item code functionality
-//material (64), class(8), type(16), dimension(8), thickness(8), quality(16)
+//material (128), class(8), type(16), dimension(8), thickness(8), quality(16)
 // Escudo de Krall: 8,1,0,5,5,7
 // 0001000 001 0000 101 101 0111 -> IIVX
 
