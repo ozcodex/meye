@@ -1,6 +1,8 @@
 const create = require("./src/object").create;
 const util = require("./src/util");
+const code = require("./src/code");
 const render = require("./src/render").create;
+const decode = require("./src/render").create;
 
 //test cases
 
@@ -47,9 +49,10 @@ const testCases = [
 	},
 ];
 
-//testCases.forEach((test) => console.log(create(test)));
-//console.log(util.decode('EELX'))
-//render(create(testCases[4]))
+testCases.forEach((test) => console.log(create(test)));
+console.log(code.decodeBase('EELX'))
+console.log(code.decodeCustom('FK6I'))
+//render(create(testCases[0]))
 
-console.log(util.randomObject('weapon'))
-console.log(util.randomObject('armor'))
+//console.log(util.randomObject('weapon'))
+//console.log(util.randomObject('armor'))

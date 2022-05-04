@@ -68,6 +68,10 @@
 		"black_steel": 24,
 		"celestial_steel": 25
 	},
+	"origins":{
+		"unknown": 0,
+		"banken": 10
+	},
 	"collection": {
 		"EELX": {
 			"name": "Escudo de Krall"

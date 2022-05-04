@@ -1,6 +1,7 @@
 const objects = require("./def/objects.json");
 const createRaw = require("./raw").create;
 const util = require("./util");
+const code = require("./code");
 
 /*
 output:
@@ -307,7 +308,7 @@ function create(params) {
 			),
 			fee: objects.crafting_level[level].fee,
 		},
-		code: util.encode(params),
+		code: code.encodeBase(params),
 		rarity: calculateRarity(params),
 	};
 }

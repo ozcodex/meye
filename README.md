@@ -10,18 +10,13 @@ features:
 - item code, generate and recover
 - export card as image
 - common objects
+- item generator
+- custom code with origin, subtypes and flags for mystycs 
 
 ## To do
-item generator
 add more types of common objects
 explosives
 poison, venom, toxins and acids
-
-v2:
-effects of interpretation with code
-  this can varie the ilustration (subtypes) and the item 
-  special properties and effects
-mystical effects with code
 
 v3:
 graphical interface
