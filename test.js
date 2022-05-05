@@ -1,13 +1,13 @@
-const create = require("./src/object").create;
+const {create, load} = require("./src/object");
 const util = require("./src/util");
 const code = require("./src/code");
 const render = require("./src/render").create;
-const decode = require("./src/render").create;
 
 //test cases
 
 const testCases = [
 	{
+		name: 'Escudo de Krall',
 		class: "armor",
 		material: "iron",
 		type: "shield",
@@ -88,9 +88,7 @@ const testCases = [
 //testCases.forEach((test) => console.log(create(test)));
 //console.log(code.decodeBase("EELX"));
 //console.log(code.decodeCustom("FK6I-62", "armor"));
-console.log(create(testCases[0]));
-console.log(create(testCases[1]));
-//render(create(testCases[0]))
-
+//console.log(create(testCases[0]));
+render(load("EELX","FK6I-62"))
 //console.log(util.randomObject('weapon'))
 //console.log(util.randomObject('armor'))

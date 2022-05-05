@@ -1,4 +1,3 @@
-const collection = require("./def/collection.json");
 const dict = require("./def/dictionary.json");
 const ntob = require("number-to-base64").ntob;
 const util = require("./util");
@@ -19,7 +18,6 @@ function decodeBase(code) {
 		"value",
 		(data >> 14) & 0x7
 	);
-	const name = collection[code]?.name;
 	const result = {
 		material: util.getKey(dict.materials, data >> 17),
 		class: item_class,
@@ -28,9 +26,6 @@ function decodeBase(code) {
 		thickness: util.getKey(dict.sizes, (data >> 4) & 0x7),
 		quality: ((data & 0xf) * 0.1).toFixed(1),
 	};
-	if (name) {
-		result.name = name;
-	}
 	return result;
 }
 
@@ -127,13 +122,12 @@ function encodeCustom(params) {
 // abbreviations of all modifications object has
 
 function modString(params) {
-	const plus = (num) => (num >= 0 ? "+" : "") + num;
 	let result = [];
 	Object.keys(params.modifications).forEach((mod) => {
 		value = params.modifications[mod];
 		name = dict.modifications[mod];
 		if (!isNaN(value)) {
-			return result.push(name + plus(value));
+			return result.push(name + util.plus(value));
 		}
 		if (Array.isArray(value)) {
 			return result.push(
@@ -142,9 +136,9 @@ function modString(params) {
 					value
 						.map((e) => {
 							if (!isNaN(e)) {
-								return plus(e);
+								return util.plus(e);
 							} else {
-								return e.restriction + plus(e.reduction);
+								return e.restriction + util.plus(e.reduction);
 							}
 						})
 						.join("/") +
@@ -155,11 +149,11 @@ function modString(params) {
 			return result.push(
 				name +
 					"{" +
-					plus(value.raw || 0) +
+					util.plus(value.raw || 0) +
 					"/" +
-					plus(value.crafting || 0) +
+					util.plus(value.crafting || 0) +
 					"/" +
-					plus(value.fee || 0) +
+					util.plus(value.fee || 0) +
 					"}"
 			);
 		}

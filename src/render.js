@@ -1,5 +1,7 @@
 const { createCanvas, loadImage } = require("canvas");
 const fs = require("fs");
+const materials = require("./def/materials");
+const util = require("./util");
 const s = require("./lang").translate;
 const n = require("./lang").format;
 
@@ -38,85 +40,98 @@ context.fillRect(0, 2020, width, height);
 
 // create card
 
-async function create(params) {
-	const name = `${s(params.type)}`.toCap();
+async function create(obj) {
+	const name = `${s(obj.type)}`.toCap();
 	let suffix = "";
-	if (!isNaN(params.size_type)) {
-		suffix = params.size_type == 1 ? "piece" : "pieces";
+	if (!isNaN(obj.size_type)) {
+		suffix = obj.size_type == 1 ? "piece" : "pieces";
 	}
-	const desc = `${s(params.type)} ${s(params.size_type)} ${s(suffix)}`.toCap();
+	const desc = `${s(obj.type)} ${s(obj.size_type)} ${s(suffix)}`.toCap();
 
 	await image("background", [0, 0], [width, height]);
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
 
 	// draw card
-	text(params.name || name, [100, 200], 70, "start", "#000", "bold");
+	text(obj.name || name, [100, 200], 70, "start", "#000", "bold");
 	text(desc, [100, 300], 50, "start", "#555", "italic");
 
 	text(s("size"), [1220, 150], 40, "center", "#555", "bold");
-	text(params.size + 5, [1220, 270], 80, "end", "#000", "bold");
-	const thickness = +(Math.round(params.thickness + "e+1") + "e-1");
+	text(obj.size + 5, [1220, 270], 80, "end", "#000", "bold");
+	const thickness = +(Math.round(obj.thickness + "e+1") + "e-1");
 	text(thickness + " G", [1230, 220], 40, "start");
-	const dimension = +(Math.round(params.dimension + "e+1") + "e-1");
+	const dimension = +(Math.round(obj.dimension + "e+1") + "e-1");
 	text(dimension + " D", [1230, 270], 40, "start");
 
 	//todo: set a color by parameter
 	context.fillStyle = "#777";
 	context.fillRect(100, 375, 1300, 700);
-	await image(params.type, [100, 375], [1300, 700]);
-	text(`#${params.code}`, [110, 425], 40, "start");
-	text(s(params.material).toCap(), [1375, 1050], 40, "end", "#000", "bold");
+	await image(obj.type, [100, 375], [1300, 700]);
+	if(obj.custom_code){
+	text(`#${obj.code}`, [110, 980], 40, "start");
+	text(`#${obj.custom_code}`, [110, 1050], 40, "start");
 
-	await image(params.crafting_level, [100, 1150], [200, 200]);
-	let rarity_quality = `${params.rarity}_${params.quality * 10}`;
+	}else{
+	text(`#${obj.code}`, [110, 1050], 40, "start");
+
+	}
+	let material = materials[obj.material].symbol
+	if (obj.extra.material){
+		material += ','+materials[obj.extra.material].symbol
+	}
+	text(material, [1375, 435], 40, "end", "#000", "bold");
+
+	await image(obj.crafting_level, [100, 1150], [200, 200]);
+	let rarity_quality = `${obj.rarity}_${obj.quality * 10}`;
 	await image(rarity_quality, [100, 1350], [200, 200]);
 
-	text(s("throwing").toCap(), [400, 1200], 50, "start");
-	text(s("weight").toCap(), [400, 1280], 50, "start");
-	text(s("damping").toCap(), [400, 1360], 50, "start");
-	text(s("resistence").toCap(), [400, 1440], 50, "start");
-	text(s("useful_life").toCap(), [400, 1520], 50, "start");
+	text(s("throwing").toCap(), [380, 1200], 50, "start");
+	text(s("weight").toCap(), [380, 1280], 50, "start");
+	text(s("damping").toCap(), [380, 1360], 50, "start");
+	text(s("resistence").toCap(), [380, 1440], 50, "start");
+	text(s("useful_life").toCap(), [380, 1520], 50, "start");
 
-	text(params.throwing, [920, 1200], 50, "end");
-	text(params.weight, [920, 1280], 50, "end");
-	text(params.damping, [920, 1360], 50, "end");
-	text(params.resistence, [920, 1440], 50, "end");
-	text(params.useful_life, [920, 1520], 50, "end");
+	text(obj.throwing, [1030, 1200], 50, "end");
+	text(obj.weight, [1030, 1280], 50, "end");
+	text(obj.damping, [1030, 1360], 50, "end");
+	text(obj.resistence, [1030, 1440], 50, "end");
+	text(obj.useful_life, [1030, 1520], 50, "end");
 
 	let point = 1210;
-	let breaking = Math.ceil(params.restrictions.length / 2) * 100;
-	params.restrictions.forEach((rest) => {
-		let restriction = `${-rest.reduction} ${rest.restriction}`;
-		if (point >= breaking + 1210) {
-			text(restriction, [1300, point - breaking], 50, "center");
-		} else {
-			text(restriction, [1100, point], 50, "center");
-		}
-		point += 100;
-	});
+	let breaking = Math.ceil(obj.restrictions.length / 2) * 100;
+	
+	const restrictions = {}
+	obj.restrictions.forEach( rest => restrictions[rest.restriction] = util.plus(-rest.reduction) )
+	if (restrictions['R']) text(restrictions['R'] , [1170, 1210], 50, "center");
+	if (restrictions['F']) text(restrictions['F'] , [1170, 1310], 50, "center");
+	if (restrictions['A']) text(restrictions['A'] , [1170, 1410], 50, "center");
+	if (restrictions['V']) text(restrictions['V'] , [1170, 1510], 50, "center");
+	if (restrictions['C']) text(restrictions['C'] , [1300, 1210], 50, "center");
+	if (restrictions['I']) text(restrictions['I'] , [1300, 1310], 50, "center");
+	if (restrictions['S']) text(restrictions['S'] , [1300, 1410], 50, "center");
+	if (restrictions['W']) text(restrictions['W'] , [1300, 1510], 50, "center");
 
 	let range = "—";
-	params.range.forEach((unit) => {
+	obj.range.forEach((unit) => {
 		range += `${unit}—`;
 	});
-	text(s("range"), [400, 1675], 40, "center", "#555", "bold");
-	text(range, [400, 1775], 50, "center");
+	text(s("range"), [350, 1675], 40, "center", "#555", "bold");
+	text(range, [350, 1775], 50, "center");
 
-	let data = `${params.damage} / ${params.slice} / ${params.bleeding}`;
-	text(data, [400, 1870], 70, "center");
+	let data = `${obj.damage} / ${obj.slice} / ${obj.bleeding}`;
+	text(data, [350, 1870], 70, "center");
 	let label = `${s("damage")} / ${s("slice")} / ${s("bleeding")}`;
-	text(label, [400, 1950], 30, "center", "#555", "bold");
+	text(label, [350, 1950], 30, "center", "#555", "bold");
 
 	text(s("price"), [1050, 1675], 40, "center", "#555", "bold");
 	await image("raw", [750, 1720], [150, 150]);
 	await image("crafting", [1000, 1720], [150, 150]);
 	await image("fee", [1250, 1720], [150, 150]);
-	text(`${n(params.price.raw)} R`, [825, 1950], 40, "center");
-	text(`${n(params.price.crafting)} R`, [1075, 1950], 40, "center");
-	text(`${n(params.price.fee)} R`, [1325, 1950], 40, "center");
+	text(`${n(obj.price.raw)} R`, [825, 1950], 40, "center");
+	text(`${n(obj.price.crafting)} R`, [1075, 1950], 40, "center");
+	text(`${n(obj.price.fee)} R`, [1325, 1950], 40, "center");
 
-	text(s("Effectos y Habilidades"), [50, 2075], 30, "start", "#555");
+	text(s(obj.mod_code), [50, 2075], 30, "start", "#555");
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");

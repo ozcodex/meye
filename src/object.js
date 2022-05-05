@@ -2,6 +2,7 @@ const objects = require("./def/objects.json");
 const createRaw = require("./raw").create;
 const util = require("./util");
 const code = require("./code");
+const db = require("./db");
 
 /*
 output:
@@ -287,9 +288,9 @@ function applyExtra(obj) {
 		thickness: obj.extra.thickness,
 	});
 	const extra_weight = raw_material.weight;
-	obj.thickness += obj.extra.thickness;
-	obj.size += raw_material.size;
-	obj.price.raw += raw_material.price;
+	obj.thickness += Number(obj.extra.thickness);
+	obj.size += Number(raw_material.size);
+	obj.price.raw += Number(raw_material.price);
 	obj.price.crafting = Math.ceil(obj.price.crafting * 1.1);
 	obj.price.fee *= 1.5;
 	obj.damping += "/" + raw_material.damping;
@@ -332,7 +333,9 @@ function applyMods(obj) {
 			return;
 		}
 		if (mod == "range") {
-			obj.range = obj.range.map((ran, idx) => ran + obj.modifications.range[idx]);
+			obj.range = obj.range.map(
+				(ran, idx) => ran + obj.modifications.range[idx]
+			);
 			return;
 		}
 		if (mod == "price") {
@@ -349,7 +352,7 @@ function applyMods(obj) {
 			obj.rarity = obj.modifications.rarity;
 			return;
 		}
-		obj[mod] += obj.modifications[mod];
+		obj[mod] += Number(obj.modifications[mod]);
 	});
 	return obj;
 }
@@ -391,7 +394,7 @@ function create(params) {
 	const material = raw_material.material;
 	const useful_life = params.quality * material.useful_life;
 	const level = calculateRequiredLevel(params);
-	const result = {
+	const base_object = {
 		...params,
 		damage: calculateDamage(params),
 		slice: calculateSlice(params),
@@ -421,10 +424,32 @@ function create(params) {
 		mod_code: params.modifications ? code.modString(params) : undefined,
 		rarity: calculateRarity(params),
 	};
-	return applyExtra(applyMods(result));
+	const result = applyExtra(applyMods(base_object));
+	const id = result.code + (result.custom_code ? "-" : "") + (result.custom_code || "");
+	db.upsert(id,params);
+	return result;
+}
+
+/*
+input
+	code, custom_code
+output
+	object
+*/
+function load(base_code, custom_code) {
+	const params = code.decodeBase(base_code);
+	params.extra = code.decodeCustom(custom_code, params.class);
+	const data = db.find(`${base_code}-${custom_code}`);
+	if (data) {
+		params.name = data.name;
+		params.effects = data.effects;
+		params.modifications = data.modifications;
+	}
+	return create(params);
 }
 
 //exports
 module.exports = {
 	create,
+	load,
 };

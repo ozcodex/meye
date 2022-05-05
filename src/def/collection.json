@@ -1,5 +1,1 @@
-{
-	"EELX": {
-		"name": "Escudo de Krall"
-	}
-}
+{"EELX-FK6I-62":{"name":"Escudo de Krall","effects":[{"title":"Grafia y Alquimia","description":"Grabado tratado alquimicamente para la activación automatica de su habilidad propia. Aunque para evitar caer en su propia ilusion el portador debe permanecer atento a su entorno y conciente de su realidad."},{"title":"ilusion","description":"Crea una falange ilusoria de hasta 4 copias, ocultando la verdadera posición del usuario."}],"modifications":{"damage":2,"weight":-5,"restrictions":[{"restriction":"C","reduction":5}]}}}
