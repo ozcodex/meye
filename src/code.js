@@ -127,7 +127,14 @@ function encodeCustom(params) {
 // abbreviations of all modifications object has
 
 function modString(params) {
-	return 'tbd'
+	let result = "";
+	Object.keys(params.modifications).forEach((mod) => {
+		value = params.modifications[mod];
+		name = dict.modifications[mod];
+		result += name + " ";
+	});
+
+	return "tbd";
 }
 
 module.exports = {
@@ -135,5 +142,5 @@ module.exports = {
 	encodeBase,
 	decodeCustom,
 	encodeCustom,
-	modString
+	modString,
 };
