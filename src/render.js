@@ -65,7 +65,7 @@ async function create(obj) {
 
 	//todo: set a color by parameter
 	context.fillStyle = "#777";
-	context.fillRect(100, 375, 1300, 700);
+	context.fillRect(90, 365, 1310, 710);
 	await image(obj.extra.origin, [100, 375], [1300, 700]);
 	const id =
 		obj.code +
