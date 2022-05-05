@@ -12,9 +12,9 @@ features:
 - common objects
 - item generator
 - custom code with origin, subtypes and flags for mystycs 
+- code extra material and thickness
 
 ## To do
-code extra material and thickness
 apply card modifications
 change crafting level if have some extra flags
 shov extras on card

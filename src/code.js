@@ -51,10 +51,14 @@ function encodeBase(params) {
 // origen:banken(10) , sub-type:rodela(5), spec:reforzado_umbonado(3),grafia,alquimia,ilusion
 // Escudo de Krall: 10,5,3,1,0,1,0,0,0,1,0,0,0
 // 0001010 0101 011 1010001000 = FK6I
-//    1010 0000 000 1010001000
+// Extra
+// material (32), thickness (8)
+// steel: 12, thickness: 2
+// 01100 010 = 0x62
 
-function decodeCustom(code,item_class) {
-	const raw = atob(code);
+function decodeCustom(code, item_class) {
+	const extra = code.split("-")[1];
+	const raw = atob(code.split("-")[0]);
 	const data =
 		raw.charCodeAt(2) +
 		(raw.charCodeAt(1) << 8) +
@@ -84,6 +88,11 @@ function decodeCustom(code,item_class) {
 		},
 	};
 	result.flags = Object.keys(result.flags).filter((key) => result.flags[key]);
+	if (extra) {
+		const hex_data = parseInt(extra, 16);
+		result.material = util.getKey(dict.materials, hex_data >> 3);
+		result.thickness = util.getKey(dict.sizes, hex_data & 0x7);
+	}
 	return result;
 }
 
@@ -91,18 +100,27 @@ function encodeCustom(params) {
 	let result = 0;
 	result = dict.origins[params.extra.origin] << 17;
 	result += dict.classes[params.class].sub_types[params.extra.sub_type] << 13;
-	result += dict.classes[params.class].specializations[params.extra.specialization] << 10;
-	result += params.extra.flags.includes('graphy') << 9;
-	result += params.extra.flags.includes('lacing') << 8;
-	result += params.extra.flags.includes('alchemy') << 7;
-	result += params.extra.flags.includes('cenobism') << 6;
-	result += params.extra.flags.includes('energy') << 5;
-	result += params.extra.flags.includes('object_manipulation') << 4;
-	result += params.extra.flags.includes('ilusion') << 3;
-	result += params.extra.flags.includes('mental_manipulation') << 2;
-	result += params.extra.flags.includes('potentiation') << 1;
-	result += params.extra.flags.includes('vital_cotrol');
-	return ntob(result);
+	result +=
+		dict.classes[params.class].specializations[
+			params.extra.specialization
+		] << 10;
+	result += params.extra.flags.includes("graphy") << 9;
+	result += params.extra.flags.includes("lacing") << 8;
+	result += params.extra.flags.includes("alchemy") << 7;
+	result += params.extra.flags.includes("cenobism") << 6;
+	result += params.extra.flags.includes("energy") << 5;
+	result += params.extra.flags.includes("object_manipulation") << 4;
+	result += params.extra.flags.includes("ilusion") << 3;
+	result += params.extra.flags.includes("mental_manipulation") << 2;
+	result += params.extra.flags.includes("potentiation") << 1;
+	result += params.extra.flags.includes("vital_cotrol");
+	result = ntob(result);
+	if (params.extra.material && params.extra.thickness) {
+		let hex = dict.materials[params.extra.material] << 3;
+		hex += dict.sizes[params.extra.thickness];
+		result += "-" + hex.toString(16);
+	}
+	return result;
 }
 
 module.exports = {

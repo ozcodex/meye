@@ -76,20 +76,10 @@ const testCases = [
 	},
 ];
 
-testCases.forEach((test) => console.log(create(test)));
-console.log(code.decodeBase("EELX"));
-console.log(code.decodeCustom("FK6I", "armor"));
-console.log(
-	code.encodeCustom({
-		class: "armor",
-		extra: {
-			origin: "banken",
-			sub_type: "buckler",
-			specialization: "reinforced_umbonated",
-			flags: ["graphy", "alchemy", "ilusion"],
-		},
-	})
-);
+//testCases.forEach((test) => console.log(create(test)));
+//console.log(code.decodeBase("EELX"));
+//console.log(code.decodeCustom("FK6I-62", "armor"));
+console.log(create(testCases[0]))
 //render(create(testCases[0]))
 
 //console.log(util.randomObject('weapon'))
