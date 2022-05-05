@@ -66,18 +66,25 @@ async function create(obj) {
 	//todo: set a color by parameter
 	context.fillStyle = "#777";
 	context.fillRect(100, 375, 1300, 700);
-	await image(obj.type, [100, 375], [1300, 700]);
-	if(obj.custom_code){
-	text(`#${obj.code}`, [110, 980], 40, "start");
-	text(`#${obj.custom_code}`, [110, 1050], 40, "start");
-
-	}else{
-	text(`#${obj.code}`, [110, 1050], 40, "start");
-
+	await image(obj.extra.origin, [100, 375], [1300, 700]);
+	const id =
+		obj.code +
+		(obj.custom_code ? "-" : "") +
+		(obj.custom_code || "");
+	if (fs.existsSync(`./src/img/${id}.png`)) {
+		await image(id, [100, 375], [1300, 700]);
+	} else {
+		await image(obj.type, [100, 375], [1300, 700]);
 	}
-	let material = materials[obj.material].symbol
-	if (obj.extra.material){
-		material += ','+materials[obj.extra.material].symbol
+	if (obj.custom_code) {
+		text(`#${obj.code}`, [110, 980], 40, "start");
+		text(`#${obj.custom_code}`, [110, 1050], 40, "start");
+	} else {
+		text(`#${obj.code}`, [110, 1050], 40, "start");
+	}
+	let material = materials[obj.material].symbol;
+	if (obj.extra.material) {
+		material += "," + materials[obj.extra.material].symbol;
 	}
 	text(material, [1375, 435], 40, "end", "#000", "bold");
 
@@ -99,17 +106,19 @@ async function create(obj) {
 
 	let point = 1210;
 	let breaking = Math.ceil(obj.restrictions.length / 2) * 100;
-	
-	const restrictions = {}
-	obj.restrictions.forEach( rest => restrictions[rest.restriction] = util.plus(-rest.reduction) )
-	if (restrictions['R']) text(restrictions['R'] , [1170, 1210], 50, "center");
-	if (restrictions['F']) text(restrictions['F'] , [1170, 1310], 50, "center");
-	if (restrictions['A']) text(restrictions['A'] , [1170, 1410], 50, "center");
-	if (restrictions['V']) text(restrictions['V'] , [1170, 1510], 50, "center");
-	if (restrictions['C']) text(restrictions['C'] , [1300, 1210], 50, "center");
-	if (restrictions['I']) text(restrictions['I'] , [1300, 1310], 50, "center");
-	if (restrictions['S']) text(restrictions['S'] , [1300, 1410], 50, "center");
-	if (restrictions['W']) text(restrictions['W'] , [1300, 1510], 50, "center");
+
+	const restrictions = {};
+	obj.restrictions.forEach(
+		(rest) => (restrictions[rest.restriction] = util.plus(-rest.reduction))
+	);
+	if (restrictions["R"]) text(restrictions["R"], [1170, 1210], 50, "center");
+	if (restrictions["F"]) text(restrictions["F"], [1170, 1310], 50, "center");
+	if (restrictions["A"]) text(restrictions["A"], [1170, 1410], 50, "center");
+	if (restrictions["V"]) text(restrictions["V"], [1170, 1510], 50, "center");
+	if (restrictions["C"]) text(restrictions["C"], [1300, 1210], 50, "center");
+	if (restrictions["I"]) text(restrictions["I"], [1300, 1310], 50, "center");
+	if (restrictions["S"]) text(restrictions["S"], [1300, 1410], 50, "center");
+	if (restrictions["W"]) text(restrictions["W"], [1300, 1510], 50, "center");
 
 	let range = "—";
 	obj.range.forEach((unit) => {
