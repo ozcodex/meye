@@ -46,7 +46,9 @@ async function create(obj) {
 	if (!isNaN(obj.size_type)) {
 		suffix = obj.size_type == 1 ? "piece" : "pieces";
 	}
-	const desc = `${s(obj.type)} ${s(obj.size_type)} ${s(suffix)}`.toCap();
+	const desc = `${s(obj.type)} ${s(obj.extra.sub_type)} ${s(
+		obj.extra.specialization
+	)}, ${s(obj.size_type)} ${s(suffix)}`.toCap();
 
 	await image("background", [0, 0], [width, height]);
 	context.fillStyle = "#000";
@@ -54,23 +56,21 @@ async function create(obj) {
 
 	// draw card
 	text(obj.name || name, [100, 200], 70, "start", "#000", "bold");
-	text(desc, [100, 300], 50, "start", "#555", "italic");
+	text(desc, [100, 300], 40, "start", "#555", "italic");
 
-	text(s("size"), [1220, 150], 40, "center", "#555", "bold");
-	text(obj.size + 5, [1220, 270], 80, "end", "#000", "bold");
+	text(s("size"), [1200, 110], 40, "center", "#555", "bold");
+	text(obj.size + 5, [1220, 220], 80, "end", "#000", "bold");
 	const thickness = +(Math.round(obj.thickness + "e+1") + "e-1");
-	text(thickness + " G", [1230, 220], 40, "start");
+	text(thickness + " G", [1230, 170], 40, "start");
 	const dimension = +(Math.round(obj.dimension + "e+1") + "e-1");
-	text(dimension + " D", [1230, 270], 40, "start");
+	text(dimension + " D", [1230, 220], 40, "start");
 
 	//todo: set a color by parameter
 	context.fillStyle = "#777";
-	context.fillRect(90, 365, 1310, 710);
+	context.fillRect(90, 365, 1320, 720);
 	await image(obj.extra.origin, [100, 375], [1300, 700]);
 	const id =
-		obj.code +
-		(obj.custom_code ? "-" : "") +
-		(obj.custom_code || "");
+		obj.code + (obj.custom_code ? "-" : "") + (obj.custom_code || "");
 	if (fs.existsSync(`./src/img/${id}.png`)) {
 		await image(id, [100, 375], [1300, 700]);
 	} else {
