@@ -251,6 +251,110 @@ function calculateWeight(params) {
 }
 
 /*
+input:
+	restrictions
+	update
+output
+	modified_restrictions
+
+*/
+function addRestriction(restrictions, update) {
+	restrictions.forEach((element, index) => {
+		if (element.restriction == update.restriction) {
+			restrictions[index].reduction += update.reduction;
+		}
+	});
+	if (!restrictions.some((e) => e.restriction == update.restriction)) {
+		restrictions = restrictions.concat([update]);
+	}
+	return restrictions;
+}
+
+/*
+input:
+	created object
+output:
+	object with modifications
+*/
+
+function applyExtra(obj) {
+	if (!obj.extra) {
+		return obj;
+	}
+	const raw_material = createRaw({
+		dimension: obj.dimension,
+		material: obj.extra.material,
+		thickness: obj.extra.thickness,
+	});
+	const extra_weight = raw_material.weight;
+	obj.thickness += obj.extra.thickness;
+	obj.size += raw_material.size;
+	obj.price.raw += raw_material.price;
+	obj.price.crafting = Math.ceil(obj.price.crafting * 1.1);
+	obj.price.fee *= 1.5;
+	obj.damping += "/" + raw_material.damping;
+	obj.resistence += "/" + raw_material.material.resistence;
+	obj.useful_life += "/" + raw_material.material.useful_life * obj.quality;
+	//extra weight restrictions are only applied to R
+	const reduction = Math.floor(raw_material.weight);
+	if (reduction) {
+		obj.restrictions = addRestriction(obj.restrictions, {
+			restriction: "R",
+			reduction,
+		});
+	}
+	if (obj.crafting_level != "divine") {
+		obj.crafting_level = "mystic";
+	}
+	if (obj.rarity != "supernatural" && obj.rarity != "legendary") {
+		obj.rarity = "special";
+	}
+	return obj;
+}
+
+/*
+input:
+	created object
+output:
+	object with modifications
+*/
+
+function applyMods(obj) {
+	if (!obj.modifications) {
+		return obj;
+	}
+	//apply modifications
+	Object.keys(obj.modifications).forEach((mod) => {
+		if (mod == "restrictions") {
+			obj.modifications[mod].forEach((res) => {
+				obj.restrictions = addRestriction(obj.restrictions, res);
+			});
+			return;
+		}
+		if (mod == "range") {
+			obj.range = obj.range.map((ran, idx) => ran + obj.modifications.range[idx]);
+			return;
+		}
+		if (mod == "price") {
+			obj.price.raw += obj.modifications.price.raw;
+			obj.price.crafting += obj.modifications.price.crafting;
+			obj.price.fee += obj.modifications.price.fee;
+			return;
+		}
+		if (mod == "crafting_level") {
+			obj.crafting_level = obj.modifications.crafting_level;
+			return;
+		}
+		if (mod == "rarity") {
+			obj.rarity = obj.modifications.rarity;
+			return;
+		}
+		obj[mod] += obj.modifications[mod];
+	});
+	return obj;
+}
+
+/*
 output:
 	{
 		damage
@@ -269,6 +373,9 @@ output:
 		price
 		code
 		rarity
+		extra
+		effects
+		modifications
 	}
 */
 
@@ -284,7 +391,7 @@ function create(params) {
 	const material = raw_material.material;
 	const useful_life = params.quality * material.useful_life;
 	const level = calculateRequiredLevel(params);
-	return {
+	const result = {
 		...params,
 		damage: calculateDamage(params),
 		slice: calculateSlice(params),
@@ -303,15 +410,18 @@ function create(params) {
 			raw: raw_material.price,
 			crafting: Math.ceil(
 				material.price.useful_life * useful_life +
-					0.3*raw_material.price *
+					0.3 *
+						raw_material.price *
 						(0.2 + Math.abs(params.dimension - params.thickness))
 			),
 			fee: objects.crafting_level[level].fee,
 		},
 		code: code.encodeBase(params),
-		custom_code: params.extra?code.encodeCustom(params):undefined,
+		custom_code: params.extra ? code.encodeCustom(params) : undefined,
+		mod_code: params.modifications ? code.modString(params) : undefined,
 		rarity: calculateRarity(params),
 	};
+	return applyExtra(applyMods(result));
 }
 
 //exports

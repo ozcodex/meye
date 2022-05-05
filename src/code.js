@@ -123,9 +123,17 @@ function encodeCustom(params) {
 	return result;
 }
 
+// Mod string
+// abbreviations of all modifications object has
+
+function modString(params) {
+	return 'tbd'
+}
+
 module.exports = {
 	decodeBase,
 	encodeBase,
 	decodeCustom,
 	encodeCustom,
+	modString
 };

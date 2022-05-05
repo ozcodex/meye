@@ -11,7 +11,9 @@ output:
 	{
 		weight
 		price
+		damping
 		size
+		material
 	}
 */
 

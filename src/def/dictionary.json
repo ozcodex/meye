@@ -77,5 +77,21 @@
 	"origins": {
 		"unknown": 0,
 		"banken": 10
+	},
+	"modifications": {
+		"damage": "Dñ.",
+		"slice": "Ct.",
+		"bleeding": "Ds.",
+		"resistence": "Rs.",
+		"size": "T.",
+		"throwing": "L.",
+		"weight": "P.",
+		"restrictions": "Res",
+		"range": "Ran",
+		"price": "Cst",
+		"damping": "Am.",
+		"useful_life": "Vu.",
+		"crafting_level": "Nv.",
+		"rarity": "Rz."
 	}
 }

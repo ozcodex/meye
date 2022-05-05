@@ -13,11 +13,11 @@ features:
 - item generator
 - custom code with origin, subtypes and flags for mystycs 
 - code extra material and thickness
+- change crafting level if have some extra flags
+- apply card modifications
 
 ## To do
-apply card modifications
-change crafting level if have some extra flags
-shov extras on card
+show extras on card
 create card reverse
 
 v2:

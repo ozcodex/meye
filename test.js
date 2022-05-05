@@ -49,6 +49,15 @@ const testCases = [
 		dimension: "3",
 		thickness: "0.5",
 		quality: 0.3,
+		modifications: {
+			damage: 2,
+			weight: -5,
+			restrictions: [{ restriction: "R", reduction: 5 }],
+			range: [2, 3],
+			price: { raw: 100, crafting: 4, fee: -200 },
+			crafting_level: "divine",
+			rarity: "common",
+		},
 	},
 	{
 		class: "weapon",
@@ -79,7 +88,8 @@ const testCases = [
 //testCases.forEach((test) => console.log(create(test)));
 //console.log(code.decodeBase("EELX"));
 //console.log(code.decodeCustom("FK6I-62", "armor"));
-console.log(create(testCases[0]))
+console.log(create(testCases[0]));
+console.log(create(testCases[1]));
 //render(create(testCases[0]))
 
 //console.log(util.randomObject('weapon'))
