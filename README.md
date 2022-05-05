@@ -17,11 +17,17 @@ features:
 code extra material and thickness
 apply card modifications
 change crafting level if have some extra flags
+shov extras on card
+create card reverse
+
+v2:
 add more types of common objects
+add components
 explosives
 poison, venom, toxins and acids
 
 v3:
+create and read qr codes
 graphical interface
 edibles
 fluids and containers
