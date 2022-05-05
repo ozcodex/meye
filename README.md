@@ -14,6 +14,9 @@ features:
 - custom code with origin, subtypes and flags for mystycs 
 
 ## To do
+code extra material and thickness
+apply card modifications
+change crafting level if have some extra flags
 add more types of common objects
 explosives
 poison, venom, toxins and acids

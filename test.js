@@ -14,6 +14,33 @@ const testCases = [
 		dimension: "3",
 		thickness: 3,
 		quality: 0.7,
+		extra: {
+			material: "steel",
+			thickness: 0.5,
+			origin: "banken",
+			sub_type: "buckler",
+			specialization: "reinforced_umbonated",
+			flags: ["graphy", "alchemy", "ilusion"],
+		},
+		effects: [
+			{
+				title: "Grafia y Alquimia",
+				description:
+					"Grabado tratado alquimicamente para la activación automatica de su habilidad" +
+					" propia. Aunque para evitar caer en su propia ilusion el portador debe " +
+					"permanecer atento a su entorno y conciente de su realidad.",
+			},
+			{
+				title: "ilusion",
+				description:
+					"Crea una falange ilusoria de hasta 4 copias, ocultando la verdadera posición del usuario.",
+			},
+		],
+		modifications: {
+			damage: 2,
+			weight: -5,
+			restrictions: [{ restriction: "C", reduction: 5 }],
+		},
 	},
 	{
 		class: "weapon",
@@ -50,8 +77,19 @@ const testCases = [
 ];
 
 testCases.forEach((test) => console.log(create(test)));
-console.log(code.decodeBase('EELX'))
-console.log(code.decodeCustom('FK6I'))
+console.log(code.decodeBase("EELX"));
+console.log(code.decodeCustom("FK6I", "armor"));
+console.log(
+	code.encodeCustom({
+		class: "armor",
+		extra: {
+			origin: "banken",
+			sub_type: "buckler",
+			specialization: "reinforced_umbonated",
+			flags: ["graphy", "alchemy", "ilusion"],
+		},
+	})
+);
 //render(create(testCases[0]))
 
 //console.log(util.randomObject('weapon'))

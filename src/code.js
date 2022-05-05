@@ -1,6 +1,7 @@
+const collection = require("./def/collection.json");
 const dict = require("./def/dictionary.json");
 const ntob = require("number-to-base64").ntob;
-const util = require('./util')
+const util = require("./util");
 
 // Item code
 // material (128), class(8), type(16), dimension(8), thickness(8), quality(16)
@@ -13,8 +14,12 @@ function decodeBase(code) {
 		raw.charCodeAt(2) +
 		(raw.charCodeAt(1) << 8) +
 		(raw.charCodeAt(0) << 16);
-	const item_class = util.getKeyByParam(dict.classes, "value", (data >> 14) & 0x7);
-	const name = dict.collection[code]?.name;
+	const item_class = util.getKeyByParam(
+		dict.classes,
+		"value",
+		(data >> 14) & 0x7
+	);
+	const name = collection[code]?.name;
 	const result = {
 		material: util.getKey(dict.materials, data >> 17),
 		class: item_class,
@@ -34,7 +39,7 @@ function encodeBase(params) {
 	result = params.quality * 10;
 	result += dict.sizes[params.thickness] << 4;
 	result += dict.sizes[params.dimension] << 7;
-	result += dict.classes[params.class][params.type] << 10;
+	result += dict.classes[params.class].types[params.type] << 10;
 	result += dict.classes[params.class].value << 14;
 	result += dict.materials[params.material] << 17;
 	return ntob(result);
@@ -46,8 +51,9 @@ function encodeBase(params) {
 // origen:banken(10) , sub-type:rodela(5), spec:reforzado_umbonado(3),grafia,alquimia,ilusion
 // Escudo de Krall: 10,5,3,1,0,1,0,0,0,1,0,0,0
 // 0001010 0101 011 1010001000 = FK6I
+//    1010 0000 000 1010001000
 
-function decodeCustom(code) {
+function decodeCustom(code,item_class) {
 	const raw = atob(code);
 	const data =
 		raw.charCodeAt(2) +
@@ -56,8 +62,14 @@ function decodeCustom(code) {
 
 	const result = {
 		origin: util.getKey(dict.origins, (data >> 17) & 0xf),
-		subtype: (data >> 13) & 0xf,
-		specialization: (data >> 10) & 0x7,
+		sub_type: util.getKey(
+			dict.classes[item_class].sub_types,
+			(data >> 13) & 0xf
+		),
+		specialization: util.getKey(
+			dict.classes[item_class].specializations,
+			(data >> 10) & 0x7
+		),
 		flags: {
 			graphy: (data >> 9) & 0x1,
 			lacing: (data >> 8) & 0x1,
@@ -71,11 +83,31 @@ function decodeCustom(code) {
 			vital_cotrol: data & 0x1,
 		},
 	};
+	result.flags = Object.keys(result.flags).filter((key) => result.flags[key]);
 	return result;
+}
+
+function encodeCustom(params) {
+	let result = 0;
+	result = dict.origins[params.extra.origin] << 17;
+	result += dict.classes[params.class].sub_types[params.extra.sub_type] << 13;
+	result += dict.classes[params.class].specializations[params.extra.specialization] << 10;
+	result += params.extra.flags.includes('graphy') << 9;
+	result += params.extra.flags.includes('lacing') << 8;
+	result += params.extra.flags.includes('alchemy') << 7;
+	result += params.extra.flags.includes('cenobism') << 6;
+	result += params.extra.flags.includes('energy') << 5;
+	result += params.extra.flags.includes('object_manipulation') << 4;
+	result += params.extra.flags.includes('ilusion') << 3;
+	result += params.extra.flags.includes('mental_manipulation') << 2;
+	result += params.extra.flags.includes('potentiation') << 1;
+	result += params.extra.flags.includes('vital_cotrol');
+	return ntob(result);
 }
 
 module.exports = {
 	decodeBase,
 	encodeBase,
 	decodeCustom,
+	encodeCustom,
 };

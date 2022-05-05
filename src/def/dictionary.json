@@ -20,6 +20,12 @@
 				"scales": 3,
 				"studded": 4,
 				"mail": 5
+			},
+			"sub_types": {
+				"buckler": 5
+			},
+			"specializations": {
+				"reinforced_umbonated": 3
 			}
 		},
 		"common": {
@@ -68,13 +74,8 @@
 		"black_steel": 24,
 		"celestial_steel": 25
 	},
-	"origins":{
+	"origins": {
 		"unknown": 0,
 		"banken": 10
-	},
-	"collection": {
-		"EELX": {
-			"name": "Escudo de Krall"
-		}
 	}
 }

@@ -309,6 +309,7 @@ function create(params) {
 			fee: objects.crafting_level[level].fee,
 		},
 		code: code.encodeBase(params),
+		custom_code: params.extra?code.encodeCustom(params):undefined,
 		rarity: calculateRarity(params),
 	};
 }
