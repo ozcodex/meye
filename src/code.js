@@ -127,14 +127,45 @@ function encodeCustom(params) {
 // abbreviations of all modifications object has
 
 function modString(params) {
-	let result = "";
+	const plus = (num) => (num >= 0 ? "+" : "") + num;
+	let result = [];
 	Object.keys(params.modifications).forEach((mod) => {
 		value = params.modifications[mod];
 		name = dict.modifications[mod];
-		result += name + " ";
+		if (!isNaN(value)) {
+			return result.push(name + plus(value));
+		}
+		if (Array.isArray(value)) {
+			return result.push(
+				name +
+					"[" +
+					value
+						.map((e) => {
+							if (!isNaN(e)) {
+								return plus(e);
+							} else {
+								return e.restriction + plus(e.reduction);
+							}
+						})
+						.join("/") +
+					"]"
+			);
+		}
+		if (typeof value === "object") {
+			return result.push(
+				name +
+					"{" +
+					plus(value.raw || 0) +
+					"/" +
+					plus(value.crafting || 0) +
+					"/" +
+					plus(value.fee || 0) +
+					"}"
+			);
+		}
 	});
 
-	return "tbd";
+	return result.join(" ");
 }
 
 module.exports = {

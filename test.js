@@ -54,7 +54,7 @@ const testCases = [
 			weight: -5,
 			restrictions: [{ restriction: "R", reduction: 5 }],
 			range: [2, 3],
-			price: { raw: 100, crafting: 4, fee: -200 },
+			price: { raw: 100, fee: -200 },
 			crafting_level: "divine",
 			rarity: "common",
 		},
