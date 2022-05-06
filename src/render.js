@@ -14,6 +14,29 @@ const height = 2100;
 let context;
 let canvas;
 
+function multiline(text, pos, maxWidth, size, align, color, variant) {
+	context.font = `${variant || "normal"} ${size}pt Sans`;
+	context.textAlign = align;
+	context.fillStyle = color || "#000";
+	let words = text.split(" ");
+	let line = "";
+
+	for (let n = 0; n < words.length; n++) {
+		let testLine = line + words[n] + " ";
+		let metrics = context.measureText(testLine);
+		let testWidth = metrics.width;
+		if (testWidth > maxWidth && n > 0) {
+			context.fillText(line, pos[0], pos[1]);
+			line = words[n] + " ";
+			pos[1] += size + 15;
+		} else {
+			line = testLine;
+		}
+	}
+	context.fillText(line, pos[0], pos[1]);
+	return pos[1];
+}
+
 function text(text, pos, size, align, color, variant) {
 	context.font = `${variant || "normal"} ${size}pt Sans`;
 	context.textAlign = align;
@@ -40,7 +63,7 @@ context.fillRect(0, 2020, width, height);
 
 // create card
 
-async function create(obj) {
+async function front(obj) {
 	const name = `${s(obj.type)}`.toCap();
 	let suffix = "";
 	if (!isNaN(obj.size_type)) {
@@ -50,7 +73,7 @@ async function create(obj) {
 		obj.extra.specialization
 	)}, ${s(obj.size_type)} ${s(suffix)}`.toCap();
 
-	await image("background", [0, 0], [width, height]);
+	await image("background_front", [0, 0], [width, height]);
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
 
@@ -59,7 +82,7 @@ async function create(obj) {
 	text(desc, [100, 300], 40, "start", "#555", "italic");
 
 	text(s("size"), [1200, 110], 40, "center", "#555", "bold");
-	text(obj.size + 5, [1220, 220], 80, "end", "#000", "bold");
+	text(obj.size, [1220, 220], 80, "end", "#000", "bold");
 	const thickness = +(Math.round(obj.thickness + "e+1") + "e-1");
 	text(thickness + " G", [1230, 170], 40, "start");
 	const dimension = +(Math.round(obj.dimension + "e+1") + "e-1");
@@ -111,14 +134,22 @@ async function create(obj) {
 	obj.restrictions.forEach(
 		(rest) => (restrictions[rest.restriction] = util.plus(-rest.reduction))
 	);
-	if (restrictions["R"]) text(restrictions["R"], [1170, 1210], 50, "center");
-	if (restrictions["F"]) text(restrictions["F"], [1170, 1310], 50, "center");
-	if (restrictions["A"]) text(restrictions["A"], [1170, 1410], 50, "center");
-	if (restrictions["V"]) text(restrictions["V"], [1170, 1510], 50, "center");
-	if (restrictions["C"]) text(restrictions["C"], [1300, 1210], 50, "center");
-	if (restrictions["I"]) text(restrictions["I"], [1300, 1310], 50, "center");
-	if (restrictions["S"]) text(restrictions["S"], [1300, 1410], 50, "center");
-	if (restrictions["W"]) text(restrictions["W"], [1300, 1510], 50, "center");
+	if (restrictions["F"])
+		text(restrictions["F"], [1170, 1210], 50, "center", "#000", "bold");
+	if (restrictions["A"])
+		text(restrictions["A"], [1170, 1310], 50, "center", "#000", "bold");
+	if (restrictions["V"])
+		text(restrictions["V"], [1170, 1410], 50, "center", "#000", "bold");
+	if (restrictions["R"])
+		text(restrictions["R"], [1170, 1510], 50, "center", "#000", "bold");
+	if (restrictions["I"])
+		text(restrictions["I"], [1300, 1210], 50, "center", "#000", "bold");
+	if (restrictions["S"])
+		text(restrictions["S"], [1300, 1310], 50, "center", "#000", "bold");
+	if (restrictions["C"])
+		text(restrictions["C"], [1300, 1410], 50, "center", "#000", "bold");
+	if (restrictions["W"])
+		text(restrictions["W"], [1300, 1510], 50, "center", "#000", "bold");
 
 	let range = "—";
 	obj.range.forEach((unit) => {
@@ -142,9 +173,44 @@ async function create(obj) {
 
 	text(s(obj.mod_code), [50, 2075], 30, "start", "#555");
 
+	// put flags
+
+	await Promise.all(
+		obj.extra.flags.map((flag, idx) =>
+			image(flag, [-363, 100 + 192 * idx], [380, 172])
+		)
+	);
+
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync("./test.png", buffer);
+	fs.writeFileSync("./front.png", buffer);
+}
+
+async function back(obj) {
+	await image("background_back", [0, 0], [width, height]);
+	context.fillStyle = "#000";
+	context.fillRect(0, 2020, width, height);
+
+	await Promise.all(
+		obj.extra.flags.map((flag, idx) =>
+			image(flag, [1164, 100 + 192 * idx], [336, 172])
+		)
+	);
+
+	next_y = 250;
+	obj.effects.forEach((effect, idx) => {
+		text(effect.title, [100, next_y - 100], 40, "start", '#000', 'bold');
+		next_y = 200 + multiline(effect.description, [100, next_y], 1000, 40);
+	});
+
+	// render and save file
+	const buffer = canvas.toBuffer("image/png");
+	fs.writeFileSync("./back.png", buffer);
+}
+
+async function create(obj) {
+	await front(obj);
+	await back(obj);
 }
 
 module.exports = {

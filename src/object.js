@@ -304,11 +304,17 @@ function applyExtra(obj) {
 			reduction,
 		});
 	}
-	if (obj.crafting_level != "divine") {
-		obj.crafting_level = "mystic";
-	}
-	if (obj.rarity != "supernatural" && obj.rarity != "legendary") {
-		obj.rarity = "special";
+	if (obj.extra.flags.length > 0) {
+		obj.price.fee += objects.crafting_level.mystic.fee
+		if (obj.crafting_level != "divine") {
+			obj.crafting_level = "mystic";
+		}
+		if (obj.rarity != "supernatural" && obj.rarity != "legendary") {
+			obj.rarity = "special";
+		}
+		if ( obj.rarity != "legendary" && obj.extra.flags.includes('cenobism')){
+			obj.rarity = "supernatural";
+		} 
 	}
 	return obj;
 }
@@ -425,8 +431,11 @@ function create(params) {
 		rarity: calculateRarity(params),
 	};
 	const result = applyExtra(applyMods(base_object));
-	const id = result.code + (result.custom_code ? "-" : "") + (result.custom_code || "");
-	db.upsert(id,params);
+	const id =
+		result.code +
+		(result.custom_code ? "-" : "") +
+		(result.custom_code || "");
+	db.upsert(id, params);
 	return result;
 }
 

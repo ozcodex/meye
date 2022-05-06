@@ -22,25 +22,6 @@ const testCases = [
 			specialization: "reinforced_umbonated",
 			flags: ["graphy", "alchemy", "ilusion"],
 		},
-		effects: [
-			{
-				title: "Grafia y Alquimia",
-				description:
-					"Grabado tratado alquimicamente para la activación automatica de su habilidad" +
-					" propia. Aunque para evitar caer en su propia ilusion el portador debe " +
-					"permanecer atento a su entorno y conciente de su realidad.",
-			},
-			{
-				title: "ilusion",
-				description:
-					"Crea una falange ilusoria de hasta 4 copias, ocultando la verdadera posición del usuario.",
-			},
-		],
-		modifications: {
-			damage: 2,
-			weight: -5,
-			restrictions: [{ restriction: "C", reduction: 5 }],
-		},
 	},
 	{
 		class: "weapon",
@@ -61,10 +42,10 @@ const testCases = [
 	},
 	{
 		class: "weapon",
-		material: "ferro_iron",
+		material: "steel",
 		type: "blade",
-		dimension: "3",
-		thickness: "2",
+		dimension: "0.5",
+		thickness: "1",
 		quality: 0.7,
 	},
 	{
@@ -88,7 +69,8 @@ const testCases = [
 //testCases.forEach((test) => console.log(create(test)));
 //console.log(code.decodeBase("EELX"));
 //console.log(code.decodeCustom("FK6I-62", "armor"));
-//console.log(create(testCases[0]));
+console.log(create(testCases[2]));
+//console.log(load("EELX","FK6I-62"));
 render(load("EELX","FK6I-62"))
 //console.log(util.randomObject('weapon'))
 //console.log(util.randomObject('armor'))

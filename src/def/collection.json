@@ -1,1 +1,30 @@
-{"EELX-FK6I-62":{"name":"Escudo de Krall","effects":[{"title":"Grafia y Alquimia","description":"Grabado tratado alquimicamente para la activación automatica de su habilidad propia. Aunque para evitar caer en su propia ilusion el portador debe permanecer atento a su entorno y conciente de su realidad."},{"title":"ilusion","description":"Crea una falange ilusoria de hasta 4 copias, ocultando la verdadera posición del usuario."}],"modifications":{"damage":2,"weight":-5,"restrictions":[{"restriction":"C","reduction":5}]}}}
+{
+	"EELX-FK6I-62": {
+		"name": "Escudo de Krall",
+		"effects": [
+			{
+				"title": "Construcción",
+				"description": "El refuerzo de acero esta construido para proteger las grafias. Ademas cuenta con un umbo central en forma de espina y cuchillas en los extremos del puño y del codo."
+			},
+			{
+				"title": "Grafia y Alquimia",
+				"description": "Grabado tratada alquimicamente para retener la habilidad propia del arma y aligerar su peso"
+			},
+			{
+				"title": "Ilusion Nivel 3",
+				"description": "Hablidad activada al asumir posicion defensiva. Crea tres copias del portador en formación de falange ocultando la ubicación original del usuario obligando al atacante a liberarse de la ilusion o atacar con probabilidad. Una vez una lusion sea atacada, esta desaparece."
+			},
+			{
+				"title": "Historia",
+				"description": "Escudo portado por Krall, lider de falanges de los Keikan durante las guerras de liberación de la nación Sujfi"
+			}
+		],
+		"modifications": {
+			"damage": 3,
+			"slice": 47,
+			"bleeding": 4,  
+			"weight": -5,
+			"restrictions": [{ "restriction": "C", "reduction": 5 }]
+		}
+	}
+}
