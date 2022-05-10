@@ -1,76 +1,51 @@
-const {create, load} = require("./src/object");
+const { create, load } = require("./src/object");
 const util = require("./src/util");
 const code = require("./src/code");
 const render = require("./src/render").create;
 
-//test cases
-
-const testCases = [
-	{
-		name: 'Escudo de Krall',
-		class: "armor",
-		material: "iron",
-		type: "shield",
-		dimension: "3",
-		thickness: 3,
-		quality: 0.7,
-		extra: {
-			material: "steel",
-			thickness: 0.5,
-			origin: "banken",
-			sub_type: "buckler",
-			specialization: "reinforced_umbonated",
-			flags: ["graphy", "alchemy", "ilusion"],
+object = {
+	name: "Espada Shishi",
+	class: "weapon",
+	material: "steel",
+	type: "blade",
+	dimension: "3",
+	thickness: "2",
+	quality: 1,
+	extra: {
+		origin: "sujfi",
+		sub_type: "straight",
+		specialization: "none",
+		flags: ["alchemy", "graphy", "lacing"],
+	},
+	modifications: {
+		slice: 7,
+		restrictions: [{ restriction: "C", reduction: 10 }],
+	},
+	effects: [
+		{
+			title: "Alquimia",
+			description:
+				"La espada ha sido tratada alquimicamente para poder contener una habilidad activa, ademas de mejorar su corte.",
 		},
-	},
-	{
-		class: "weapon",
-		material: "iron",
-		type: "blade",
-		dimension: "3",
-		thickness: "0.5",
-		quality: 0.3,
-		modifications: {
-			damage: 2,
-			weight: -5,
-			restrictions: [{ restriction: "R", reduction: 5 }],
-			range: [2, 3],
-			price: { raw: 100, fee: -200 },
-			crafting_level: "divine",
-			rarity: "common",
+		{
+			title: "Grafia",
+			description:
+				"El grabado al rebedorde la guarda absorbe energia del ambiente y la acumula en forma de calor en la pieza central",
 		},
-	},
-	{
-		class: "weapon",
-		material: "steel",
-		type: "blade",
-		dimension: "0.5",
-		thickness: "1",
-		quality: 0.7,
-	},
-	{
-		class: "armor",
-		material: "aluminium",
-		type: "cuirass",
-		dimension: "3",
-		thickness: "4",
-		quality: 1,
-	},
-	{
-		class: "common",
-		material: "platinum",
-		type: "solid",
-		dimension: "5",
-		thickness: "0.1",
-		quality: 0.9,
-	},
-];
+		{
+			title: "Lazado",
+			description:
+				"El calor acumulado en la pieza central es transferido a la hoja concediedole 20 de corte y daño por calor, a voluntad del portador.",
+		},{
+			title: "Historia",
+			description:
+				"Arma insignia de la guardia del sujmar del publo shishi. Representa el honor y la responsabilidad de protejer las tradiciones de los sujfi.",
+		},
+	],
+};
 
-//testCases.forEach((test) => console.log(create(test)));
-//console.log(code.decodeBase("EELX"));
-//console.log(code.decodeCustom("FK6I-62", "armor"));
-console.log(create(testCases[2]));
-//console.log(load("EELX","FK6I-62"));
-render(load("EELX","FK6I-62"))
+console.log(create(object));
+render(load("EELX","FK6I-62"));
+
 //console.log(util.randomObject('weapon'))
 //console.log(util.randomObject('armor'))

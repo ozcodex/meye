@@ -9,6 +9,12 @@
 				"shear": 3,
 				"blunt": 4,
 				"tension": 5
+			},
+			"sub_types": {
+				"straight": 0
+			},
+			"specializations": {
+				"none": 0
 			}
 		},
 		"armor": {
@@ -76,10 +82,9 @@
 	},
 	"origins": {
 		"unknown": 0,
-		"mar_osdusfe":9,
+		"mar_osdusfe": 9,
 		"sujfi": 10,
-		"roegeil Horro":11,
-
+		"roegeil Horro": 11
 	},
 	"modifications": {
 		"damage": "Dñ.",

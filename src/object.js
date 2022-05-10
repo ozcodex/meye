@@ -282,39 +282,41 @@ function applyExtra(obj) {
 	if (!obj.extra) {
 		return obj;
 	}
-	const raw_material = createRaw({
-		dimension: obj.dimension,
-		material: obj.extra.material,
-		thickness: obj.extra.thickness,
-	});
-	const extra_weight = raw_material.weight;
-	obj.thickness += Number(obj.extra.thickness);
-	obj.size += Number(raw_material.size);
-	obj.price.raw += Number(raw_material.price);
+	if (obj.extra.material) {
+		const raw = createRaw({
+			dimension: obj.dimension,
+			material: obj.extra.material,
+			thickness: obj.extra.thickness,
+		});
+		const extra_weight = raw.weight;
+		obj.size += Number(raw.size);
+		obj.price.raw += Number(raw.price);
+		obj.damping += "/" + raw.damping;
+		obj.resistence += "/" + raw.material.resistence;
+		obj.useful_life += "/" + raw.material.useful_life * obj.quality;
+		//extra weight restrictions are only applied to R
+		const reduction = Math.floor(raw.weight);
+		if (reduction) {
+			obj.restrictions = addRestriction(obj.restrictions, {
+				restriction: "R",
+				reduction,
+			});
+		}
+	}
+	obj.thickness = Number(obj.thickness) +  Number(obj.extra.thickness || 0) ;
 	obj.price.crafting = Math.ceil(obj.price.crafting * 1.1);
 	obj.price.fee *= 1.5;
-	obj.damping += "/" + raw_material.damping;
-	obj.resistence += "/" + raw_material.material.resistence;
-	obj.useful_life += "/" + raw_material.material.useful_life * obj.quality;
-	//extra weight restrictions are only applied to R
-	const reduction = Math.floor(raw_material.weight);
-	if (reduction) {
-		obj.restrictions = addRestriction(obj.restrictions, {
-			restriction: "R",
-			reduction,
-		});
-	}
 	if (obj.extra.flags.length > 0) {
-		obj.price.fee += objects.crafting_level.mystic.fee
+		obj.price.fee += objects.crafting_level.mystic.fee;
 		if (obj.crafting_level != "divine") {
 			obj.crafting_level = "mystic";
 		}
 		if (obj.rarity != "supernatural" && obj.rarity != "legendary") {
 			obj.rarity = "special";
 		}
-		if ( obj.rarity != "legendary" && obj.extra.flags.includes('cenobism')){
+		if (obj.rarity != "legendary" && obj.extra.flags.includes("cenobism")) {
 			obj.rarity = "supernatural";
-		} 
+		}
 	}
 	return obj;
 }

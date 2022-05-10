@@ -44,6 +44,16 @@ function text(text, pos, size, align, color, variant) {
 	context.fillText(text, ...pos);
 }
 
+function strokeText(text, pos, size, align, color, variant) {
+	context.font = `${variant || "normal"} ${size}pt Sans`;
+	context.textAlign = align;
+	context.fillStyle = color || "#000";
+	context.fillText(text, ...pos);
+	context.strokeStyle = "#FFF";
+	context.strokeText(text, ...pos);
+	context.stroke();
+}
+
 function image(name, pos, size) {
 	loadImage(`./src/img/${name}.png`).then((img) =>
 		context.drawImage(img, ...pos, ...size)
@@ -69,10 +79,18 @@ async function front(obj) {
 	if (!isNaN(obj.size_type)) {
 		suffix = obj.size_type == 1 ? "piece" : "pieces";
 	}
-	const desc = `${s(obj.type)} ${s(obj.extra.sub_type)} ${s(
-		obj.extra.specialization
-	)}, ${s(obj.size_type)} ${s(suffix)}`.toCap();
-
+	const desc = [
+		s(obj.type),
+		s(obj.extra?.sub_type),
+		s(obj.extra?.specialization),
+		s(obj.size_type),
+		s(suffix),
+	]
+		.filter((element) => {
+			return element !== "";
+		})
+		.join(" ")
+		.toCap();
 	await image("background_front", [0, 0], [width, height]);
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
@@ -91,7 +109,9 @@ async function front(obj) {
 	//todo: set a color by parameter
 	context.fillStyle = "#777";
 	context.fillRect(90, 365, 1320, 720);
-	await image(obj.extra.origin, [100, 375], [1300, 700]);
+	if (obj.extra?.origin) {
+		await image(obj.extra.origin, [100, 375], [1300, 700]);
+	}
 	const id =
 		obj.code + (obj.custom_code ? "-" : "") + (obj.custom_code || "");
 	if (fs.existsSync(`./src/img/${id}.png`)) {
@@ -100,16 +120,16 @@ async function front(obj) {
 		await image(obj.type, [100, 375], [1300, 700]);
 	}
 	if (obj.custom_code) {
-		text(`#${obj.code}`, [110, 980], 40, "start");
-		text(`#${obj.custom_code}`, [110, 1050], 40, "start");
+		strokeText(`#${obj.code}`, [110, 980], 40, "start", "#000", "bold");
+		strokeText(`#${obj.custom_code}`, [110, 1050], 40, "start", "#000", "bold");
 	} else {
-		text(`#${obj.code}`, [110, 1050], 40, "start");
+		strokeText(`#${obj.code}`, [110, 1050], 40, "start", "#000", "bold");
 	}
 	let material = materials[obj.material].symbol;
-	if (obj.extra.material) {
+	if (obj.extra?.material) {
 		material += "," + materials[obj.extra.material].symbol;
 	}
-	text(material, [1375, 435], 40, "end", "#000", "bold");
+	strokeText(material, [1375, 435], 40, "end", "#000", "bold");
 
 	await image(obj.crafting_level, [100, 1150], [200, 200]);
 	let rarity_quality = `${obj.rarity}_${obj.quality * 10}`;
@@ -175,11 +195,13 @@ async function front(obj) {
 
 	// put flags
 
-	await Promise.all(
-		obj.extra.flags.map((flag, idx) =>
-			image(flag, [-363, 100 + 192 * idx], [380, 172])
-		)
-	);
+	if (obj.extra?.flags) {
+		await Promise.all(
+			obj.extra.flags.map((flag, idx) =>
+				image(flag, [-363, 100 + 192 * idx], [380, 172])
+			)
+		);
+	}
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
@@ -191,15 +213,17 @@ async function back(obj) {
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
 
-	await Promise.all(
-		obj.extra.flags.map((flag, idx) =>
-			image(flag, [1164, 100 + 192 * idx], [336, 172])
-		)
-	);
+	if (obj.extra?.flags) {
+		await Promise.all(
+			obj.extra.flags.map((flag, idx) =>
+				image(flag, [1164, 100 + 192 * idx], [336, 172])
+			)
+		);
+	}
 
 	next_y = 250;
-	obj.effects.forEach((effect, idx) => {
-		text(effect.title, [100, next_y - 100], 40, "start", '#000', 'bold');
+	obj.effects?.forEach((effect, idx) => {
+		text(effect.title, [100, next_y - 100], 40, "start", "#000", "bold");
 		next_y = 200 + multiline(effect.description, [100, next_y], 1000, 40);
 	});
 

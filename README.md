@@ -15,10 +15,12 @@ features:
 - code extra material and thickness
 - change crafting level if have some extra flags
 - apply card modifications
+- show extras on card
+- create card reverse
 
 ## To do
-show extras on card
-create card reverse
+charge numbers colors if a mod was applied
+create subtypes and specializations
 
 v2:
 add more types of common objects

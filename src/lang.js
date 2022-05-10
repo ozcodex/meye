@@ -1,8 +1,8 @@
 const language = require("./def/language.json");
 
 function translate(text) {
-	const str = text.toString();
-	return language[str] || str;
+	const str = text?.toString() || '';
+	return typeof language[str] == 'undefined'? str: language[str];
 }
 
 function format(x) {
