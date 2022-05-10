@@ -191,7 +191,7 @@ async function front(obj) {
 	text(`${n(obj.price.crafting)} R`, [1075, 1950], 40, "center");
 	text(`${n(obj.price.fee)} R`, [1325, 1950], 40, "center");
 
-	text(s(obj.mod_code), [50, 2075], 30, "start", "#555");
+	text(s(obj.mod_code), [100, 2075], 30, "start", "#555");
 
 	// put flags
 
@@ -226,6 +226,8 @@ async function back(obj) {
 		text(effect.title, [100, next_y - 100], 40, "start", "#000", "bold");
 		next_y = 200 + multiline(effect.description, [100, next_y], 1000, 40);
 	});
+
+	text(s('signature'), [1400, 2075], 30, "end", "#CCC");
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");

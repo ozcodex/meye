@@ -4,48 +4,54 @@ const code = require("./src/code");
 const render = require("./src/render").create;
 
 object = {
-	name: "Espada Shishi",
+	name: "Dagas Diperias",
 	class: "weapon",
-	material: "steel",
+	material: "copper",
 	type: "blade",
-	dimension: "3",
-	thickness: "2",
-	quality: 1,
+	dimension: "0.5",
+	thickness: "1",
+	quality: 0.5,
 	extra: {
-		origin: "sujfi",
+		origin: "tagyef",
 		sub_type: "straight",
 		specialization: "none",
-		flags: ["alchemy", "graphy", "lacing"],
+		flags: ["alchemy", "lacing"],
 	},
 	modifications: {
-		slice: 7,
-		restrictions: [{ restriction: "C", reduction: 10 }],
+		damping: 20,
+		restrictions: [{ "restriction": "W", "reduction": 10 }]
 	},
 	effects: [
 		{
 			title: "Alquimia",
 			description:
-				"La espada ha sido tratada alquimicamente para poder contener una habilidad activa, ademas de mejorar su corte.",
-		},
-		{
-			title: "Grafia",
-			description:
-				"El grabado al rebedorde la guarda absorbe energia del ambiente y la acumula en forma de calor en la pieza central",
+				"Alqumia empirica de tiempos remotos y efectos desconocidos.",
 		},
 		{
 			title: "Lazado",
 			description:
-				"El calor acumulado en la pieza central es transferido a la hoja concediedole 20 de corte y daño por calor, a voluntad del portador.",
-		},{
+				"Lazado instintivo que dotó las dagas con la cualidad de energía oscura calida del aura de su creador",
+		},
+		{
+			title: "Propiedad",
+			description:
+				"Esta arma puede cortar cualquier expresion de energía inferior a nivel 10 y genera una perdida de energia por corte igual al nivel.",
+		},
+		{
 			title: "Historia",
 			description:
-				"Arma insignia de la guardia del sujmar del publo shishi. Representa el honor y la responsabilidad de protejer las tradiciones de los sujfi.",
+				"Dagas creadas prefundación de los reinos, catalagodas por cenobitas como objeto en posesión espectral. Los registros revelan que pueden inducir a la agresividad.",
+		},
+		{
+			title: "Transfondo",
+			description:
+				"Reclamadas como propias por Tagnit.",
 		},
 	],
 };
 
 console.log(create(object));
-render(load("EELX","FK6I-62"));
+render(create(object));
 
 //console.log(util.randomObject('weapon'))
 //console.log(util.randomObject('armor'))
