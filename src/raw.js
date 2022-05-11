@@ -26,7 +26,7 @@ function create(params) {
 	);
 	return {
 		weight: material.weight * size,
-		price: material.price.base * size,
+		price: material.price * size,
 		damping,
 		size,
 		material,

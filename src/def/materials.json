@@ -1,6 +1,6 @@
 {
 	"crystal": {
-		"symbol":"CR",
+		"symbol": "CR",
 		"damage": 60,
 		"resistence": 25,
 		"slice": 200,
@@ -8,13 +8,10 @@
 		"useful_life": 1,
 		"weight": 1,
 		"level": 0,
-		"price": {
-			"base": 20,
-			"useful_life": 0
-		}
+		"price": 20
 	},
 	"marine_crystal": {
-		"symbol":"CR+",
+		"symbol": "CR+",
 		"damage": 60,
 		"resistence": 25,
 		"slice": 200,
@@ -22,13 +19,10 @@
 		"useful_life": 1,
 		"weight": 1,
 		"level": 0,
-		"price": {
-			"base": 1000,
-			"useful_life": 0
-		}
+		"price": 1000
 	},
 	"leather": {
-		"symbol":"CO",
+		"symbol": "CO",
 		"damage": 10,
 		"resistence": 15,
 		"slice": 8,
@@ -36,13 +30,10 @@
 		"useful_life": 60,
 		"weight": 0.1,
 		"level": 0,
-		"price": {
-			"base": 10,
-			"useful_life": 1
-		}
+		"price": 10
 	},
 	"wood": {
-		"symbol":"MA",
+		"symbol": "MA",
 		"damage": 10,
 		"resistence": 10,
 		"slice": 9,
@@ -50,13 +41,10 @@
 		"useful_life": 15,
 		"weight": 0.5,
 		"level": 0,
-		"price": {
-			"base": 5,
-			"useful_life": 1
-		}
+		"price": 5
 	},
 	"wothe_wood": {
-		"symbol":"MA+",
+		"symbol": "MA+",
 		"damage": 10,
 		"resistence": 10,
 		"slice": 9,
@@ -64,13 +52,10 @@
 		"useful_life": 15,
 		"weight": 0.5,
 		"level": 4,
-		"price": {
-			"base": 1000,
-			"useful_life": 1
-		}
+		"price": 1000
 	},
 	"stone": {
-		"symbol":"PI",
+		"symbol": "PI",
 		"damage": 20,
 		"resistence": 10,
 		"slice": 20,
@@ -78,13 +63,10 @@
 		"useful_life": 70,
 		"weight": 1,
 		"level": 0,
-		"price": {
-			"base": 10,
-			"useful_life": 1
-		}
+		"price": 10
 	},
 	"brass": {
-		"symbol":"LA",
+		"symbol": "LA",
 		"damage": 20,
 		"resistence": 20,
 		"slice": 20,
@@ -92,13 +74,10 @@
 		"useful_life": 70,
 		"weight": 1.5,
 		"level": 0,
-		"price": {
-			"base": 20,
-			"useful_life": 1
-		}
+		"price": 20
 	},
 	"bronze": {
-		"symbol":"BR",
+		"symbol": "BR",
 		"damage": 20,
 		"resistence": 25,
 		"slice": 40,
@@ -106,13 +85,10 @@
 		"useful_life": 80,
 		"weight": 2,
 		"level": 1,
-		"price": {
-			"base": 200,
-			"useful_life": 2
-		}
+		"price": 200
 	},
 	"iron": {
-		"symbol":"Fe",
+		"symbol": "Fe",
 		"damage": 25,
 		"resistence": 30,
 		"slice": 60,
@@ -120,13 +96,10 @@
 		"useful_life": 170,
 		"weight": 2,
 		"level": 1,
-		"price": {
-			"base": 20,
-			"useful_life": 1
-		}
+		"price": 20
 	},
 	"ferro_iron": {
-		"symbol":"Fe+",
+		"symbol": "Fe+",
 		"damage": 25,
 		"resistence": 30,
 		"slice": 60,
@@ -134,13 +107,10 @@
 		"useful_life": 170,
 		"weight": 2,
 		"level": 4,
-		"price": {
-			"base": 5000,
-			"useful_life": 1
-		}
+		"price": 5000
 	},
 	"gold": {
-		"symbol":"Au",
+		"symbol": "Au",
 		"damage": 15,
 		"resistence": 35,
 		"slice": 10,
@@ -148,13 +118,10 @@
 		"useful_life": 90,
 		"weight": 5,
 		"level": 2,
-		"price": {
-			"base": 20000,
-			"useful_life": 2
-		}
+		"price": 20000
 	},
 	"silver": {
-		"symbol":"Ag",
+		"symbol": "Ag",
 		"damage": 20,
 		"resistence": 19,
 		"slice": 20,
@@ -162,13 +129,10 @@
 		"useful_life": 50,
 		"weight": 3,
 		"level": 2,
-		"price": {
-			"base": 2000,
-			"useful_life": 1
-		}
+		"price": 2000
 	},
 	"steel": {
-		"symbol":"AC",
+		"symbol": "AC",
 		"damage": 40,
 		"resistence": 40,
 		"slice": 90,
@@ -176,13 +140,10 @@
 		"useful_life": 250,
 		"weight": 2,
 		"level": 2,
-		"price": {
-			"base": 50,
-			"useful_life": 2
-		}
+		"price": 50
 	},
 	"platinum": {
-		"symbol":"Pt",
+		"symbol": "Pt",
 		"damage": 25,
 		"resistence": 59,
 		"slice": 40,
@@ -190,13 +151,10 @@
 		"useful_life": 180,
 		"weight": 5.5,
 		"level": 3,
-		"price": {
-			"base": 3000,
-			"useful_life": 1
-		}
+		"price": 3000
 	},
 	"tin": {
-		"symbol":"Sn",
+		"symbol": "Sn",
 		"damage": 8,
 		"resistence": 8,
 		"slice": 2,
@@ -204,13 +162,10 @@
 		"useful_life": 20,
 		"weight": 2.5,
 		"level": 0,
-		"price": {
-			"base": 0,
-			"useful_life": 0
-		}
+		"price": 0
 	},
 	"lead": {
-		"symbol":"Pb",
+		"symbol": "Pb",
 		"damage": 8,
 		"resistence": 12,
 		"slice": 5,
@@ -218,13 +173,10 @@
 		"useful_life": 15,
 		"weight": 3,
 		"level": 0,
-		"price": {
-			"base": 0,
-			"useful_life": 0
-		}
+		"price": 0
 	},
 	"aluzinc": {
-		"symbol":"AZ",
+		"symbol": "AZ",
 		"damage": 15,
 		"resistence": 18,
 		"slice": 10,
@@ -232,13 +184,10 @@
 		"useful_life": 60,
 		"weight": 2,
 		"level": 0,
-		"price": {
-			"base": 0,
-			"useful_life": 0
-		}
+		"price": 0
 	},
 	"aluminium": {
-		"symbol":"Al",
+		"symbol": "Al",
 		"damage": 15,
 		"resistence": 5,
 		"slice": 15,
@@ -246,13 +195,10 @@
 		"useful_life": 60,
 		"weight": 0.5,
 		"level": 0,
-		"price": {
-			"base": 0,
-			"useful_life": 0
-		}
+		"price": 0
 	},
 	"copper": {
-		"symbol":"Cu",
+		"symbol": "Cu",
 		"damage": 20,
 		"resistence": 20,
 		"slice": 20,
@@ -260,13 +206,10 @@
 		"useful_life": 100,
 		"weight": 2.5,
 		"level": 0,
-		"price": {
-			"base": 18,
-			"useful_life": 1
-		}
+		"price": 18
 	},
 	"titanium": {
-		"symbol":"Ti",
+		"symbol": "Ti",
 		"damage": 35,
 		"resistence": 25,
 		"slice": 70,
@@ -274,13 +217,10 @@
 		"useful_life": 110,
 		"weight": 1.5,
 		"level": 3,
-		"price": {
-			"base": 0,
-			"useful_life": 0
-		}
+		"price": 0
 	},
 	"nickel": {
-		"symbol":"Ni",
+		"symbol": "Ni",
 		"damage": 30,
 		"resistence": 30,
 		"slice": 50,
@@ -288,13 +228,10 @@
 		"useful_life": 200,
 		"weight": 2.5,
 		"level": 3,
-		"price": {
-			"base": 0,
-			"useful_life": 0
-		}
+		"price": 0
 	},
 	"molybdenum": {
-		"symbol":"Mo",
+		"symbol": "Mo",
 		"damage": 30,
 		"resistence": 40,
 		"slice": 60,
@@ -302,13 +239,10 @@
 		"useful_life": 220,
 		"weight": 2.5,
 		"level": 3,
-		"price": {
-			"base": 0,
-			"useful_life": 0
-		}
+		"price": 0
 	},
 	"tungsten": {
-		"symbol":"TU",
+		"symbol": "TU",
 		"damage": 45,
 		"resistence": 75,
 		"slice": 100,
@@ -316,13 +250,10 @@
 		"useful_life": 300,
 		"weight": 5,
 		"level": 3,
-		"price": {
-			"base": 0,
-			"useful_life": 0
-		}
+		"price": 0
 	},
 	"black_iron": {
-		"symbol":"HN",
+		"symbol": "HN",
 		"damage": 30,
 		"resistence": 35,
 		"slice": 60,
@@ -330,13 +261,10 @@
 		"useful_life": 170,
 		"weight": 1,
 		"level": 4,
-		"price": {
-			"base": 30000,
-			"useful_life": 1
-		}
+		"price": 30000
 	},
 	"black_steel": {
-		"symbol":"AN",
+		"symbol": "AN",
 		"damage": 45,
 		"resistence": 70,
 		"slice": 80,
@@ -344,13 +272,10 @@
 		"useful_life": 400,
 		"weight": 0.5,
 		"level": 4,
-		"price": {
-			"base": 50000,
-			"useful_life": 2
-		}
+		"price": 50000
 	},
 	"celestial_steel": {
-		"symbol":"AE",
+		"symbol": "AE",
 		"damage": 60,
 		"resistence": 100,
 		"slice": 100,
@@ -358,9 +283,6 @@
 		"useful_life": 600,
 		"weight": 0.5,
 		"level": 4,
-		"price": {
-			"base": 100000,
-			"useful_life": 2
-		}
+		"price": 100000
 	}
 }

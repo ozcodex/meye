@@ -303,7 +303,7 @@ function applyExtra(obj) {
 			});
 		}
 	}
-	obj.thickness = Number(obj.thickness) +  Number(obj.extra.thickness || 0) ;
+	obj.thickness = Number(obj.thickness) + Number(obj.extra.thickness || 0);
 	obj.price.crafting = Math.ceil(obj.price.crafting * 1.1);
 	obj.price.fee *= 1.5;
 	if (obj.extra.flags.length > 0) {
@@ -420,10 +420,8 @@ function create(params) {
 		price: {
 			raw: raw_material.price,
 			crafting: Math.ceil(
-				material.price.useful_life * useful_life +
-					0.3 *
-						raw_material.price *
-						(0.2 + Math.abs(params.dimension - params.thickness))
+				raw_material.price *
+					(0.2 + Math.abs(params.dimension - params.thickness))
 			),
 			fee: objects.crafting_level[level].fee,
 		},

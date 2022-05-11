@@ -1,6 +1,7 @@
 const { create, load } = require("./src/object");
 const util = require("./src/util");
 const code = require("./src/code");
+const material = require("./src/material");
 const render = require("./src/render").create;
 
 (async () => {
