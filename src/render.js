@@ -47,11 +47,13 @@ function text(text, pos, size, align, color, variant) {
 function strokeText(text, pos, size, align, color, variant) {
 	context.font = `${variant || "normal"} ${size}pt Sans`;
 	context.textAlign = align;
-	context.fillStyle = color || "#000";
-	context.fillText(text, ...pos);
-	context.strokeStyle = "#FFF";
+	context.strokeStyle = "#000";
+	context.lineWidth = 10;
 	context.strokeText(text, ...pos);
 	context.stroke();
+	context.lineWidth = 1;
+	context.fillStyle = color || "#FFF";
+	context.fillText(text, ...pos);
 }
 
 function image(name, pos, size) {
@@ -73,7 +75,7 @@ context.fillRect(0, 2020, width, height);
 
 // create card
 
-async function front(obj) {
+async function front(obj,filename) {
 	const name = `${s(obj.type)}`.toCap();
 	let suffix = "";
 	if (!isNaN(obj.size_type)) {
@@ -120,16 +122,23 @@ async function front(obj) {
 		await image(obj.type, [100, 375], [1300, 700]);
 	}
 	if (obj.custom_code) {
-		strokeText(`#${obj.code}`, [110, 980], 40, "start", "#000", "bold");
-		strokeText(`#${obj.custom_code}`, [110, 1050], 40, "start", "#000", "bold");
+		strokeText(`#${obj.code}`, [110, 980], 40, "start", "#FFF", "bold");
+		strokeText(
+			`#${obj.custom_code}`,
+			[110, 1050],
+			40,
+			"start",
+			"#FFF",
+			"bold"
+		);
 	} else {
-		strokeText(`#${obj.code}`, [110, 1050], 40, "start", "#000", "bold");
+		strokeText(`#${obj.code}`, [110, 1050], 40, "start", "#FFF", "bold");
 	}
 	let material = materials[obj.material].symbol;
 	if (obj.extra?.material) {
 		material += "," + materials[obj.extra.material].symbol;
 	}
-	strokeText(material, [1375, 435], 40, "end", "#000", "bold");
+	strokeText(material, [1375, 435], 40, "end", "#FFF", "bold");
 
 	await image(obj.crafting_level, [100, 1150], [200, 200]);
 	let rarity_quality = `${obj.rarity}_${obj.quality * 10}`;
@@ -191,7 +200,7 @@ async function front(obj) {
 	text(`${n(obj.price.crafting)} R`, [1075, 1950], 40, "center");
 	text(`${n(obj.price.fee)} R`, [1325, 1950], 40, "center");
 
-	text(s(obj.mod_code), [100, 2075], 30, "start", "#555");
+	text(s(obj.mod_code), [100, 2075], 30, "start", "#FFF", 'bold');
 
 	// put flags
 
@@ -205,10 +214,10 @@ async function front(obj) {
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync("./front.png", buffer);
+	fs.writeFileSync("./out/"+filename + "_front.png", buffer);
 }
 
-async function back(obj) {
+async function back(obj, filename) {
 	await image("background_back", [0, 0], [width, height]);
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
@@ -227,16 +236,16 @@ async function back(obj) {
 		next_y = 200 + multiline(effect.description, [100, next_y], 1000, 40);
 	});
 
-	text(s('signature'), [1400, 2075], 30, "end", "#CCC");
+	text(s("signature"), [1400, 2075], 30, "end", "#FFF", 'bold');
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync("./back.png", buffer);
+	fs.writeFileSync("./out/"+filename + "_back.png", buffer);
 }
 
-async function create(obj) {
-	await front(obj);
-	await back(obj);
+async function create(obj, filename) {
+	await front(obj, filename);
+	await back(obj, filename);
 }
 
 module.exports = {
