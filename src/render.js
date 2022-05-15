@@ -93,11 +93,11 @@ async function front(obj,filename) {
 		})
 		.join(" ")
 		.toCap();
-	await image("background_front", [0, 0], [width, height]);
+	await image("backgrounds/front", [0, 0], [width, height]);
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
 
-	// draw card
+	// draw card titleo
 	text(obj.name || name, [100, 200], 70, "start", "#000", "bold");
 	text(desc, [100, 300], 40, "start", "#555", "italic");
 
@@ -110,16 +110,17 @@ async function front(obj,filename) {
 
 	//todo: set a color by parameter
 	context.fillStyle = "#777";
+	// draw origin image
 	context.fillRect(90, 365, 1320, 720);
 	if (obj.extra?.origin) {
-		await image(obj.extra.origin, [100, 375], [1300, 700]);
+		await image('origins/' + obj.extra.origin, [100, 375], [1300, 700]);
 	}
 	const id =
 		obj.code + (obj.custom_code ? "-" : "") + (obj.custom_code || "");
-	if (fs.existsSync(`./src/img/${id}.png`)) {
-		await image(id, [100, 375], [1300, 700]);
+	if (fs.existsSync(`./src/img/objects/${id}.png`)) {
+		await image('objects/' + id, [100, 375], [1300, 700]);
 	} else {
-		await image(obj.type, [100, 375], [1300, 700]);
+		await image('types/'+obj.type, [100, 375], [1300, 700]);
 	}
 	if (obj.custom_code) {
 		strokeText(`#${obj.code}`, [110, 980], 40, "start", "#FFF", "bold");
@@ -140,9 +141,10 @@ async function front(obj,filename) {
 	}
 	strokeText(material, [1375, 435], 40, "end", "#FFF", "bold");
 
-	await image(obj.crafting_level, [100, 1150], [200, 200]);
+	//card properties
+	await image('levels/' + obj.crafting_level, [100, 1150], [200, 200]);
 	let rarity_quality = `${obj.rarity}_${obj.quality * 10}`;
-	await image(rarity_quality, [100, 1350], [200, 200]);
+	await image('rarities/' + rarity_quality, [100, 1350], [200, 200]);
 
 	text(s("throwing").toCap(), [380, 1200], 50, "start");
 	text(s("weight").toCap(), [380, 1280], 50, "start");
@@ -159,6 +161,7 @@ async function front(obj,filename) {
 	let point = 1210;
 	let breaking = Math.ceil(obj.restrictions.length / 2) * 100;
 
+	// object restrictions
 	const restrictions = {};
 	obj.restrictions.forEach(
 		(rest) => (restrictions[rest.restriction] = util.plus(-rest.reduction))
@@ -180,6 +183,7 @@ async function front(obj,filename) {
 	if (restrictions["W"])
 		text(restrictions["W"], [1300, 1510], 50, "center", "#000", "bold");
 
+	// range and damage
 	let range = "—";
 	obj.range.forEach((unit) => {
 		range += `${unit}—`;
@@ -192,10 +196,11 @@ async function front(obj,filename) {
 	let label = `${s("damage")} / ${s("slice")} / ${s("bleeding")}`;
 	text(label, [350, 1950], 30, "center", "#555", "bold");
 
+	// pricing
 	text(s("price"), [1050, 1675], 40, "center", "#555", "bold");
-	await image("raw", [750, 1720], [150, 150]);
-	await image("crafting", [1000, 1720], [150, 150]);
-	await image("fee", [1250, 1720], [150, 150]);
+	await image("prices/raw", [750, 1720], [150, 150]);
+	await image("prices/crafting", [1000, 1720], [150, 150]);
+	await image("prices/fee", [1250, 1720], [150, 150]);
 	text(`${n(obj.price.raw)} R`, [825, 1950], 40, "center");
 	text(`${n(obj.price.crafting)} R`, [1075, 1950], 40, "center");
 	text(`${n(obj.price.fee)} R`, [1325, 1950], 40, "center");
@@ -207,7 +212,7 @@ async function front(obj,filename) {
 	if (obj.extra?.flags) {
 		await Promise.all(
 			obj.extra.flags.map((flag, idx) =>
-				image(flag, [-363, 100 + 192 * idx], [380, 172])
+				image('flags/'+flag, [-363, 100 + 192 * idx], [380, 172])
 			)
 		);
 	}
@@ -218,14 +223,14 @@ async function front(obj,filename) {
 }
 
 async function back(obj, filename) {
-	await image("background_back", [0, 0], [width, height]);
+	await image("backgrounds/back", [0, 0], [width, height]);
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
 
 	if (obj.extra?.flags) {
 		await Promise.all(
 			obj.extra.flags.map((flag, idx) =>
-				image(flag, [1164, 100 + 192 * idx], [336, 172])
+				image('flags/'+flag, [1164, 100 + 192 * idx], [336, 172])
 			)
 		);
 	}
