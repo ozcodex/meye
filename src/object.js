@@ -420,6 +420,7 @@ function create(params) {
 		price: {
 			raw: raw_material.price,
 			crafting: Math.ceil(
+				objects.crafting_level[level].fee + 
 				raw_material.price *
 					(0.2 + Math.abs(params.dimension - params.thickness))
 			),
