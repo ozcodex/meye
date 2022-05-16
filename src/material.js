@@ -1,4 +1,4 @@
-const materials = require("./def/materials.json");
+const materials = require("./def/materials");
 
 /*
 output:	

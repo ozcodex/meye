@@ -9,8 +9,13 @@ String.prototype.toCap = function () {
 	return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
-const width = 1500;
-const height = 2100;
+Array.prototype.add = function (arr) {
+	var sum = this.map(function (num, idx) {
+		return num + arr[idx];
+	});
+	return sum;
+};
+
 let context;
 let canvas;
 
@@ -62,20 +67,20 @@ function image(name, pos, size) {
 	);
 }
 
-// INIT
-
-canvas = createCanvas(width, height);
-context = canvas.getContext("2d");
-
-context.fillStyle = "#fff";
-context.fillRect(0, 0, width, height);
-
-context.fillStyle = "#000";
-context.fillRect(0, 2020, width, height);
-
 // create card
 
-async function front(obj,filename) {
+async function front(obj, filename) {
+	const width = 1500;
+	const height = 2100;
+	// INIT
+	canvas = createCanvas(width, height);
+	context = canvas.getContext("2d");
+
+	context.fillStyle = "#fff";
+	context.fillRect(0, 0, width, height);
+
+	context.fillStyle = "#000";
+	context.fillRect(0, 2020, width, height);
 	const name = `${s(obj.type)}`.toCap();
 	let suffix = "";
 	if (!isNaN(obj.size_type)) {
@@ -113,14 +118,14 @@ async function front(obj,filename) {
 	// draw origin image
 	context.fillRect(90, 365, 1320, 720);
 	if (obj.extra?.origin) {
-		await image('origins/' + obj.extra.origin, [100, 375], [1300, 700]);
+		await image("origins/" + obj.extra.origin, [100, 375], [1300, 700]);
 	}
 	const id =
 		obj.code + (obj.custom_code ? "-" : "") + (obj.custom_code || "");
 	if (fs.existsSync(`./src/img/objects/${id}.png`)) {
-		await image('objects/' + id, [100, 375], [1300, 700]);
+		await image("objects/" + id, [100, 375], [1300, 700]);
 	} else {
-		await image('types/'+obj.type, [100, 375], [1300, 700]);
+		await image("types/" + obj.type, [100, 375], [1300, 700]);
 	}
 	if (obj.custom_code) {
 		strokeText(`#${obj.code}`, [110, 980], 40, "start", "#FFF", "bold");
@@ -142,9 +147,9 @@ async function front(obj,filename) {
 	strokeText(material, [1375, 435], 40, "end", "#FFF", "bold");
 
 	//card properties
-	await image('levels/' + obj.crafting_level, [100, 1150], [200, 200]);
+	await image("levels/" + obj.crafting_level, [100, 1150], [200, 200]);
 	let rarity_quality = `${obj.rarity}_${obj.quality * 10}`;
-	await image('rarities/' + rarity_quality, [100, 1350], [200, 200]);
+	await image("rarities/" + rarity_quality, [100, 1350], [200, 200]);
 
 	text(s("throwing").toCap(), [380, 1200], 50, "start");
 	text(s("weight").toCap(), [380, 1280], 50, "start");
@@ -205,24 +210,35 @@ async function front(obj,filename) {
 	text(`${n(obj.price.crafting)} R`, [1075, 1950], 40, "center");
 	text(`${n(obj.price.fee)} R`, [1325, 1950], 40, "center");
 
-	text(s(obj.mod_code), [100, 2075], 30, "start", "#FFF", 'bold');
+	text(s(obj.mod_code), [100, 2075], 30, "start", "#FFF", "bold");
 
 	// put flags
 
 	if (obj.extra?.flags) {
 		await Promise.all(
 			obj.extra.flags.map((flag, idx) =>
-				image('flags/'+flag, [-363, 100 + 192 * idx], [380, 172])
+				image("flags/" + flag, [-363, 100 + 192 * idx], [380, 172])
 			)
 		);
 	}
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync("./out/"+filename + "_front.png", buffer);
+	fs.writeFileSync("./out/" + filename + "_front.png", buffer);
 }
 
 async function back(obj, filename) {
+	const width = 1500;
+	const height = 2100;
+	// INIT
+	canvas = createCanvas(width, height);
+	context = canvas.getContext("2d");
+
+	context.fillStyle = "#fff";
+	context.fillRect(0, 0, width, height);
+
+	context.fillStyle = "#000";
+	context.fillRect(0, 2020, width, height);
 	await image("backgrounds/back", [0, 0], [width, height]);
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
@@ -230,7 +246,7 @@ async function back(obj, filename) {
 	if (obj.extra?.flags) {
 		await Promise.all(
 			obj.extra.flags.map((flag, idx) =>
-				image('flags/'+flag, [1164, 100 + 192 * idx], [336, 172])
+				image("flags/" + flag, [1164, 100 + 192 * idx], [336, 172])
 			)
 		);
 	}
@@ -241,18 +257,51 @@ async function back(obj, filename) {
 		next_y = 200 + multiline(effect.description, [100, next_y], 1000, 40);
 	});
 
-	text(s("signature"), [1400, 2075], 30, "end", "#FFF", 'bold');
+	text(s("signature"), [1400, 2075], 30, "end", "#FFF", "bold");
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync("./out/"+filename + "_back.png", buffer);
+	fs.writeFileSync("./out/" + filename + "_back.png", buffer);
 }
 
-async function create(obj, filename) {
+async function periodic_table() {
+	const width = 3000;
+	const height = 2000;
+	// INIT
+	canvas = createCanvas(width, height);
+	context = canvas.getContext("2d");
+
+	context.fillStyle = "#fff";
+	context.fillRect(0, 0, width, height);
+
+	context.lineWidth = 5;
+	context.strokeStyle = "#000";
+	const init_pos = [300, 200];
+	const periods = [0, 0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6];
+
+	Object.values(materials).forEach((mat) => {
+		//ignore + materials
+		if (mat.symbol.includes("+")) return;
+		let pos = init_pos.add([
+			mat.group * 200,
+			periods.indexOf(Number(mat.weight)) * 130,
+		]);
+		text(mat.symbol, pos, "50", "start", "#000", "bold");
+		text(mat.name, pos.add([0,-65]), "20");
+		context.strokeRect(pos[0]-15, pos[1]-110, 200, 130);
+	});
+
+	// render and save file
+	const buffer = canvas.toBuffer("image/png");
+	fs.writeFileSync("./out/table.png", buffer);
+}
+
+async function create_card(obj, filename) {
 	await front(obj, filename);
 	await back(obj, filename);
 }
 
 module.exports = {
-	create,
+	create_card,
+	periodic_table,
 };
