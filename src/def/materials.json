@@ -117,7 +117,7 @@
 		"price": 20
 	},
 	"ferro_iron": {
-		"name": "hierro de los montes pherros",
+		"name": "hierro de pherros",
 		"symbol": "FE+",
 		"group": 4,
 		"damage": 25,
