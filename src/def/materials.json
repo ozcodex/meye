@@ -1,6 +1,8 @@
 {
 	"crystal": {
+		"name": "cristal",
 		"symbol": "CR",
+		"group": 3,
 		"damage": 60,
 		"resistence": 25,
 		"slice": 200,
@@ -11,7 +13,9 @@
 		"price": 20
 	},
 	"marine_crystal": {
+		"name": "cristal marino",
 		"symbol": "CR+",
+		"group": 3,
 		"damage": 60,
 		"resistence": 25,
 		"slice": 200,
@@ -22,7 +26,9 @@
 		"price": 1000
 	},
 	"leather": {
+		"name": "cuero",
 		"symbol": "CO",
+		"group": 3,
 		"damage": 10,
 		"resistence": 15,
 		"slice": 8,
@@ -33,7 +39,9 @@
 		"price": 10
 	},
 	"wood": {
+		"name": "madera",
 		"symbol": "MA",
+		"group": 2,
 		"damage": 10,
 		"resistence": 10,
 		"slice": 9,
@@ -44,7 +52,9 @@
 		"price": 5
 	},
 	"wothe_wood": {
+		"name": "madera de wothe",
 		"symbol": "MA+",
+		"group": 2,
 		"damage": 10,
 		"resistence": 10,
 		"slice": 9,
@@ -55,7 +65,9 @@
 		"price": 1000
 	},
 	"stone": {
+		"name": "piedra",
 		"symbol": "PI",
+		"group": 2,
 		"damage": 20,
 		"resistence": 10,
 		"slice": 20,
@@ -66,7 +78,9 @@
 		"price": 10
 	},
 	"brass": {
+		"name": "laton",
 		"symbol": "LA",
+		"group": 3,
 		"damage": 20,
 		"resistence": 20,
 		"slice": 20,
@@ -77,7 +91,9 @@
 		"price": 20
 	},
 	"bronze": {
+		"name": "bronce",
 		"symbol": "BR",
+		"group": 3,
 		"damage": 20,
 		"resistence": 25,
 		"slice": 40,
@@ -88,7 +104,9 @@
 		"price": 200
 	},
 	"iron": {
-		"symbol": "Fe",
+		"name": "hierro",
+		"symbol": "FE",
+		"group": 4,
 		"damage": 25,
 		"resistence": 30,
 		"slice": 60,
@@ -99,7 +117,9 @@
 		"price": 20
 	},
 	"ferro_iron": {
-		"symbol": "Fe+",
+		"name": "hierro de los montes pherros",
+		"symbol": "FE+",
+		"group": 4,
 		"damage": 25,
 		"resistence": 30,
 		"slice": 60,
@@ -110,7 +130,9 @@
 		"price": 5000
 	},
 	"gold": {
-		"symbol": "Au",
+		"name": "oro",
+		"symbol": "AU",
+		"group": 4,
 		"damage": 15,
 		"resistence": 35,
 		"slice": 10,
@@ -121,18 +143,22 @@
 		"price": 20000
 	},
 	"silver": {
-		"symbol": "Ag",
+		"name": "plata",
+		"symbol": "AG",
+		"group": 1,
 		"damage": 20,
 		"resistence": 19,
 		"slice": 20,
 		"damping": 25,
 		"useful_life": 50,
-		"weight": 3,
+		"weight": 3.5,
 		"level": 2,
 		"price": 2000
 	},
 	"steel": {
+		"name": "acero",
 		"symbol": "AC",
+		"group": 5,
 		"damage": 40,
 		"resistence": 40,
 		"slice": 90,
@@ -143,7 +169,9 @@
 		"price": 50
 	},
 	"platinum": {
-		"symbol": "Pt",
+		"name": "platino",
+		"symbol": "PT",
+		"group": 6,
 		"damage": 25,
 		"resistence": 59,
 		"slice": 40,
@@ -154,7 +182,9 @@
 		"price": 3000
 	},
 	"tin": {
-		"symbol": "Sn",
+		"name": "estaño",
+		"symbol": "SN",
+		"group": 1,
 		"damage": 8,
 		"resistence": 8,
 		"slice": 2,
@@ -165,7 +195,9 @@
 		"price": 0
 	},
 	"lead": {
-		"symbol": "Pb",
+		"name": "plomo",
+		"symbol": "PB",
+		"group": 1,
 		"damage": 8,
 		"resistence": 12,
 		"slice": 5,
@@ -176,7 +208,9 @@
 		"price": 0
 	},
 	"aluzinc": {
+		"name": "aluzinc",
 		"symbol": "AZ",
+		"group": 2,
 		"damage": 15,
 		"resistence": 18,
 		"slice": 10,
@@ -187,7 +221,9 @@
 		"price": 0
 	},
 	"aluminium": {
-		"symbol": "Al",
+		"name": "aluminio",
+		"symbol": "AL",
+		"group": 1,
 		"damage": 15,
 		"resistence": 5,
 		"slice": 15,
@@ -198,7 +234,9 @@
 		"price": 0
 	},
 	"copper": {
-		"symbol": "Cu",
+		"name": "cobre",
+		"symbol": "CU",
+		"group": 3,
 		"damage": 20,
 		"resistence": 20,
 		"slice": 20,
@@ -209,7 +247,9 @@
 		"price": 18
 	},
 	"titanium": {
-		"symbol": "Ti",
+		"name": "titanio",
+		"symbol": "TI",
+		"group": 5,
 		"damage": 35,
 		"resistence": 25,
 		"slice": 70,
@@ -220,7 +260,9 @@
 		"price": 0
 	},
 	"nickel": {
-		"symbol": "Ni",
+		"name": "níquel",
+		"symbol": "NI",
+		"group": 4,
 		"damage": 30,
 		"resistence": 30,
 		"slice": 50,
@@ -231,7 +273,9 @@
 		"price": 0
 	},
 	"molybdenum": {
-		"symbol": "Mo",
+		"name": "molibdeno",
+		"symbol": "MO",
+		"group": 5,
 		"damage": 30,
 		"resistence": 40,
 		"slice": 60,
@@ -242,7 +286,9 @@
 		"price": 0
 	},
 	"tungsten": {
+		"name": "tungsteno",
 		"symbol": "TU",
+		"group": 8,
 		"damage": 45,
 		"resistence": 75,
 		"slice": 100,
@@ -253,7 +299,9 @@
 		"price": 0
 	},
 	"black_iron": {
+		"name": "hierro negro",
 		"symbol": "HN",
+		"group": 4,
 		"damage": 30,
 		"resistence": 35,
 		"slice": 60,
@@ -264,7 +312,9 @@
 		"price": 30000
 	},
 	"black_steel": {
+		"name": "acero negro",
 		"symbol": "AN",
+		"group": 7,
 		"damage": 45,
 		"resistence": 70,
 		"slice": 80,
@@ -275,7 +325,9 @@
 		"price": 50000
 	},
 	"celestial_steel": {
+		"name": "acero celeste",
 		"symbol": "AE",
+		"group": 10,
 		"damage": 60,
 		"resistence": 100,
 		"slice": 100,
