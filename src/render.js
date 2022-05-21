@@ -265,8 +265,8 @@ async function back(obj, filename) {
 }
 
 async function periodic_table() {
-	const width = 3000;
-	const height = 2000;
+	const width = 3500;
+	const height = 2500;
 	// INIT
 	canvas = createCanvas(width, height);
 	context = canvas.getContext("2d");
@@ -276,19 +276,29 @@ async function periodic_table() {
 
 	context.lineWidth = 5;
 	context.strokeStyle = "#000";
-	const init_pos = [300, 200];
+	const init_pos = [100, 300];
 	const periods = [0, 0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6];
 
 	Object.values(materials).forEach((mat) => {
 		//ignore + materials
 		if (mat.symbol.includes("+")) return;
 		let pos = init_pos.add([
-			mat.group * 200,
-			periods.indexOf(Number(mat.weight)) * 130,
+			mat.group * 250,
+			periods.indexOf(Number(mat.weight)) * 150,
 		]);
-		text(mat.symbol, pos, "50", "start", "#000", "bold");
-		text(mat.name, pos.add([0,-65]), "20");
-		context.strokeRect(pos[0]-15, pos[1]-110, 200, 130);
+
+		context.fillStyle = "#ccc";
+		context.fillRect(...pos.add([-15,-130]), 250, 150);
+
+		text(mat.symbol, pos, "70", "start", "#000", "bold");
+		text(mat.name, pos.add([0,-90]), "20");
+		text(31.25, pos.add([220,-100]), "15", "end");
+		text(28.25, pos.add([220,-80]), "15", "end");
+		text(32.25, pos.add([220,-60]), "15", "end");
+		text(16.25, pos.add([220,-40]), "15", "end");
+		text(38.25, pos.add([220,-20]), "15", "end");
+		text(25.25, pos.add([220,0]), "15", "end");
+		context.strokeRect(...pos.add([-15,-130]), 250, 150);
 	});
 
 	// render and save file
