@@ -1,6 +1,6 @@
 const { createCanvas, loadImage } = require("canvas");
 const fs = require("fs");
-const materials = require("./def/materials");
+const material = require("./material");
 const util = require("./util");
 const s = require("./lang").translate;
 const n = require("./lang").format;
@@ -140,11 +140,11 @@ async function front(obj, filename) {
 	} else {
 		strokeText(`#${obj.code}`, [110, 1050], 40, "start", "#FFF", "bold");
 	}
-	let material = materials[obj.material].symbol;
+	let symbol = obj.material;
 	if (obj.extra?.material) {
-		material += "," + materials[obj.extra.material].symbol;
+		symbol += "/" + obj.extra.material;
 	}
-	strokeText(material, [1375, 435], 40, "end", "#FFF", "bold");
+	strokeText(symbol, [1375, 435], 40, "end", "#FFF", "bold");
 
 	//card properties
 	await image("levels/" + obj.crafting_level, [100, 1150], [200, 200]);
@@ -279,7 +279,7 @@ async function periodic_table() {
 	const init_pos = [100, 300];
 	const periods = [0, 0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6];
 
-	Object.values(materials).forEach((mat) => {
+	Object.values(material.all).forEach((mat) => {
 		//ignore + materials
 		if (mat.symbol.includes("+")) return;
 		let pos = init_pos.add([

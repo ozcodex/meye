@@ -12,7 +12,7 @@ async function createCards() {
 
 render.periodic_table()
 
-//createCards()
+createCards()
 
 //console.log(util.randomObject('weapon'))
 //console.log(util.randomObject('armor'))

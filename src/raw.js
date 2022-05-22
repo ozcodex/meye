@@ -1,4 +1,4 @@
-const materials = require("./def/materials");
+const material = require("./material");
 
 /*
 input:
@@ -19,17 +19,17 @@ output:
 
 function create(params) {
 	const size = params.dimension * params.thickness;
-	const material = materials[params.material];
+	const raw_material = material.get(params.material);
 	const damping = Math.min(
-		(params.thickness / 5) * material.damping,
-		material.damping
+		(params.thickness / 5) * raw_material.damping,
+		raw_material.damping
 	);
 	return {
-		weight: material.weight * size,
-		price: material.price * size,
+		weight: raw_material.weight * size,
+		price: raw_material.price * size,
 		damping,
 		size,
-		material,
+		material: raw_material,
 	};
 }
 

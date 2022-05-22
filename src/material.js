@@ -2,6 +2,14 @@ const materials = require("./def/materials");
 
 /*
 output:	
+	material
+*/
+function get(symbol) {
+	return materials.find(element => element.symbol == symbol)
+}
+
+/*
+output:	
 	mean_result
 */
 function mix(property, components, proportions) {
@@ -61,6 +69,8 @@ function table(properties) {
 }
 
 module.exports = {
+	all: materials,
+	get,
 	create,
 	table
 };
