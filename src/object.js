@@ -122,9 +122,9 @@ function calculateDamage(params) {
 					weapon_type.damage[1] * params.dimension +
 					weapon_type.damage[2] * params.dimension ** 2
 			);
+			base_damage = Math.min(material.damage, base_damage);
 			break;
-	}
-	base_damage = Math.min(material.damage, base_damage);
+	}	
 	//reduce variable damage percent by quality
 	damage = base_damage * (1 - variable_damage * (1 - params.quality));
 	return Math.round(damage);

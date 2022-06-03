@@ -278,6 +278,17 @@ async function periodic_table() {
 	context.strokeStyle = "#000";
 	const init_pos = [100, 300];
 	const periods = [0, 0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6];
+	const categories = {
+		Volatil: "#538",
+		Reactivo: "#a44",
+		Precioso: "#bb5",
+		Organico: "#8b8",
+		No_Metalico: "#378",
+		Mistico: "#79d",
+		Metalico: "#999",
+		Metal_Blando: "#98a",
+		Alquimenidos: "#336",
+	};
 
 	Object.values(material.all).forEach((mat) => {
 		//ignore + materials
@@ -287,18 +298,18 @@ async function periodic_table() {
 			periods.indexOf(Number(mat.weight)) * 150,
 		]);
 
-		context.fillStyle = "#ccc";
-		context.fillRect(...pos.add([-15,-130]), 250, 150);
+		context.fillStyle = categories[mat.category];
+		context.fillRect(...pos.add([-15, -130]), 250, 150);
 
-		text(mat.symbol, pos, "70", "start", "#000", "bold");
-		text(mat.name, pos.add([0,-90]), "20");
-		text(31.25, pos.add([220,-100]), "15", "end");
-		text(28.25, pos.add([220,-80]), "15", "end");
-		text(32.25, pos.add([220,-60]), "15", "end");
-		text(16.25, pos.add([220,-40]), "15", "end");
-		text(38.25, pos.add([220,-20]), "15", "end");
-		text(25.25, pos.add([220,0]), "15", "end");
-		context.strokeRect(...pos.add([-15,-130]), 250, 150);
+		text(mat.symbol, pos, "65", "start", "#000", "bold");
+		text(mat.name, pos.add([0, -90]), "20");
+		text(mat.resistence, pos.add([220, -100]), "15", "end");
+		text(mat.damping, pos.add([220, -80]), "15", "end");
+		text(mat.useful_life, pos.add([220, -60]), "15", "end");
+		text(`${mat.damage}/${mat.slice}`, pos.add([220, -40]), "15", "end");
+		text(mat.level, pos.add([220, -20]), "15", "end");
+		text(mat.decadency, pos.add([220, 0]), "15", "end");
+		context.strokeRect(...pos.add([-15, -130]), 250, 150);
 	});
 
 	// render and save file
