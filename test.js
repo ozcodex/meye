@@ -10,9 +10,9 @@ async function createCards() {
 	await render.create_card(load("JAk1", "GAGA"), "DagasDiperias");
 }
 
-render.periodic_table()
+//render.periodic_table()
 
-//createCards()
+createCards()
 
 //console.log(util.randomObject('weapon'))
 //console.log(util.randomObject('armor'))

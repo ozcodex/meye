@@ -276,8 +276,10 @@ async function periodic_table() {
 
 	context.lineWidth = 5;
 	context.strokeStyle = "#000";
-	const init_pos = [100, 300];
-	const periods = [0, 0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6];
+	const init_pos = [300, 500];
+	const box_width = 260;
+	const box_height = 150;
+	const periods = [0, 0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5];
 	const categories = {
 		Volatil: "#538",
 		Reactivo: "#a44",
@@ -290,26 +292,47 @@ async function periodic_table() {
 		Alquimenidos: "#336",
 	};
 
+	//draw labels
+
+	periods.forEach(period => {
+		let pos = init_pos.add([
+			-80,
+			(periods.indexOf(Number(period)) * box_height) - 20,
+		]);
+		text(period, pos, "65", "end", "#000", "bold");
+	})
+
+	for (let group = 10; group >= 0; group--) {
+		let pos = init_pos.add([
+			group * box_width + 50,
+			-200,
+		]);
+		text(group, pos, "65", "center", "#000", "bold");
+	}
+
+	//draw materials
+
 	Object.values(material.all).forEach((mat) => {
 		//ignore + materials
 		if (mat.symbol.includes("+")) return;
 		let pos = init_pos.add([
-			mat.group * 250,
-			periods.indexOf(Number(mat.weight)) * 150,
+			mat.group * box_width,
+			periods.indexOf(Number(mat.weight)) * box_height,
 		]);
 
 		context.fillStyle = categories[mat.category];
-		context.fillRect(...pos.add([-15, -130]), 250, 150);
+		context.fillRect(...pos.add([-15, -130]), box_width, box_height);
 
 		text(mat.symbol, pos, "65", "start", "#000", "bold");
 		text(mat.name, pos.add([0, -90]), "20");
-		text(mat.resistence, pos.add([220, -100]), "15", "end");
-		text(mat.damping, pos.add([220, -80]), "15", "end");
-		text(mat.useful_life, pos.add([220, -60]), "15", "end");
-		text(`${mat.damage}/${mat.slice}`, pos.add([220, -40]), "15", "end");
-		text(mat.level, pos.add([220, -20]), "15", "end");
-		text(mat.decadency, pos.add([220, 0]), "15", "end");
-		context.strokeRect(...pos.add([-15, -130]), 250, 150);
+		text(mat.resistence, pos.add([box_width - 30, -100]), "15", "end");
+		text(mat.damping, pos.add([box_width - 30, -80]), "15", "end");
+		text(mat.useful_life, pos.add([box_width - 30, -60]), "15", "end");
+		let dmg_slc = `${mat.damage}/${mat.slice}`;
+		text(dmg_slc, pos.add([box_width - 30, -40]), "15", "end");
+		text(mat.level, pos.add([box_width - 30, -20]), "15", "end");
+		text(mat.decadency, pos.add([box_width - 30, 0]), "15", "end");
+		context.strokeRect(...pos.add([-15, -130]), box_width, box_height);
 	});
 
 	// render and save file
