@@ -29,7 +29,7 @@ function calculateRequiredLevel(params) {
 		(params.thickness < Math.floor(params.dimension / 2)) *
 		objects.crafting_level["mystic"].score;
 	const score = Math.max(
-		material.level,
+		objects.crafting_level[material.level].score,
 		object_level,
 		quality_score,
 		out_of_limits
