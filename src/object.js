@@ -281,7 +281,7 @@ function calculateDamping(params) {
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
 	if (params.class == "explosive") {
-		return material.damping * params.dimension;
+		return material.damping * raw_material.size;
 	}
 	return Math.min(
 		(params.thickness / 5) * material.damping,
@@ -300,6 +300,34 @@ function calculateUsefulLife(params) {
 		return 1; //only one use
 	}
 	return Math.floor(params.quality * material.useful_life);
+}
+
+/*
+output:
+	{
+	raw
+	crafting
+	fee
+	}
+*/
+function calculatePrice(params) {
+	const raw_material = createRaw(params);
+	const material = raw_material.material;
+	const level = calculateRequiredLevel(params);
+	const raw = raw_material.price;
+	let crafting = Math.ceil(
+		raw_material.price *
+			(0.2 + Math.abs(params.dimension - params.thickness))
+	);
+	const fee = objects.crafting_level[level].fee;
+	if (params.class == "explosive") {
+		crafting = raw_material.price * params.thickness;
+	}
+	return {
+		raw,
+		crafting,
+		fee,
+	};
 }
 
 /*
@@ -485,15 +513,7 @@ function create(params) {
 		damping: calculateDamping(params),
 		useful_life: useful_life,
 		crafting_level: level,
-		price: {
-			raw: raw_material.price,
-			crafting: Math.ceil(
-				objects.crafting_level[level].fee +
-					raw_material.price *
-						(0.2 + Math.abs(params.dimension - params.thickness))
-			),
-			fee: objects.crafting_level[level].fee,
-		},
+		price: calculatePrice(params),
 		code: code.encodeBase(params),
 		custom_code: params.extra ? code.encodeCustom(params) : undefined,
 		mod_code: params.modifications ? code.modString(params) : undefined,

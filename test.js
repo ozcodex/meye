@@ -11,7 +11,7 @@ let obj = create({
 	class: 'explosive',
 	dimension: 0.1,
 	type: 'detonante',
-	thickness: 3
+	thickness: 2
 })
 
 async function createCards() {
