@@ -16,6 +16,10 @@ Array.prototype.add = function (arr) {
 	return sum;
 };
 
+Number.prototype.round = function () {
+	return +(Math.round(this + "e+1") + "e-1");
+};
+
 let context;
 let canvas;
 
@@ -81,20 +85,21 @@ async function front(obj, filename) {
 
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
-	const name = `${s(obj.type)}`.toCap();
+	const name = obj.type.toCap();
 	let suffix = "";
 	if (!isNaN(obj.size_type)) {
 		suffix = obj.size_type == 1 ? "piece" : "pieces";
 	}
 	const desc = [
-		s(obj.type),
-		s(obj.extra?.sub_type),
-		s(obj.extra?.specialization),
-		s(obj.size_type),
-		s(suffix),
+		obj.type,
+		obj.class == "explosive" ? material.get(obj.material).name : "",
+		obj.extra?.sub_type,
+		obj.extra?.specialization,
+		obj.size_type,
+		suffix,
 	]
 		.filter((element) => {
-			return element !== "";
+			return !["", "none", null, undefined].includes(element);
 		})
 		.join(" ")
 		.toCap();
@@ -102,16 +107,23 @@ async function front(obj, filename) {
 	context.fillStyle = "#000";
 	context.fillRect(0, 2020, width, height);
 
-	// draw card titleo
+	// draw card title
 	text(obj.name || name, [100, 200], 70, "start", "#000", "bold");
 	text(desc, [100, 300], 40, "start", "#555", "italic");
 
-	text(s("size"), [1200, 110], 40, "center", "#555", "bold");
-	text(obj.size, [1220, 220], 80, "end", "#000", "bold");
-	const thickness = +(Math.round(obj.thickness + "e+1") + "e-1");
-	text(thickness + " G", [1230, 170], 40, "start");
-	const dimension = +(Math.round(obj.dimension + "e+1") + "e-1");
-	text(dimension + " D", [1230, 220], 40, "start");
+	text("tamaño", [1200, 110], 40, "center", "#555", "bold");
+	let label_size = obj.size;
+	if (obj.class == "explosive") {
+		label_size = Number(obj.dimension).round();
+	}
+	text(label_size, [1220, 220], 80, "end", "#000", "bold");
+	let label_thickness = Number(obj.thickness).round() + " G";
+	if (obj.class == "explosive") {
+		label_thickness = Number(obj.thickness * 10).round() + " %";
+	}
+	text(label_thickness, [1230, 170], 40, "start");
+	const label_dimension = +(Math.round(obj.dimension + "e+1") + "e-1") + " D";
+	text(label_dimension, [1230, 220], 40, "start");
 
 	//todo: set a color by parameter
 	context.fillStyle = "#777";
@@ -145,7 +157,7 @@ async function front(obj, filename) {
 		symbol += "/" + obj.extra.material;
 	}
 	let decay = material.get(obj.material).decadency;
-	if (decay) {
+	if (decay != "-") {
 		symbol += " → " + decay;
 	}
 	strokeText(symbol, [1375, 435], 40, "end", "#FFF", "bold");
@@ -155,17 +167,18 @@ async function front(obj, filename) {
 	let rarity_quality = `${obj.rarity}_${obj.quality * 10}`;
 	await image("rarities/" + rarity_quality, [100, 1350], [200, 200]);
 
-	text(s("throwing").toCap(), [380, 1200], 50, "start");
-	text(s("weight").toCap(), [380, 1280], 50, "start");
-	text(s("damping").toCap(), [380, 1360], 50, "start");
-	text(s("resistence").toCap(), [380, 1440], 50, "start");
-	text(s("useful_life").toCap(), [380, 1520], 50, "start");
+	text("Lance", [380, 1200], 50, "start");
+	text("Peso", [380, 1280], 50, "start");
+	let damping_label = obj.class == "explosive" ? "Impacto" : "Amortiguado";
+	text(damping_label, [380, 1360], 50, "start");
+	text("Resistencia", [380, 1440], 50, "start");
+	text("Vida Util", [380, 1520], 50, "start");
 
-	text(obj.throwing, [1030, 1200], 50, "end");
-	text(obj.weight, [1030, 1280], 50, "end");
-	text(obj.damping, [1030, 1360], 50, "end");
-	text(obj.resistence, [1030, 1440], 50, "end");
-	text(obj.useful_life, [1030, 1520], 50, "end");
+	text(obj.throwing.toFixed(0), [1030, 1200], 50, "end");
+	text(Number(obj.weight).round(), [1030, 1280], 50, "end");
+	text(Number(obj.damping).round(), [1030, 1360], 50, "end");
+	text(Number(obj.resistence).round(), [1030, 1440], 50, "end");
+	text(Number(obj.useful_life).round(), [1030, 1520], 50, "end");
 
 	let point = 1210;
 	let breaking = Math.ceil(obj.restrictions.length / 2) * 100;
@@ -210,9 +223,10 @@ async function front(obj, filename) {
 	await image("prices/raw", [750, 1720], [150, 150]);
 	await image("prices/crafting", [1000, 1720], [150, 150]);
 	await image("prices/fee", [1250, 1720], [150, 150]);
-	text(`${n(obj.price.raw)} R`, [825, 1950], 40, "center");
-	text(`${n(obj.price.crafting)} R`, [1075, 1950], 40, "center");
-	text(`${n(obj.price.fee)} R`, [1325, 1950], 40, "center");
+	text(`${n(Number(obj.price.raw).round())} R`, [825, 1950], 40, "center");
+	const label_crafting = `${n(Number(obj.price.crafting).round())} R`;
+	text(label_crafting, [1075, 1950], 40, "center");
+	text(`${n(Number(obj.price.fee).round())} R`, [1325, 1950], 40, "center");
 
 	text(s(obj.mod_code), [100, 2075], 30, "start", "#FFF", "bold");
 

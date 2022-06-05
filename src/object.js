@@ -48,7 +48,7 @@ output:
 */
 function calculateRestrictions(params) {
 	let restrictions = objects.class[params.class].restrictions;
-	if(Object.keys(restrictions).length == 0) return [];
+	if (Object.keys(restrictions).length == 0) return [];
 	const property = restrictions.property;
 	const range = util.closest(
 		Object.keys(restrictions.ranges),
@@ -98,7 +98,7 @@ output:
 function calculateDamage(params) {
 	let base_damage;
 	const raw_material = createRaw(params);
-	if ( !["weapon","explosive"].includes(params.class)) {
+	if (!["weapon", "explosive"].includes(params.class)) {
 		return calculateWeight(params);
 	}
 	const material = raw_material.material;
@@ -118,13 +118,15 @@ function calculateDamage(params) {
 			);
 			break;
 		case "deflagrante":
-		case "explosive":
+		case "detonante":
 			// damage based on:
 			// material resistence (base damage)
 			// thickness (concentration)
 			// dimension (amount)
-			base_damage = Math.round(material.resistence* params.thickness* params.dimension)
-		break;
+			base_damage = Math.round(
+				material.resistence * params.thickness * params.dimension
+			);
+			break;
 		default:
 			base_damage = Math.round(
 				weapon_type.damage[0] +
@@ -133,7 +135,7 @@ function calculateDamage(params) {
 			);
 			base_damage = Math.min(material.damage, base_damage);
 			break;
-	}	
+	}
 	//reduce variable damage percent by quality
 	damage = base_damage * (1 - variable_damage * (1 - params.quality));
 	return Math.round(damage);
@@ -228,8 +230,11 @@ output:
 
 function calculateRange(params) {
 	let range, range_max;
-	if (params.class != "weapon") {
-		return [Math.round(params.dimension * 4)];
+	const raw_material = createRaw(params);
+	if (!["weapon", "explosive"].includes(params.class)) {
+		range = Math.round(params.dimension * 2);
+		range_max = Math.round(params.dimension * 4);
+		return [range, range_max];
 	}
 	const weapon_type = objects.class[params.class].type[params.type];
 	switch (params.type) {
@@ -238,6 +243,14 @@ function calculateRange(params) {
 				Math.round(
 					Math.abs(290 + 140 * Math.log(params.dimension)) / 10
 				) * 10;
+			break;
+		case "deflagrante":
+		case "detonante":
+			return [
+				(raw_material.weight).toFixed(0),
+				(raw_material.weight * 2).toFixed(0),
+				(raw_material.weight * 4).toFixed(0),
+			];
 			break;
 		default:
 			range_max = Math.round(params.dimension * weapon_type.range);
@@ -441,9 +454,9 @@ function create(params) {
 		price: {
 			raw: raw_material.price,
 			crafting: Math.ceil(
-				objects.crafting_level[level].fee + 
-				raw_material.price *
-					(0.2 + Math.abs(params.dimension - params.thickness))
+				objects.crafting_level[level].fee +
+					raw_material.price *
+						(0.2 + Math.abs(params.dimension - params.thickness))
 			),
 			fee: objects.crafting_level[level].fee,
 		},
