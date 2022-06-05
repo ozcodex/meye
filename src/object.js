@@ -104,7 +104,7 @@ function calculateDamage(params) {
 	const material = raw_material.material;
 	const weapon_type = objects.class[params.class].type[params.type];
 	const variable_damage = weapon_type.variable_damage;
-	const damping = raw_material.damping;
+	const damping = calculateDamping(params);
 	switch (params.type) {
 		case "blunt":
 			//calculations based on weight
@@ -247,7 +247,7 @@ function calculateRange(params) {
 		case "deflagrante":
 		case "detonante":
 			return [
-				(raw_material.weight).toFixed(0),
+				raw_material.weight.toFixed(0),
 				(raw_material.weight * 2).toFixed(0),
 				(raw_material.weight * 4).toFixed(0),
 			];
@@ -271,6 +271,22 @@ function calculateWeight(params) {
 		return raw_material.weight * object_type.weight_factor;
 	}
 	return raw_material.weight;
+}
+
+/*
+output:
+	damping
+*/
+function calculateDamping(params) {
+	const raw_material = createRaw(params);
+	const material = raw_material.material;
+	if (params.class == "explosive") {
+		return material.damping * params.dimension;
+	}
+	return Math.min(
+		(params.thickness / 5) * material.damping,
+		material.damping
+	);
 }
 
 /*
@@ -305,15 +321,18 @@ function applyExtra(obj) {
 		return obj;
 	}
 	if (obj.extra.material) {
-		const raw = createRaw({
+		const extra_params = {
+			class: obj.class,
 			dimension: obj.dimension,
 			material: obj.extra.material,
 			thickness: obj.extra.thickness,
-		});
+		};
+		const raw = createRaw(extra_params);
+		const damping = calculateDamping(extra_params);
 		const extra_weight = raw.weight;
 		obj.size += Number(raw.size);
 		obj.price.raw += Number(raw.price);
-		obj.damping += "/" + raw.damping;
+		obj.damping += "/" + damping;
 		obj.resistence += "/" + raw.material.resistence;
 		obj.useful_life += "/" + raw.material.useful_life * obj.quality;
 		//extra weight restrictions are only applied to R
@@ -448,7 +467,7 @@ function create(params) {
 		weight: calculateWeight(params),
 		restrictions: calculateRestrictions(params),
 		range: calculateRange(params),
-		damping: raw_material.damping,
+		damping: calculateDamping(params),
 		useful_life: Math.floor(useful_life),
 		crafting_level: level,
 		price: {
