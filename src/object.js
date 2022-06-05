@@ -290,6 +290,19 @@ function calculateDamping(params) {
 }
 
 /*
+output:
+	useful_life
+*/
+function calculateUsefulLife(params) {
+	const raw_material = createRaw(params);
+	const material = raw_material.material;
+	if (params.class == "explosive") {
+		return 1; //only one use
+	}
+	return Math.floor(params.quality * material.useful_life);
+}
+
+/*
 input:
 	restrictions
 	update
@@ -326,15 +339,17 @@ function applyExtra(obj) {
 			dimension: obj.dimension,
 			material: obj.extra.material,
 			thickness: obj.extra.thickness,
+			quality: obj.quality,
 		};
 		const raw = createRaw(extra_params);
 		const damping = calculateDamping(extra_params);
+		const useful_life = calculateUsefulLife(extra_params);
 		const extra_weight = raw.weight;
 		obj.size += Number(raw.size);
 		obj.price.raw += Number(raw.price);
 		obj.damping += "/" + damping;
 		obj.resistence += "/" + raw.material.resistence;
-		obj.useful_life += "/" + raw.material.useful_life * obj.quality;
+		obj.useful_life += "/" + useful_life;
 		//extra weight restrictions are only applied to R
 		const reduction = Math.floor(raw.weight);
 		if (reduction) {
@@ -453,7 +468,7 @@ function create(params) {
 	params.quality = Number(params.quality).toFixed(1);
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
-	const useful_life = params.quality * material.useful_life;
+	const useful_life = calculateUsefulLife(params);
 	const level = calculateRequiredLevel(params);
 	const base_object = {
 		...params,
@@ -468,7 +483,7 @@ function create(params) {
 		restrictions: calculateRestrictions(params),
 		range: calculateRange(params),
 		damping: calculateDamping(params),
-		useful_life: Math.floor(useful_life),
+		useful_life: useful_life,
 		crafting_level: level,
 		price: {
 			raw: raw_material.price,
