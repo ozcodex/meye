@@ -452,15 +452,29 @@ function applyMods(obj) {
 /*
 input:
 	{
+		name
 		quality
 		class
 		dimension
 		type
+		material
 		thickness
 		extra
+			origin
+			sub_type
+			specialization
+			flags[]
 		modifications
-		name
-		effects
+			restrictions[]
+			range[]
+			price
+			crafting_level
+			rarity
+			*any_numeric_output
+		effects[]
+			title
+			description
+
 	}
 output:
 	{

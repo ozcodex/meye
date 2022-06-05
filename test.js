@@ -15,7 +15,7 @@ let obj = create({
 })
 
 async function createCards() {
-	await render.create_card(obj, "Nitrurea");
+	await render.create_card(load("MVX"), "Nitrurea");
 	await render.create_card(load("EELX", "FK6I-62"), "EscudoKrall");
 	await render.create_card(load("GArK", "FAOA"), "EspadaShishi");
 	await render.create_card(load("JAk1", "GAGA"), "DagasDiperias");
