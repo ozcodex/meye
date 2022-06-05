@@ -2,8 +2,8 @@ const { createCanvas, loadImage } = require("canvas");
 const fs = require("fs");
 const material = require("./material");
 const util = require("./util");
-const s = require("./lang").translate;
-const n = require("./lang").format;
+const s = require("./lang").string_format;
+const n = require("./lang").number_format;
 
 String.prototype.toCap = function () {
 	return this.charAt(0).toUpperCase() + this.slice(1);
@@ -88,11 +88,11 @@ async function front(obj, filename) {
 	const name = obj.type.toCap();
 	let suffix = "";
 	if (!isNaN(obj.size_type)) {
-		suffix = obj.size_type == 1 ? "piece" : "pieces";
+		suffix = obj.size_type == 1 ? "pieza_completa" : "pieza_completas";
 	}
 	const desc = [
 		obj.type,
-		obj.class == "explosive" ? material.get(obj.material).name : "",
+		obj.class == "explosivo" ? material.get(obj.material).name : "",
 		obj.extra?.sub_type,
 		obj.extra?.specialization,
 		obj.size_type,
@@ -113,12 +113,12 @@ async function front(obj, filename) {
 
 	text("tamaño", [1200, 110], 40, "center", "#555", "bold");
 	let label_size = obj.size;
-	if (obj.class == "explosive") {
+	if (obj.class == "explosivo") {
 		label_size = Number(obj.dimension).round();
 	}
 	text(label_size, [1220, 220], 80, "end", "#000", "bold");
 	let label_thickness = Number(obj.thickness).round() + " G";
-	if (obj.class == "explosive") {
+	if (obj.class == "explosivo") {
 		label_thickness = Number(obj.thickness * 10).round() + " %";
 	}
 	text(label_thickness, [1230, 170], 40, "start");
@@ -169,7 +169,7 @@ async function front(obj, filename) {
 
 	text("Lance", [380, 1200], 50, "start");
 	text("Peso", [380, 1280], 50, "start");
-	let damping_label = obj.class == "explosive" ? "Impacto" : "Amortiguado";
+	let damping_label = obj.class == "explosivo" ? "Impacto" : "Amortiguado";
 	text(damping_label, [380, 1360], 50, "start");
 	text("Resistencia", [380, 1440], 50, "start");
 	text("Vida Util", [380, 1520], 50, "start");

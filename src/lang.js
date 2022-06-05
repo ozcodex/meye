@@ -1,14 +1,14 @@
-const language = require("./def/language.json");
-
-function translate(text) {
-	const str = text?.toString() || '';
-	return typeof language[str] == 'undefined'? str: language[str];
+function string_format(text) {
+	let str = text?.toString() || "";
+	str = str.replace("_", " ").replace("nn", "ñ");
+	return str;
 }
 
-function format(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+function number_format(x) {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 module.exports = {
-	translate,format
+	string_format,
+	number_format,
 };

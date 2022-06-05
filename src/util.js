@@ -20,6 +20,31 @@ function plus(num) {
   return (num >= 0 ? "+" : "") + num;
 }
 
+function compare(obj1, obj2) {
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+  //simmetric difference
+  let diff = keys1
+    .filter((x) => !keys2.includes(x))
+    .concat(keys2.filter((x) => !keys1.includes(x)));
+  if (diff.length > 0) {
+    console.log("Object keys didn't match", diff);
+    return;
+  }
+  diff = keys1.filter(
+    (key) =>
+      (
+        obj1[key] != obj2[key] &&
+        JSON.stringify(obj1[key]) != JSON.stringify(obj2[key])
+      )
+  );
+  if (diff.length > 0) {
+    console.log("Some keys have different value", diff);
+    return;
+  }
+  console.log("Objects are the same");
+}
+
 // item generator
 
 // given class
@@ -52,4 +77,5 @@ module.exports = {
   plus,
   closest,
   randomObject,
+  compare,
 };

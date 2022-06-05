@@ -20,14 +20,14 @@ function calculateRequiredLevel(params) {
 	});
 	const ranges = objects.class[params.class].dimension;
 	let dim = util.getKeyByParamLess(ranges, "value", params.dimension);
-	const trainee_level = 0;
+	const aprendiz_level = 0;
 	object_level =
 		objects.class[params.class].type[params.type].level ||
 		objects.class[params.class].dimension[dim].level ||
-		trainee_level;
+		aprendiz_level;
 	const out_of_limits =
 		(params.thickness < Math.floor(params.dimension / 2)) *
-		objects.crafting_level["mystic"].score;
+		objects.crafting_level["mistico"].score;
 	const score = Math.max(
 		objects.crafting_level[material.level].score,
 		object_level,
@@ -74,20 +74,20 @@ output:
 */
 function calculateRarity(params) {
 	const level = calculateRequiredLevel(params);
-	let rarity = "common";
-	if (params.quality == 1) rarity = "masterly";
+	let rarity = "comun";
+	if (params.quality == 1) rarity = "magistral";
 	switch (level) {
-		case "science":
-			if (rarity != "masterly") rarity = "rare";
+		case "ciencia":
+			if (rarity != "magistral") rarity = "raro";
 			break;
-		case "mystic":
-			rarity = "special";
+		case "mistico":
+			rarity = "especial";
 			break;
-		case "divine":
-			rarity = "legendary";
+		case "divino":
+			rarity = "legendario";
 			break;
 	}
-	//todo: supernatural
+	//todo: sobrenatural
 	return rarity;
 }
 
@@ -98,19 +98,19 @@ output:
 function calculateDamage(params) {
 	let base_damage;
 	const raw_material = createRaw(params);
-	if (!["weapon", "explosive"].includes(params.class)) {
+	if (!["arma", "explosivo"].includes(params.class)) {
 		return calculateWeight(params);
 	}
 	const material = raw_material.material;
-	const weapon_type = objects.class[params.class].type[params.type];
-	const variable_damage = weapon_type.variable_damage;
+	const arma_type = objects.class[params.class].type[params.type];
+	const variable_damage = arma_type.variable_damage;
 	const damping = calculateDamping(params);
 	switch (params.type) {
-		case "blunt":
+		case "contundente":
 			//calculations based on weight
 			base_damage = calculateWeight(params);
 			break;
-		case "tension":
+		case "de_tension":
 			//damage calculed by damping
 			base_damage = Math.max(
 				0,
@@ -129,9 +129,9 @@ function calculateDamage(params) {
 			break;
 		default:
 			base_damage = Math.round(
-				weapon_type.damage[0] +
-					weapon_type.damage[1] * params.dimension +
-					weapon_type.damage[2] * params.dimension ** 2
+				arma_type.damage[0] +
+					arma_type.damage[1] * params.dimension +
+					arma_type.damage[2] * params.dimension ** 2
 			);
 			base_damage = Math.min(material.damage, base_damage);
 			break;
@@ -147,23 +147,23 @@ output:
 */
 function calculateSlice(params) {
 	let slice;
-	if (params.class != "weapon") {
+	if (params.class != "arma") {
 		return 0;
 	}
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
-	const weapon_type = objects.class[params.class].type[params.type];
+	const arma_type = objects.class[params.class].type[params.type];
 	const thickness = params.thickness;
 	switch (params.type) {
-		case "blunt":
-		case "tension":
+		case "contundente":
+		case "de_tension":
 			slice = 0;
 			break;
 		default:
 			slice = Math.round(
-				weapon_type.slice[0] +
-					weapon_type.slice[1] * thickness +
-					weapon_type.slice[2] * thickness ** 2
+				arma_type.slice[0] +
+					arma_type.slice[1] * thickness +
+					arma_type.slice[2] * thickness ** 2
 			);
 			break;
 	}
@@ -176,21 +176,21 @@ output:
 */
 function calculateBleeding(params) {
 	let bleeding;
-	if (params.class != "weapon") {
+	if (params.class != "arma") {
 		return 0;
 	}
-	const weapon_type = objects.class[params.class].type[params.type];
+	const arma_type = objects.class[params.class].type[params.type];
 	const thickness = params.thickness;
 	switch (params.type) {
-		case "blunt":
-		case "tension":
+		case "contundente":
+		case "de_tension":
 			bleeding = 0;
 			break;
 		default:
 			bleeding = Math.round(
-				weapon_type.bleeding[0] +
-					weapon_type.bleeding[1] * thickness +
-					weapon_type.bleeding[2] * thickness ** 2
+				arma_type.bleeding[0] +
+					arma_type.bleeding[1] * thickness +
+					arma_type.bleeding[2] * thickness ** 2
 			);
 			break;
 	}
@@ -203,11 +203,11 @@ output:
 */
 function calculateThrowing(params) {
 	const raw_material = createRaw(params);
-	if (params.class != "weapon") {
+	if (params.class != "arma") {
 		return calculateWeight(params) * 2;
 	}
-	const weapon_type = objects.class[params.class].type[params.type];
-	return calculateWeight(params) * weapon_type.throwing;
+	const arma_type = objects.class[params.class].type[params.type];
+	return calculateWeight(params) * arma_type.throwing;
 }
 
 /*
@@ -217,8 +217,8 @@ output:
 function generateSizeType(params) {
 	const ranges = objects.class[params.class].dimension;
 	let type = util.getKeyByParamLess(ranges, "value", params.dimension);
-	if (params.class == "armor") {
-		type = params.type == "shield" ? type : params.dimension;
+	if (params.class == "armadura") {
+		type = params.type == "escudo" ? type : params.dimension;
 	}
 	return type;
 }
@@ -231,14 +231,14 @@ output:
 function calculateRange(params) {
 	let range, range_max;
 	const raw_material = createRaw(params);
-	if (!["weapon", "explosive"].includes(params.class)) {
+	if (!["arma", "explosivo"].includes(params.class)) {
 		range = Math.round(params.dimension * 2);
 		range_max = Math.round(params.dimension * 4);
 		return [range, range_max];
 	}
-	const weapon_type = objects.class[params.class].type[params.type];
+	const arma_type = objects.class[params.class].type[params.type];
 	switch (params.type) {
-		case "tension":
+		case "de_tension":
 			range_max =
 				Math.round(
 					Math.abs(290 + 140 * Math.log(params.dimension)) / 10
@@ -253,7 +253,7 @@ function calculateRange(params) {
 			];
 			break;
 		default:
-			range_max = Math.round(params.dimension * weapon_type.range);
+			range_max = Math.round(params.dimension * arma_type.range);
 			break;
 	}
 	range = Math.floor(range_max / 2);
@@ -267,7 +267,7 @@ output:
 function calculateWeight(params) {
 	const raw_material = createRaw(params);
 	const object_type = objects.class[params.class].type[params.type];
-	if (params.class == "common") {
+	if (params.class == "comun") {
 		return raw_material.weight * object_type.weight_factor;
 	}
 	return raw_material.weight;
@@ -280,7 +280,7 @@ output:
 function calculateDamping(params) {
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
-	if (params.class == "explosive") {
+	if (params.class == "explosivo") {
 		return material.damping * raw_material.size;
 	}
 	return Math.min(
@@ -296,7 +296,7 @@ output:
 function calculateUsefulLife(params) {
 	const raw_material = createRaw(params);
 	const material = raw_material.material;
-	if (params.class == "explosive") {
+	if (params.class == "explosivo") {
 		return 1; //only one use
 	}
 	return Math.floor(params.quality * material.useful_life);
@@ -320,7 +320,7 @@ function calculatePrice(params) {
 			(0.2 + Math.abs(params.dimension - params.thickness))
 	);
 	const fee = objects.crafting_level[level].fee;
-	if (params.class == "explosive") {
+	if (params.class == "explosivo") {
 		crafting = raw_material.price * params.thickness;
 	}
 	return {
@@ -391,15 +391,15 @@ function applyExtra(obj) {
 	obj.price.crafting = Math.ceil(obj.price.crafting * 1.1);
 	obj.price.fee *= 1.5;
 	if (obj.extra.flags.length > 0) {
-		obj.price.fee += objects.crafting_level.mystic.fee;
-		if (obj.crafting_level != "divine") {
-			obj.crafting_level = "mystic";
+		obj.price.fee += objects.crafting_level.mistico.fee;
+		if (obj.crafting_level != "divino") {
+			obj.crafting_level = "mistico";
 		}
-		if (obj.rarity != "supernatural" && obj.rarity != "legendary") {
-			obj.rarity = "special";
+		if (obj.rarity != "sobrenatural" && obj.rarity != "legendario") {
+			obj.rarity = "especial";
 		}
-		if (obj.rarity != "legendary" && obj.extra.flags.includes("cenobism")) {
-			obj.rarity = "supernatural";
+		if (obj.rarity != "legendario" && obj.extra.flags.includes("cenobism")) {
+			obj.rarity = "sobrenatural";
 		}
 	}
 	return obj;
@@ -501,7 +501,7 @@ output:
 */
 
 function create(params) {
-	if (params.class == "armor") {
+	if (params.class == "armadura") {
 		params.thickness = Math.min(
 			params.thickness,
 			objects.class[params.class].type[params.type].max_thickness
@@ -552,7 +552,9 @@ output
 */
 function load(base_code, custom_code) {
 	const params = code.decodeBase(base_code);
-	params.extra = code.decodeCustom(custom_code, params.class);
+	if (custom_code) {
+		params.extra = code.decodeCustom(custom_code, params.class);
+	}
 	const data = db.find(`${base_code}-${custom_code}`);
 	if (data) {
 		params.name = data.name;

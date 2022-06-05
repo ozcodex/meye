@@ -8,14 +8,14 @@ const render = require("./src/render");
 let obj = create({
 	material:'NU',
 	quality:0.7,
-	class: 'explosive',
-	dimension: 0.5,
+	class: 'explosivo',
+	dimension: 0.25,
 	type: 'detonante',
 	thickness: 3
 })
 
 async function createCards() {
-	await render.create_card(load("MVX"), "Nitrurea");
+	await render.create_card(load("aMVX"), "Nitrurea");
 	await render.create_card(load("EELX", "FK6I-62"), "EscudoKrall");
 	await render.create_card(load("GArK", "FAOA"), "EspadaShishi");
 	await render.create_card(load("JAk1", "GAGA"), "DagasDiperias");

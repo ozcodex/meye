@@ -1,14 +1,14 @@
 {
 	"classes": {
-		"weapon": {
+		"arma": {
 			"value": 0,
 			"types": {
-				"projectile": 0,
-				"piercing": 1,
-				"blade": 2,
-				"shear": 3,
-				"blunt": 4,
-				"tension": 5
+				"proyectil": 0,
+				"penetrante": 1,
+				"de_hoja": 2,
+				"cizallante": 3,
+				"contundente": 4,
+				"de_tension": 5
 			},
 			"sub_types": {
 				"straight": 0
@@ -17,15 +17,15 @@
 				"none": 0
 			}
 		},
-		"armor": {
+		"armadura": {
 			"value": 1,
 			"types": {
-				"shield": 0,
-				"cuirass": 1,
-				"plates": 2,
-				"scales": 3,
-				"studded": 4,
-				"mail": 5
+				"escudo": 0,
+				"coraza": 1,
+				"placas": 2,
+				"escamada": 3,
+				"tachonada": 4,
+				"malla": 5
 			},
 			"sub_types": {
 				"buckler": 5
@@ -34,14 +34,14 @@
 				"reinforced_umbonated": 3
 			}
 		},
-		"common": {
+		"comun": {
 			"value": 2,
 			"types": {
-				"hollow": 0,
-				"solid": 1
+				"hueco": 0,
+				"solido": 1
 			}
 		},
-		"explosive": {
+		"explosivo": {
 			"value": 3,
 			"types": {
 				"deflagrante": 0,
@@ -85,7 +85,45 @@
 		"TU": 22,
 		"HN": 23,
 		"AN": 24,
-		"AE": 25
+		"AE": 25,
+		"HO": 26,
+		"AI": 27,
+		"AT": 28,
+		"CA": 29,
+		"CB": 30,
+		"CC": 31,
+		"CK": 32,
+		"CM": 33,
+		"DS": 34,
+		"DY": 35,
+		"EF": 36,
+		"FC": 37,
+		"FK": 38,
+		"FL": 39,
+		"FN": 40,
+		"FV": 41,
+		"HG": 42,
+		"HU": 43,
+		"KZ": 44,
+		"LO": 45,
+		"MC": 46,
+		"MK": 47,
+		"MM": 48,
+		"MT": 49,
+		"MZ": 50,
+		"NC": 51,
+		"NU": 52,
+		"OG": 53,
+		"OK": 54,
+		"OL": 55,
+		"PC": 56,
+		"PE": 57,
+		"PL": 58,
+		"PV": 59,
+		"TE": 60,
+		"TT": 61,
+		"VC": 62,
+		"VT": 63
 	},
 	"origins": {
 		"unknown": 0,
