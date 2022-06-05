@@ -347,9 +347,9 @@ function applyExtra(obj) {
 		const extra_weight = raw.weight;
 		obj.size += Number(raw.size);
 		obj.price.raw += Number(raw.price);
-		obj.damping += "/" + damping;
-		obj.resistence += "/" + raw.material.resistence;
-		obj.useful_life += "/" + useful_life;
+		obj.damping += "/" + Number(damping);
+		obj.resistence += "/" + Number(raw.material.resistence);
+		obj.useful_life += "/" + Number(useful_life);
 		//extra weight restrictions are only applied to R
 		const reduction = Math.floor(raw.weight);
 		if (reduction) {

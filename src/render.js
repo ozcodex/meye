@@ -176,9 +176,21 @@ async function front(obj, filename) {
 
 	text(obj.throwing.toFixed(0), [1030, 1200], 50, "end");
 	text(Number(obj.weight).round(), [1030, 1280], 50, "end");
-	text(Number(obj.damping).round(), [1030, 1360], 50, "end");
-	text(Number(obj.resistence).round(), [1030, 1440], 50, "end");
-	text(Number(obj.useful_life).round(), [1030, 1520], 50, "end");
+	let damping = obj.damping
+	if(!isNaN(damping)){
+		damping = Number(damping).round()
+	}
+	text(damping, [1030, 1360], 50, "end");
+	let resistence = obj.resistence
+	if(!isNaN(resistence)){
+		resistence = Number(resistence).round()
+	}
+	text(resistence, [1030, 1440], 50, "end");
+	let useful_life = obj.useful_life
+	if(!isNaN(useful_life)){
+		useful_life = Number(useful_life).round()
+	}
+	text(useful_life, [1030, 1520], 50, "end");
 
 	let point = 1210;
 	let breaking = Math.ceil(obj.restrictions.length / 2) * 100;
