@@ -144,6 +144,10 @@ async function front(obj, filename) {
 	if (obj.extra?.material) {
 		symbol += "/" + obj.extra.material;
 	}
+	let decay = material.get(obj.material).decadency;
+	if (decay) {
+		symbol += " → " + decay;
+	}
 	strokeText(symbol, [1375, 435], 40, "end", "#FFF", "bold");
 
 	//card properties
@@ -294,19 +298,16 @@ async function periodic_table() {
 
 	//draw labels
 
-	periods.forEach(period => {
+	periods.forEach((period) => {
 		let pos = init_pos.add([
 			-80,
-			(periods.indexOf(Number(period)) * box_height) - 20,
+			periods.indexOf(Number(period)) * box_height - 20,
 		]);
 		text(period, pos, "65", "end", "#000", "bold");
-	})
+	});
 
 	for (let group = 10; group >= 0; group--) {
-		let pos = init_pos.add([
-			group * box_width + 50,
-			-200,
-		]);
+		let pos = init_pos.add([group * box_width + 50, -200]);
 		text(group, pos, "65", "center", "#000", "bold");
 	}
 

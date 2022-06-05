@@ -40,6 +40,13 @@
 				"hollow": 0,
 				"solid": 1
 			}
+		},
+		"explosive": {
+			"value": 3,
+			"types": {
+				"deflagrante": 0,
+				"detonante": 1
+			}
 		}
 	},
 	"sizes": {

@@ -48,6 +48,7 @@ output:
 */
 function calculateRestrictions(params) {
 	let restrictions = objects.class[params.class].restrictions;
+	if(Object.keys(restrictions).length == 0) return [];
 	const property = restrictions.property;
 	const range = util.closest(
 		Object.keys(restrictions.ranges),
@@ -97,7 +98,7 @@ output:
 function calculateDamage(params) {
 	let base_damage;
 	const raw_material = createRaw(params);
-	if (params.class != "weapon") {
+	if ( !["weapon","explosive"].includes(params.class)) {
 		return calculateWeight(params);
 	}
 	const material = raw_material.material;
@@ -116,6 +117,14 @@ function calculateDamage(params) {
 				Math.round((damping * params.dimension) / 10)
 			);
 			break;
+		case "deflagrante":
+		case "explosive":
+			// damage based on:
+			// material resistence (base damage)
+			// thickness (concentration)
+			// dimension (amount)
+			base_damage = Math.round(material.resistence* params.thickness* params.dimension)
+		break;
 		default:
 			base_damage = Math.round(
 				weapon_type.damage[0] +
@@ -366,6 +375,18 @@ function applyMods(obj) {
 }
 
 /*
+input:
+	{
+		quality
+		class
+		dimension
+		type
+		thickness
+		extra
+		modifications
+		name
+		effects
+	}
 output:
 	{
 		damage
