@@ -6,12 +6,12 @@ const render = require("./src/render");
 
 //in explosive and poison, thickness is the concentration
 let obj = create({
-	material:'DS',
+	material:'NU',
 	quality:0.7,
 	class: 'explosive',
-	dimension: 0.1,
+	dimension: 0.5,
 	type: 'detonante',
-	thickness: 2
+	thickness: 3
 })
 
 async function createCards() {

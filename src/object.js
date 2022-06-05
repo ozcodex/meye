@@ -524,7 +524,9 @@ function create(params) {
 		result.code +
 		(result.custom_code ? "-" : "") +
 		(result.custom_code || "");
-	db.upsert(id, params);
+	if (params.name) {
+		db.upsert(id, params);
+	}
 	return result;
 }
 
