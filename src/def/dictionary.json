@@ -11,10 +11,17 @@
 				"de_tension": 5
 			},
 			"sub_types": {
-				"straight": 0
+				"recta": 0,
+				"curva":1,
+				"hoz":2,
+				"media_luna":3,
+				"flamigera":4,
 			},
 			"specializations": {
-				"none": 0
+				"ninguna": 0,
+				"filo_simple":1,
+				"dablo_filo":2,
+				"aserrada":3,
 			}
 		},
 		"armadura": {
@@ -129,8 +136,21 @@
 		"unknown": 0,
 		"mar_osdusfe": 9,
 		"sujfi": 10,
-		"roegeil Horro": 11,
-		"tagyef": 12
+		"roegeil_horro": 11,
+		"tagyef": 12,
+		"imperio_vestkou_de_kozan":13,
+		"reino_de_regi_vheiti":14,
+		"reino_de_venrorm":15,
+		"reino_de_regitok":16,
+		"reino_de_roegeil'heig":17,
+		"basto_reino_de_wettu":18,
+		"reino_de_rilcaur":19,
+		"gran_reinado_de_zifdu":20,
+		"virreinatos_de_akaitor":21,
+		"nación_de_los_sujfis":22,
+		"islas_del_osdudfe":23,
+		"naciones_libres_centrales":24,
+		"sacro_imperio_de_zgiosol":25,
 	},
 	"modifications": {
 		"damage": "Dñ.",
