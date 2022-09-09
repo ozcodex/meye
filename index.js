@@ -8,4 +8,6 @@ let obj = create(obj_def)
 
 card_name = obj.name
 
+console.log(obj);
+
 render.create_card(obj,card_name);

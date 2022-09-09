@@ -170,9 +170,9 @@ async function front(obj, filename) {
 
 	text("Lance", [380, 1200], 50, "start");
 	text("Peso", [380, 1280], 50, "start");
-	let damping_label = obj.class == "explosivo" ? "Impacto" : "Amortiguado";
+	let damping_label = obj.class == "explosivo" ? "Impacto" : "Amort.";
 	text(damping_label, [380, 1360], 50, "start");
-	text("Resistencia", [380, 1440], 50, "start");
+	text("Resist.", [380, 1440], 50, "start");
 	text("Vida Util", [380, 1520], 50, "start");
 
 	text(obj.throwing.toFixed(0), [1030, 1200], 50, "end");

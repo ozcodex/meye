@@ -1,22 +1,25 @@
 {
-  "name": "Guardia Valstrak",
+  "name": "Espada de Kruget",
   "material": "AC",
   "class": "arma",
   "type": "de_hoja",
   "sub_type": "recta",
-  "quality": 0.8,
-  "dimension": 0.1,
-  "thickness": 1,
+  "quality": 1,
+  "dimension": 3,
+  "thickness": 3,
   "extra": {
-    "origin": "pherros"
+    "material": "FE+",
+    "thickness": 2,
+    "origin": "stevfel",
+    "flags": ["alchemy"]
   },
   "effects": [
     {
-      "title": "Transfondo",
-      "description": "Esta daga es usada por la guardia personal de la familia Valstrak como insignia. Por lo que no pueden ser obligados a abandonarla ya que los representa."
+      "title": "Historia",
+      "description": "Daga forjada para Lord Kruget en el momento de su posesion como uno de los primeros 24 Lord Terratenietes, Fue usada durante las batallas defensivas durante la Edad Oscura para proteger las murallas de Stevfel."
     },{
-      "title": "Diseño",
-      "description": "Representa los arboles de Fuen y Fuvid, cuya leyenda dice que fueron traidos de la casa del Gran Padre y que los Valstrak guardan con recelo."
+      "title": "Alqumia",
+      "description": "Esta espada esta hecha de acero pero cuenta con un alma de hierro de Pherros"
     }
   ]
 }

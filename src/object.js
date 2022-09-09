@@ -158,13 +158,16 @@ function calculateSlice(params) {
 			slice = 0;
 			break;
 		default:
-			slice = Math.round(
-				arma_type.slice[0] +
-					arma_type.slice[1] * thickness +
-					arma_type.slice[2] * thickness ** 2
+			slice = Math.abs(
+				Math.round(
+					arma_type.slice[0] +
+						arma_type.slice[1] * thickness +
+						arma_type.slice[2] * thickness ** 2
+				)
 			);
 			break;
 	}
+	console.log(arma_type.slice,thickness,slice, material.slice)
 	return Math.min(slice, material.slice);
 }
 
@@ -365,8 +368,9 @@ function applyExtra(obj) {
 		const damping = calculateDamping(extra_params);
 		const useful_life = calculateUsefulLife(extra_params);
 		const extra_weight = raw.weight;
-		obj.size += Number(raw.size);
 		obj.price.raw += Number(raw.price);
+		obj.weight += Number(extra_weight);
+		obj.size += Number(raw.size);
 		obj.damping += "/" + Number(damping);
 		obj.resistence += "/" + Number(raw.material.resistence);
 		obj.useful_life += "/" + Number(useful_life);
@@ -378,8 +382,14 @@ function applyExtra(obj) {
 				reduction,
 			});
 		}
+		obj.thickness = Number(obj.thickness) + Number(obj.extra.thickness || 0);
+		//recalculate damage, bleeding and slicing, and trowing whith new thickness
+		obj.throwing = calculateThrowing(obj);
+		obj.damage = calculateDamage(obj);
+		obj.slice = calculateSlice(obj);
+		obj.bleeding = calculateBleeding(obj);
 	}
-	obj.thickness = Number(obj.thickness) + Number(obj.extra.thickness || 0);
+	// price recalculation
 	obj.price.crafting = Math.ceil(obj.price.crafting * 1.1);
 	obj.price.fee *= 1.5;
 	if (obj.extra.flags && obj.extra.flags.length > 0) {
