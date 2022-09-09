@@ -6,5 +6,17 @@
   "sub_type": "recta",
   "quality": 0.8,
   "dimension": 0.1,
-  "thickness": 1
+  "thickness": 1,
+  "extra": {
+    "origin": "pherros"
+  },
+  "effects": [
+    {
+      "title": "Transfondo",
+      "description": "Esta daga es usada por la guardia personal de la familia Valstrak como insignia. Por lo que no pueden ser obligados a abandonarla ya que los representa."
+    },{
+      "title": "Diseño",
+      "description": "Representa los arboles de Fuen y Fuvid, cuya leyenda dice que fueron traidos de la casa del Gran Padre y que los Valstrak guardan con recelo."
+    }
+  ]
 }

@@ -382,7 +382,7 @@ function applyExtra(obj) {
 	obj.thickness = Number(obj.thickness) + Number(obj.extra.thickness || 0);
 	obj.price.crafting = Math.ceil(obj.price.crafting * 1.1);
 	obj.price.fee *= 1.5;
-	if (obj.extra.flags.length > 0) {
+	if (obj.extra.flags && obj.extra.flags.length > 0) {
 		obj.price.fee += objects.crafting_level.mistico.fee;
 		if (obj.crafting_level != "divino") {
 			obj.crafting_level = "mistico";

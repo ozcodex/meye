@@ -10,9 +10,7 @@ const util = require("./util");
 function decodeBase(code) {
 	const raw = atob(code);
 	const data =
-		raw.charCodeAt(2) +
-		(raw.charCodeAt(1) << 8) +
-		(raw.charCodeAt(0) << 16);
+		raw.charCodeAt(2) + (raw.charCodeAt(1) << 8) + (raw.charCodeAt(0) << 16);
 	const item_class = util.getKeyByParam(
 		dict.classes,
 		"value",
@@ -55,9 +53,7 @@ function decodeCustom(code, item_class) {
 	const extra = code.split("-")[1];
 	const raw = atob(code.split("-")[0]);
 	const data =
-		raw.charCodeAt(2) +
-		(raw.charCodeAt(1) << 8) +
-		(raw.charCodeAt(0) << 16);
+		raw.charCodeAt(2) + (raw.charCodeAt(1) << 8) + (raw.charCodeAt(0) << 16);
 
 	const result = {
 		origin: util.getKey(dict.origins, (data >> 17) & 0xf),
@@ -96,19 +92,20 @@ function encodeCustom(params) {
 	result = dict.origins[params.extra.origin] << 17;
 	result += dict.classes[params.class].sub_types[params.extra.sub_type] << 13;
 	result +=
-		dict.classes[params.class].specializations[
-			params.extra.specialization
-		] << 10;
-	result += params.extra.flags.includes("graphy") << 9;
-	result += params.extra.flags.includes("lacing") << 8;
-	result += params.extra.flags.includes("alchemy") << 7;
-	result += params.extra.flags.includes("cenobism") << 6;
-	result += params.extra.flags.includes("energy") << 5;
-	result += params.extra.flags.includes("object_manipulation") << 4;
-	result += params.extra.flags.includes("ilusion") << 3;
-	result += params.extra.flags.includes("mental_manipulation") << 2;
-	result += params.extra.flags.includes("potentiation") << 1;
-	result += params.extra.flags.includes("vital_cotrol");
+		dict.classes[params.class].specializations[params.extra.specialization] <<
+		10;
+	if (params.extra.flags) {
+		result += params.extra.flags.includes("graphy") << 9;
+		result += params.extra.flags.includes("lacing") << 8;
+		result += params.extra.flags.includes("alchemy") << 7;
+		result += params.extra.flags.includes("cenobism") << 6;
+		result += params.extra.flags.includes("energy") << 5;
+		result += params.extra.flags.includes("object_manipulation") << 4;
+		result += params.extra.flags.includes("ilusion") << 3;
+		result += params.extra.flags.includes("mental_manipulation") << 2;
+		result += params.extra.flags.includes("potentiation") << 1;
+		result += params.extra.flags.includes("vital_cotrol");
+	}
 	result = ntob(result);
 	if (params.extra.material && params.extra.thickness) {
 		let hex = dict.materials[params.extra.material] << 3;

@@ -288,7 +288,7 @@ async function back(obj, filename) {
 		next_y = 200 + multiline(effect.description, [100, next_y], 1000, 40);
 	});
 
-	text(s("signature"), [1400, 2075], 30, "end", "#FFF", "bold");
+	text(s("Tierras de Meye"), [1400, 2075], 30, "end", "#FFF", "bold");
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
