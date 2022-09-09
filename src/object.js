@@ -112,10 +112,7 @@ function calculateDamage(params) {
 			break;
 		case "de_tension":
 			//damage calculed by damping
-			base_damage = Math.max(
-				0,
-				Math.round((damping * params.dimension) / 10)
-			);
+			base_damage = Math.max(0, Math.round((damping * params.dimension) / 10));
 			break;
 		case "deflagrante":
 		case "detonante":
@@ -128,12 +125,13 @@ function calculateDamage(params) {
 			);
 			break;
 		default:
-			base_damage = Math.round(
-				arma_type.damage[0] +
-					arma_type.damage[1] * params.dimension +
-					arma_type.damage[2] * params.dimension ** 2
+			base_damage = Math.abs(
+				Math.round(
+					arma_type.damage[0] +
+						arma_type.damage[1] * params.thickness +
+						arma_type.damage[2] * params.thickness ** 2
+				)
 			);
-			base_damage = Math.min(material.damage, base_damage);
 			break;
 	}
 	//reduce variable damage percent by quality
@@ -240,9 +238,7 @@ function calculateRange(params) {
 	switch (params.type) {
 		case "de_tension":
 			range_max =
-				Math.round(
-					Math.abs(290 + 140 * Math.log(params.dimension)) / 10
-				) * 10;
+				Math.round(Math.abs(290 + 140 * Math.log(params.dimension)) / 10) * 10;
 			break;
 		case "deflagrante":
 		case "detonante":
@@ -283,10 +279,7 @@ function calculateDamping(params) {
 	if (params.class == "explosivo") {
 		return material.damping * raw_material.size;
 	}
-	return Math.min(
-		(params.thickness / 5) * material.damping,
-		material.damping
-	);
+	return Math.min((params.thickness / 5) * material.damping, material.damping);
 }
 
 /*
@@ -316,8 +309,7 @@ function calculatePrice(params) {
 	const level = calculateRequiredLevel(params);
 	const raw = raw_material.price;
 	let crafting = Math.ceil(
-		raw_material.price *
-			(0.2 + Math.abs(params.dimension - params.thickness))
+		raw_material.price * (0.2 + Math.abs(params.dimension - params.thickness))
 	);
 	const fee = objects.crafting_level[level].fee;
 	if (params.class == "explosivo") {
@@ -535,9 +527,7 @@ function create(params) {
 	};
 	const result = applyExtra(applyMods(base_object));
 	const id =
-		result.code +
-		(result.custom_code ? "-" : "") +
-		(result.custom_code || "");
+		result.code + (result.custom_code ? "-" : "") + (result.custom_code || "");
 	if (params.name) {
 		db.upsert(id, params);
 	}

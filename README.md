@@ -35,3 +35,9 @@ edibles
 fluids and containers
 write down all the rules for item creation
 generate tables (export data in csv)
+
+## Usage
+
+Update the obj variable
+
+if the object have a name it will be saved on the database

@@ -1,6 +1,6 @@
 function string_format(text) {
 	let str = text?.toString() || "";
-	str = str.replace("_", " ").replace("nn", "ñ");
+	str = str.replace(/_/g, " ").replace("nn", "ñ");
 	return str;
 }
 

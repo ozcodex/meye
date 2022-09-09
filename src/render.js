@@ -91,6 +91,7 @@ async function front(obj, filename) {
 		suffix = obj.size_type == 1 ? "pieza_completa" : "pieza_completas";
 	}
 	const desc = [
+		obj.class,
 		obj.type,
 		obj.class == "explosivo" ? material.get(obj.material).name : "",
 		obj.extra?.sub_type,
@@ -109,7 +110,7 @@ async function front(obj, filename) {
 
 	// draw card title
 	text(obj.name || name, [100, 200], 70, "start", "#000", "bold");
-	text(desc, [100, 300], 40, "start", "#555", "italic");
+	text(s(desc), [100, 300], 40, "start", "#555", "italic");
 
 	text("tamaño", [1200, 110], 40, "center", "#555", "bold");
 	let label_size = obj.size;
@@ -222,16 +223,16 @@ async function front(obj, filename) {
 	obj.range.forEach((unit) => {
 		range += `${unit}—`;
 	});
-	text(s("range"), [350, 1675], 40, "center", "#555", "bold");
+	text(s("rango"), [350, 1675], 40, "center", "#555", "bold");
 	text(range, [350, 1775], 50, "center");
 
 	let data = `${obj.damage} / ${obj.slice} / ${obj.bleeding}`;
 	text(data, [350, 1870], 70, "center");
-	let label = `${s("damage")} / ${s("slice")} / ${s("bleeding")}`;
+	let label = `${s("daño")} / ${s("corte")} / ${s("desangre")}`;
 	text(label, [350, 1950], 30, "center", "#555", "bold");
 
 	// pricing
-	text(s("price"), [1050, 1675], 40, "center", "#555", "bold");
+	text(s("costos de fabricación"), [1050, 1675], 40, "center", "#555", "bold");
 	await image("prices/raw", [750, 1720], [150, 150]);
 	await image("prices/crafting", [1000, 1720], [150, 150]);
 	await image("prices/fee", [1250, 1720], [150, 150]);
