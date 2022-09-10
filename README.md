@@ -19,6 +19,7 @@ features:
 - create card reverse
 
 ## To do
+smaller font in the card name
 charge numbers colors if a mod was applied
 create subtypes and specializations
 

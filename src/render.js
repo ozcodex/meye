@@ -100,7 +100,7 @@ async function front(obj, filename) {
 		suffix,
 	]
 		.filter((element) => {
-			return !["", "none", null, undefined].includes(element);
+			return !["", "none", null, undefined,"desconocido"].includes(element);
 		})
 		.join(" ")
 		.toCap();
@@ -109,22 +109,22 @@ async function front(obj, filename) {
 	context.fillRect(0, 2020, width, height);
 
 	// draw card title
-	text(obj.name || name, [100, 200], 70, "start", "#000", "bold");
+	text(obj.name || name, [100, 200], 60, "start", "#000", "bold");
 	text(s(desc), [100, 300], 40, "start", "#555", "italic");
 
-	text("tamaño", [1200, 110], 40, "center", "#555", "bold");
+	text("tamaño", [1230, 110], 40, "center", "#555", "bold");
 	let label_size = obj.size;
 	if (obj.class == "explosivo") {
 		label_size = Number(obj.dimension).round();
 	}
-	text(label_size, [1220, 220], 80, "end", "#000", "bold");
+	text(label_size, [1250, 220], 80, "end", "#000", "bold");
 	let label_thickness = Number(obj.thickness).round() + " G";
 	if (obj.class == "explosivo") {
 		label_thickness = Number(obj.thickness * 10).round() + " %";
 	}
-	text(label_thickness, [1230, 170], 40, "start");
+	text(label_thickness, [1260, 170], 40, "start");
 	const label_dimension = +(Math.round(obj.dimension + "e+1") + "e-1") + " D";
-	text(label_dimension, [1230, 220], 40, "start");
+	text(label_dimension, [1260, 220], 40, "start");
 
 	//todo: set a color by parameter
 	context.fillStyle = "#777";

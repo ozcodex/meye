@@ -167,7 +167,6 @@ function calculateSlice(params) {
 			);
 			break;
 	}
-	console.log(arma_type.slice,thickness,slice, material.slice)
 	return Math.min(slice, material.slice);
 }
 
