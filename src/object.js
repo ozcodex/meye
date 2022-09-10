@@ -22,8 +22,8 @@ function calculateRequiredLevel(params) {
 	let dim = util.getKeyByParamLess(ranges, "value", params.dimension);
 	const aprendiz_level = 0;
 	object_level =
-		objects.class[params.class].type[params.type].level ||
-		objects.class[params.class].dimension[dim].level ||
+		objects.class[params.class].type[params.type]?.level ||
+		objects.class[params.class].dimension[dim]?.level ||
 		aprendiz_level;
 	const out_of_limits =
 		(params.thickness < Math.floor(params.dimension / 2)) *
@@ -217,9 +217,6 @@ output:
 function generateSizeType(params) {
 	const ranges = objects.class[params.class].dimension;
 	let type = util.getKeyByParamLess(ranges, "value", params.dimension);
-	if (params.class == "armadura") {
-		type = params.type == "escudo" ? type : params.dimension;
-	}
 	return type;
 }
 

@@ -82,32 +82,6 @@
 			}
 		},
 		"armadura": {
-			"type": {
-				"escudo": {
-					"max_thickness": 5,
-					"level": 0
-				},
-				"coraza": {
-					"max_thickness": 5,
-					"level": 0
-				},
-				"placas": {
-					"max_thickness": 4,
-					"level": 0
-				},
-				"escamada": {
-					"max_thickness": 3,
-					"level": 0
-				},
-				"tachonada": {
-					"max_thickness": 2,
-					"level": 0
-				},
-				"malla": {
-					"max_thickness": 1,
-					"level": 0
-				}
-			},
 			"dimension": {
 				"pequenna": {
 					"value": 0.25
@@ -201,6 +175,84 @@
 				}
 			},
 			"restrictions": {}
+		},
+		"escudo": {
+			"type": {
+				"trigonal": {
+					"level": 1
+				},
+				"ojivado": {
+					"level": 1
+				},
+				"tripuntado": {
+					"level": 1
+				},
+				"bourbon": {
+					"level": 1
+				},
+				"tarja": {
+					"level": 2
+				},
+				"rodela": {
+					"level": 0
+				},
+				"pelta": {
+					"level": 3
+				},
+				"gota_de_agua": {
+					"level": 1
+				},
+				"parma": {
+					"level": 0
+				},
+				"aspis": {
+					"level": 1
+				},
+				"escotado": {
+					"level": 2
+				},
+				"rectangular": {
+					"level": 0
+				},
+				"scutum": {
+					"level": 0
+				},
+				"glagwa": {
+					"level": 1
+				},
+				"adarga": {
+					"level": 0
+				},
+				"medialuna": {
+					"level": 2
+				}
+			},
+			"dimension": {
+				"de_punno": {
+					"value": 0.25
+				},
+				"pequenno": {
+					"value": 0.5
+				},
+				"medio_cuerpo": {
+					"value": 1
+				},
+				"grande": {
+					"value": 3
+				},
+				"cuerpo_entero": {
+					"value": 5
+				}
+			},
+			"restrictions": {
+				"property": "thickness",
+				"ranges": {
+					"1": ["R"],
+					"3": ["R", "F"],
+					"4": ["R", "F", "V"],
+					"5": ["R", "F", "V", "A"]
+				}
+			}
 		}
 	},
 	"crafting_level": {

@@ -1,30 +1,41 @@
 {
-  "name": "Espada de Kruget",
-  "material": "AC",
-  "class": "arma",
-  "type": "de_hoja",
-  "sub_type": "recta",
-  "quality": 1,
-  "dimension": 2,
+  "material": "FE",
+  "class": "escudo",
+  "type": "rodela",
+  "dimension": "1",
   "thickness": 3,
+  "quality": "0.7",
   "extra": {
-    "material": "FE+",
-    "thickness": 0.5,
-    "origin": "stevfel",
-    "flags": ["alchemy"]
+    "origin": "sujfi",
+    "specialization": "reforzado",
+    "flags": ["graphy", "alchemy", "ilusion"],
+    "material": "AC",
+    "thickness": "0.5"
   },
+  "name": "Escudo de Krall",
   "effects": [
     {
-      "title": "Grafia",
-      "description": "la grafias estan destinadas a detectar curacion por control vital en heridas causadas por el arma, y asi liberar el efecto del material, siendo este efecto equivalente a una habilidad de nivel 4."
+      "title": "Construcción",
+      "description": "El refuerzo de acero esta construido para proteger las grafias. Ademas cuenta con un umbo central en forma de espina y cuchillas en los extremos del puño y del codo."
     },
     {
-      "title": "Alqumia",
-      "description": "Esta espada esta hecha de acero y cuenta con un alma de hierro de Pherros, tratado para dirigir la dispersion de energia a negar la curacion de las heridas causadas con la espada."
+      "title": "Grafia y Alquimia",
+      "description": "Grabado tratada alquimicamente para retener la habilidad propia del arma y aligerar su peso"
+    },
+    {
+      "title": "Ilusion Nivel 3",
+      "description": "Hablidad activada al asumir posicion defensiva. Crea tres copias del portador en formación de falange ocultando la ubicación original del usuario obligando al atacante a liberarse de la ilusion o atacar con probabilidad. Una vez una lusion sea atacada, esta desaparece."
     },
     {
       "title": "Historia",
-      "description": "Daga forjada para Lord Kruget en el momento de su posesion como uno de los primeros 24 Lord Terratenietes, Fue usada durante las batallas defensivas durante la Edad Oscura para proteger las murallas de Stevfel."
+      "description": "Escudo portado por Krall, lider de falanges de los Keikan durante las guerras de liberación de la nación Sujfi. Tras finalizar el conflicto, el escudo fue cedido por Krall a su sobrino quien decretó que el escudo solo será obtenido al derrotar a su anterior poseedor."
     }
-  ]
+  ],
+  "modifications": {
+    "damage": 3,
+    "slice": 47,
+    "bleeding": 4,
+    "weight": -3,
+    "restrictions": [{ "restriction": "C", "reduction": 5 }]
+  }
 }

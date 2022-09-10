@@ -5,10 +5,11 @@ const material = require("./src/material");
 const render = require("./src/render");
 
 (async () => {
-  await render.create_card(load("EELX", "FK6I-62"), "EscudoKrall");
-  await render.create_card(load("GArK", "FAOA"), "EspadaShishi");
-  await render.create_card(load("JAk1", "GAGA"), "DagasDiperias");
-  await render.create_card(load("GAg4", "EAAA"), "GuardiaValstrak");
+  await render.create_card(load("ERXX", "FAKI-62"));
+  await render.create_card(load("GArK", "FAOA"));
+  await render.create_card(load("JAk1", "GAGA"));
+  await render.create_card(load("GAg4", "EAAA"));
+  await render.create_card(load("GApa", "CA-4a"));
 })();
 
 //render.periodic_table()
