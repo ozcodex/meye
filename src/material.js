@@ -1,11 +1,14 @@
-const materials = require("./def/materials");
+import { readFileSync } from "fs";
+
+const materials = JSON.parse(readFileSync("./src/def/materials.json"));
+const all = materials;
 
 /*
 output:	
 	material
 */
 function get(symbol) {
-	return materials.find(element => element.symbol == symbol)
+	return materials.find((element) => element.symbol == symbol);
 }
 
 /*
@@ -58,19 +61,14 @@ output:
 	to console
 */
 function table(properties) {
-	let props = 'name,'
-	properties.forEach( p => props+=p+',' )
-	console.log(props)
-	Object.keys(materials).forEach(name => {
-		let row = name+','
-		properties.forEach( p => row+=materials[name][p]+',' )
-		console.log(row)
-	})
+	let props = "name,";
+	properties.forEach((p) => (props += p + ","));
+	console.log(props);
+	Object.keys(materials).forEach((name) => {
+		let row = name + ",";
+		properties.forEach((p) => (row += materials[name][p] + ","));
+		console.log(row);
+	});
 }
 
-module.exports = {
-	all: materials,
-	get,
-	create,
-	table
-};
+export { all, get, create, table };

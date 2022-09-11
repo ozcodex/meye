@@ -33,10 +33,8 @@ function compare(obj1, obj2) {
   }
   diff = keys1.filter(
     (key) =>
-      (
-        obj1[key] != obj2[key] &&
-        JSON.stringify(obj1[key]) != JSON.stringify(obj2[key])
-      )
+      obj1[key] != obj2[key] &&
+      JSON.stringify(obj1[key]) != JSON.stringify(obj2[key])
   );
   if (diff.length > 0) {
     console.log("Some keys have different value", diff);
@@ -70,7 +68,7 @@ function randomObject(itemClass) {
   };
 }
 
-module.exports = {
+export {
   getKey,
   getKeyByParam,
   getKeyByParamLess,

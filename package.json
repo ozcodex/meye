@@ -1,5 +1,6 @@
 {
   "name": "meye",
+  "type": "module",
   "description": "calculator to create items using the rules of the game.",
   "version": "1.0.0",
   "main": "index.js",

@@ -1,6 +1,10 @@
-const dict = require("./def/dictionary.json");
-const ntob = require("number-to-base64").ntob;
-const util = require("./util");
+import number_to_base64 from "number-to-base64";
+import * as util from "./util.js";
+import { readFileSync } from "fs";
+
+const { ntob } = number_to_base64;
+
+const dict = JSON.parse(readFileSync("./src/def/dictionary.json"));
 
 // Item code
 // material (128), class(8), type(16), dimension(8), thickness(8), quality(16)
@@ -122,8 +126,8 @@ function encodeCustom(params) {
 function modString(params) {
 	let result = [];
 	Object.keys(params.modifications).forEach((mod) => {
-		value = params.modifications[mod];
-		name = dict.modifications[mod];
+		const value = params.modifications[mod];
+		const name = dict.modifications[mod];
 		if (!isNaN(value)) {
 			return result.push(name + util.plus(value));
 		}
@@ -160,10 +164,4 @@ function modString(params) {
 	return result.join(" ");
 }
 
-module.exports = {
-	decodeBase,
-	encodeBase,
-	decodeCustom,
-	encodeCustom,
-	modString,
-};
+export { decodeBase, encodeBase, decodeCustom, encodeCustom, modString };

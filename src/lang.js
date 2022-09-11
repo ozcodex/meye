@@ -8,7 +8,4 @@ function number_format(x) {
 	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-module.exports = {
-	string_format,
-	number_format,
-};
+export { string_format, number_format };

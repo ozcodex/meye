@@ -1,9 +1,10 @@
-const objects = require("./def/objects.json");
-const createRaw = require("./raw").create;
-const util = require("./util");
-const code = require("./code");
-const db = require("./db");
+import { create as createRaw } from "./raw.js";
+import * as util from "./util.js";
+import * as code from "./code.js";
+import * as db from "./db.js";
+import { readFileSync } from "fs";
 
+const objects = JSON.parse(readFileSync("./src/def/objects.json"));
 /*
 output:
 	level_name
@@ -21,7 +22,7 @@ function calculateRequiredLevel(params) {
 	const ranges = objects.class[params.class].dimension;
 	let dim = util.getKeyByParamLess(ranges, "value", params.dimension);
 	const aprendiz_level = 0;
-	object_level =
+	const object_level =
 		objects.class[params.class].type[params.type]?.level ||
 		objects.class[params.class].dimension[dim]?.level ||
 		aprendiz_level;
@@ -135,7 +136,7 @@ function calculateDamage(params) {
 			break;
 	}
 	//reduce variable damage percent by quality
-	damage = base_damage * (1 - variable_damage * (1 - params.quality));
+	const damage = base_damage * (1 - variable_damage * (1 - params.quality));
 	return Math.round(damage);
 }
 
@@ -561,7 +562,4 @@ function load(base_code, custom_code) {
 }
 
 //exports
-module.exports = {
-	create,
-	load,
-};
+export { create, load };

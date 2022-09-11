@@ -1,9 +1,9 @@
-const { createCanvas, loadImage } = require("canvas");
-const fs = require("fs");
-const material = require("./material");
-const util = require("./util");
-const s = require("./lang").string_format;
-const n = require("./lang").number_format;
+import { readFileSync, existsSync, writeFileSync } from "fs";
+import { createCanvas, loadImage } from "canvas";
+import { string_format as s, number_format as n } from "./lang.js";
+
+import * as material from "./material.js";
+import * as util from "./util.js";
 
 String.prototype.toCap = function () {
 	return this.charAt(0).toUpperCase() + this.slice(1);
@@ -123,7 +123,7 @@ async function front(obj, filename) {
 		label_thickness = Number(obj.thickness * 10).round() + " %";
 	}
 	text(label_thickness, [1260, 170], 40, "start");
-	const label_dimension = Number(obj.dimension ).round() + " D";
+	const label_dimension = Number(obj.dimension).round() + " D";
 	text(label_dimension, [1260, 220], 40, "start");
 
 	//todo: set a color by parameter
@@ -134,7 +134,7 @@ async function front(obj, filename) {
 		await image("origins/" + obj.extra.origin, [100, 375], [1300, 700]);
 	}
 	const id = obj.code + (obj.custom_code ? "-" : "") + (obj.custom_code || "");
-	if (fs.existsSync(`./src/img/objects/${id}.png`)) {
+	if (existsSync(`./src/img/objects/${id}.png`)) {
 		await image("objects/" + id, [100, 375], [1300, 700]);
 	} else {
 		await image("types/" + obj.type, [100, 375], [1300, 700]);
@@ -247,7 +247,7 @@ async function front(obj, filename) {
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync("./out/" + filename + "_front.png", buffer);
+	writeFileSync("./out/" + filename + "_front.png", buffer);
 }
 
 async function back(obj, filename) {
@@ -274,7 +274,7 @@ async function back(obj, filename) {
 		);
 	}
 
-	next_y = 250;
+	let next_y = 250;
 	obj.effects?.forEach((effect, idx) => {
 		text(effect.title, [100, next_y - 100], 40, "start", "#000", "bold");
 		next_y = 200 + multiline(effect.description, [100, next_y], 1000, 40);
@@ -284,7 +284,7 @@ async function back(obj, filename) {
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync("./out/" + filename + "_back.png", buffer);
+	writeFileSync("./out/" + filename + "_back.png", buffer);
 }
 
 async function periodic_table() {
@@ -357,7 +357,7 @@ async function periodic_table() {
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	fs.writeFileSync("./out/table.png", buffer);
+	writeFileSync("./out/table.png", buffer);
 }
 
 async function create_card(obj, filename) {
@@ -365,7 +365,4 @@ async function create_card(obj, filename) {
 	await back(obj, filename || obj.name || obj.code + "-" + obj.custom_code);
 }
 
-module.exports = {
-	create_card,
-	periodic_table,
-};
+export { create_card, periodic_table };

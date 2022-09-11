@@ -1,4 +1,4 @@
-const material = require("./material");
+import * as material from "./material.js";
 
 /*
 input:
@@ -33,6 +33,4 @@ function create(params) {
 	};
 }
 
-module.exports = {
-	create
-};
+export { create };

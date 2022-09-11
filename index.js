@@ -1,12 +1,14 @@
-const { create } = require("./src/object");
-const inquirer = require("inquirer");
-const render = require("./src/render");
+import { create } from "./src/object.js";
+import inquirer from "inquirer";
+import { create_card as render } from "./src/render.js";
+//import checkbox from "@inquirer/checkbox";
+import { readFileSync } from "fs";
 
-const material = require("./src/def/materials");
-const dictionary = require("./src/def/dictionary");
+const material = JSON.parse(readFileSync("./src/def/materials.json"));
+const dictionary = JSON.parse(readFileSync("./src/def/dictionary.json"));
 
 const format = (string) => ({
-  name: string[0].toUpperCase() + string.substring(1).replace("_"," "),
+  name: string[0].toUpperCase() + string.substring(1).replace("_", " "),
   value: string,
 });
 
@@ -144,6 +146,7 @@ inquirer
       name: "extra.flags",
       type: "checkbox",
       message: "Magia o Hechiceria:",
+      instructions: "Usar espacio para seleccionar, enter para finalizar",
       loop: false,
       choices: Object.keys(dictionary.flags).map(format),
     },
