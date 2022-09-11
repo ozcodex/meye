@@ -23,6 +23,9 @@ smaller font in the card name
 charge numbers colors if a mod was applied
 create subtypes and specializations
 change flags to spanish
+change modifications to spanish
+mix object.json and dictionary.json
+test restrictions on CLI
 
 v2:
 add more types of common objects

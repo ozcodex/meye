@@ -1,13 +1,11 @@
 import { readFileSync, existsSync, writeFileSync } from "fs";
 import { createCanvas, loadImage } from "canvas";
-import { string_format as s, number_format as n } from "./lang.js";
+import { string_format as s, number_format as n, toCap } from "./lang.js";
 
 import * as material from "./material.js";
 import * as util from "./util.js";
 
-String.prototype.toCap = function () {
-	return this.charAt(0).toUpperCase() + this.slice(1);
-};
+String.prototype.toCap = toCap;
 
 Array.prototype.add = function (arr) {
 	var sum = this.map(function (num, idx) {

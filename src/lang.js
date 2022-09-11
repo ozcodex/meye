@@ -8,4 +8,8 @@ function number_format(x) {
 	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export { string_format, number_format };
+function toCap(string) {
+	return string[0].toUpperCase() + string.substring(1);
+}
+
+export { string_format, number_format, toCap };

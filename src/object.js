@@ -88,7 +88,7 @@ function calculateRarity(params) {
 			rarity = "legendario";
 			break;
 	}
-	//todo: sobrenatural
+	//TODO: sobrenatural
 	return rarity;
 }
 
