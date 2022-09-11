@@ -45,7 +45,10 @@ inquirer
       name: "quality",
       type: "list",
       message: "Calidad:",
-      choices: Array.from({ length: 10 }, (v, k) => (k + 1) * 10 + "%"),
+      choices: Array.from({ length: 10 }, (v, k) => ({
+        name: (k + 1) * 10 + "%",
+        value: (k + 1) * 0.1,
+      })),
     },
 
     {
