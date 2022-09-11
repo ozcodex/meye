@@ -5,7 +5,9 @@ import { string_format as s, number_format as n, toCap } from "./lang.js";
 import * as material from "./material.js";
 import * as util from "./util.js";
 
-String.prototype.toCap = toCap;
+String.prototype.toCap = function () {
+	return toCap(this);
+};
 
 Array.prototype.add = function (arr) {
 	var sum = this.map(function (num, idx) {
@@ -88,6 +90,7 @@ async function front(obj, filename) {
 	if (!isNaN(obj.size_type)) {
 		suffix = obj.size_type == 1 ? "pieza_completa" : "pieza_completas";
 	}
+
 	const desc = [
 		obj.class,
 		obj.type,

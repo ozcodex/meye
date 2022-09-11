@@ -25,7 +25,7 @@ create subtypes and specializations
 change flags to spanish
 change modifications to spanish
 mix object.json and dictionary.json
-test restrictions on CLI
+añadir mas lugares
 
 v2:
 add more types of common objects

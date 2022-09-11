@@ -60,7 +60,7 @@ console.log("-------");
     choices: material
       .filter((elem) => elem.category == answer.category)
       .map((elem) => ({
-        name: elem.name,
+        name: toCap(s(elem.name)),
         value: elem.symbol,
       })),
   });
@@ -106,7 +106,7 @@ console.log("-------");
       choices: material
         .filter((elem) => elem.category == answer.extra.category)
         .map((elem) => ({
-          name: elem.name,
+          name: toCap(s(elem.name)),
           value: elem.symbol,
         })),
     });
@@ -222,16 +222,18 @@ console.log("-------");
   }
 
   console.log("-------");
-  console.log(answer);
+  const obj = create(answer);
+  console.log(obj);
   const confirmation = await select({
-    message: "Esta seguro de crear este Objeto?:",
+    message: "Esta seguro de crear la carta "+ obj.code + '-' + obj.custom_code +"?:",
     choices: [
       { name: "Si", value: true },
       { name: "No", value: false },
     ],
   });
   if (confirmation) {
-    await render(create(answer));
+    await render(obj);
+    console.log("Carta Creada!");
   }
-  console.log("Carta Creada!");
+  console.log("Adios")
 })();
