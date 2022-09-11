@@ -26,6 +26,7 @@ change flags to spanish
 change modifications to spanish
 mix object.json and dictionary.json
 añadir mas lugares
+fix restriction contatenating vs addition
 
 v2:
 add more types of common objects

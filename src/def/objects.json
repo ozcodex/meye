@@ -82,6 +82,26 @@
 			}
 		},
 		"armadura": {
+			"type": {
+				"coraza": {
+					"max_thickness": 5
+				},
+				"placas": {
+					"max_thickness": 3
+				},
+				"escamada": {
+					"max_thickness": 2
+				},
+				"tachonada": {
+					"max_thickness": 1
+				},
+				"malla": {
+					"max_thickness": 0.5
+				},
+				"fibras": {
+					"max_thickness": 0.25
+				}
+			},
 			"dimension": {
 				"pequenna": {
 					"value": 0.25
@@ -128,7 +148,7 @@
 				"pieza_completa": {
 					"value": 1
 				},
-				"grade": {
+				"grande": {
 					"value": 3
 				},
 				"enorme": {

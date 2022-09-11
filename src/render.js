@@ -219,7 +219,7 @@ async function front(obj, filename) {
 	text(s("rango"), [350, 1675], 40, "center", "#555", "bold");
 	text(range, [350, 1775], 50, "center");
 
-	let data = `${obj.damage} / ${obj.slice} / ${obj.bleeding}`;
+	let data = `${obj.damage.toFixed()} / ${obj.slice.toFixed()} / ${obj.bleeding.toFixed()}`;
 	text(data, [350, 1870], 70, "center");
 	let label = `${s("daño")} / ${s("corte")} / ${s("desangre")}`;
 	text(label, [350, 1950], 30, "center", "#555", "bold");
@@ -229,7 +229,7 @@ async function front(obj, filename) {
 	await image("prices/raw", [750, 1720], [150, 150]);
 	await image("prices/crafting", [1000, 1720], [150, 150]);
 	await image("prices/fee", [1250, 1720], [150, 150]);
-	text(`${n(Number(obj.price.raw).round())} R`, [825, 1950], 40, "center");
+	text(`${n(Number(obj.price.raw).toFixed(0))} R`, [825, 1950], 40, "center");
 	const label_crafting = `${n(Number(obj.price.crafting).round())} R`;
 	text(label_crafting, [1075, 1950], 40, "center");
 	text(`${n(Number(obj.price.fee).round())} R`, [1325, 1950], 40, "center");

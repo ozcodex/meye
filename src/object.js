@@ -137,7 +137,7 @@ function calculateDamage(params) {
 	}
 	//reduce variable damage percent by quality
 	const damage = base_damage * (1 - variable_damage * (1 - params.quality));
-	return Math.round(damage);
+	return Number(Math.round(damage).toFixed());
 }
 
 /*
@@ -333,7 +333,7 @@ output
 function addRestriction(restrictions, update) {
 	restrictions.forEach((element, index) => {
 		if (element.restriction == update.restriction) {
-			restrictions[index].reduction += update.reduction;
+			restrictions[index].reduction += Number(update.reduction);
 		}
 	});
 	if (!restrictions.some((e) => e.restriction == update.restriction)) {
