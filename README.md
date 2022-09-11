@@ -22,6 +22,7 @@ features:
 smaller font in the card name
 charge numbers colors if a mod was applied
 create subtypes and specializations
+change flags to spanish
 
 v2:
 add more types of common objects

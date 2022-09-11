@@ -95,6 +95,7 @@ function encodeCustom(params) {
 		dict.classes[params.class].specializations[params.extra.specialization] <<
 		10;
 	if (params.extra.flags) {
+		//TODO: use dictionary to generate this
 		result += params.extra.flags.includes("graphy") << 9;
 		result += params.extra.flags.includes("lacing") << 8;
 		result += params.extra.flags.includes("alchemy") << 7;
@@ -104,7 +105,7 @@ function encodeCustom(params) {
 		result += params.extra.flags.includes("ilusion") << 3;
 		result += params.extra.flags.includes("mental_manipulation") << 2;
 		result += params.extra.flags.includes("potentiation") << 1;
-		result += params.extra.flags.includes("vital_cotrol");
+		result += params.extra.flags.includes("vital_cotrol") << 0;
 	}
 	result = ntob(result);
 	if (params.extra.material && params.extra.thickness) {

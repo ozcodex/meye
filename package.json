@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ozcodex/meye#readme",
   "dependencies": {
+    "@inquirer/checkbox": "^0.0.27-alpha.0",
     "canvas": "^2.9.1",
     "inquirer": "^8.2.4",
     "number-to-base64": "^1.0.5"

@@ -678,5 +678,17 @@
 		"useful_life": "Vu.",
 		"crafting_level": "Nv.",
 		"rarity": "Rz."
+	},
+	"flags": {
+		"graphy": 9,
+		"lacing": 8,
+		"alchemy": 7,
+		"cenobism": 6,
+		"energy": 5,
+		"object_manipulation": 4,
+		"ilusion": 3,
+		"mental_manipulation": 2,
+		"potentiation": 1,
+		"vital_cotrol": 0
 	}
 }
