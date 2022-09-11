@@ -43,45 +43,10 @@ generate tables (export data in csv)
 
 ## Usage
 
-Update the obj.json file
+run `npm start` and follow the instructions of the CLI
 
-if the object have a name it will be saved on the database
+## Notes
 
+A negative restriction, means a boost in that atribute.
 
-## Example
-
-{
-    class: "armor",
-    material: "iron",
-    type: "shield",
-    dimension: "3",
-    thickness: 3,
-    quality: 0.7,
-    extra: {
-      material: "steel",
-      thickness: 0.5,
-      origin: "banken",
-      sub_type: "buckler",
-      specialization: "reinforced_umbonated",
-      flags: ["graphy", "alchemy", "ilusion"],
-    },
-    effects: [
-      {
-        title: "Grafia y Alquimia",
-        description:
-          "Grabado tratado alquimicamente para la activación automatica de su habilidad" +
-          " propia. Aunque para evitar caer en su propia ilusion el portador debe " +
-          "permanecer atento a su entorno y conciente de su realidad.",
-      },
-      {
-        title: "ilusion",
-        description:
-          "Crea una falange ilusoria de hasta 4 copias, ocultando la verdadera posición del usuario.",
-      },
-    ],
-    modifications: {
-      damage: 2,
-      weight: -5,
-      restrictions: [{ restriction: "C", reduction: 5 }],
-    },
-  }
+An empty effect will not be saved.

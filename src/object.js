@@ -430,9 +430,9 @@ function applyMods(obj) {
 			return;
 		}
 		if (mod == "price") {
-			obj.price.raw += obj.modifications.price.raw;
-			obj.price.crafting += obj.modifications.price.crafting;
-			obj.price.fee += obj.modifications.price.fee;
+			obj.price.raw += Number(obj.modifications.price.raw);
+			obj.price.crafting += Number(obj.modifications.price.crafting);
+			obj.price.fee += Number(obj.modifications.price.fee);
 			return;
 		}
 		if (mod == "crafting_level") {
@@ -443,7 +443,9 @@ function applyMods(obj) {
 			obj.rarity = obj.modifications.rarity;
 			return;
 		}
-		obj[mod] += Number(obj.modifications[mod]);
+		obj[mod] = Number(obj[mod]) + Number(obj.modifications[mod]);
+		//prevent negative numbers
+		if (obj[mod] < 0) obj[mod] = 1;
 	});
 	return obj;
 }

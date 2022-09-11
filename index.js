@@ -201,7 +201,7 @@ console.log("-------");
         break;
       case "rarity":
         //TODO: make this dynamic
-        answer.extra.origin = await select({
+        answer.modifications.rarity = await select({
           message: "Origen:",
           choices: [
             { value: "comun", name: "Común" },

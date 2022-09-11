@@ -10,14 +10,14 @@ async () => {
   await periodic_table();
 }; //();
 
-console.log(
+create_card(
   create({
     class: "arma",
     type: "proyectil",
     extra: {
       sub_type: "recta",
       specialization: "simple",
-      origin: "sobrenatural",
+      origin: "stevfel",
       category: "Volatil",
       material: "PC",
       thickness: "0.1",
@@ -36,10 +36,11 @@ console.log(
       bleeding: "-5",
       resistence: "23",
       size: "5",
+      rarity: "sobrenatural",
       throwing: "82",
       weight: "-100",
       restrictions: [
-        { restriction: "A", reduction: "415" },
+        { restriction: "A", reduction: "-15" },
         { restriction: "W", reduction: "12" },
       ],
       range: "12,6",
