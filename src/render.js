@@ -20,6 +20,10 @@ Number.prototype.round = function () {
 	return +(Math.round(this + "e+1") + "e-1");
 };
 
+function sanitizeFilename(filename) {
+	return filename.replace(/\//g, "|");
+}
+
 let context;
 let canvas;
 
@@ -134,7 +138,9 @@ async function front(obj, filename) {
 	if (obj.extra?.origin) {
 		await image("origins/" + obj.extra.origin, [100, 375], [1300, 700]);
 	}
-	const id = obj.code + (obj.custom_code ? "-" : "") + (obj.custom_code || "");
+	const id = sanitizeFilename(
+		obj.code + (obj.custom_code ? "-" : "") + (obj.custom_code || "")
+	);
 	if (existsSync(`./src/img/objects/${id}.png`)) {
 		await image("objects/" + id, [100, 375], [1300, 700]);
 	} else {
