@@ -1,13 +1,73 @@
-const { create, load } = require("./src/object");
-const util = require("./src/util");
-const code = require("./src/code");
-const material = require("./src/material");
+const { create } = require("./src/object");
+const inquirer = require("inquirer");
 const render = require("./src/render");
-const obj_def = require("./obj");
-let obj = create(obj_def)
 
-card_name = obj.name
+const material = require("./src/def/materials");
+const dictionary = require("./src/def/dictionary");
 
-console.log(obj);
+const format = (string) => ({
+  name: string[0].toUpperCase() + string.substring(1),
+  value: string,
+});
 
-render.create_card(obj,card_name);
+console.log("Creador de Objetos de Meye.");
+console.log("Creado por el Automata Ambulante de Thonvhok");
+console.log("-------");
+
+inquirer
+  .prompt([
+    {
+      name: "name",
+      type: "input",
+      message: "Nombre:",
+    },
+    {
+      name: "class",
+      type: "rawlist",
+      message: "Clase:",
+      choices: Object.keys(dictionary.classes).map(format),
+    },
+    {
+      name: "type",
+      type: "list",
+      message: "Tipo:",
+      choices: (answers) =>
+        Object.keys(dictionary.classes[answers.class].types).map(format),
+    },
+    {
+      name: "sub_type",
+      type: "list",
+      message: "Tipo:",
+      choices: (answers) =>
+        Object.keys(dictionary.classes[answers.class].sub_types).map(format),
+    },
+    {
+      name: "quality",
+      type: "list",
+      message: "Calidad:",
+      choices: Array.from({ length: 10 }, (v, k) => (k + 1) * 10 + "%"),
+    },
+
+    {
+      name: "category",
+      type: "list",
+      message: "Tipo de Material:",
+      choices: [...new Set(material.map((e) => e.category))],
+    },
+    {
+      name: "material",
+      type: "list",
+      message: "Material:",
+      choices: (answers) =>
+        material
+          .filter((elem) => elem.category == answers.category)
+          .map((elem) => ({
+            name: elem.name,
+            value: elem.symbol,
+          })),
+    },
+  ])
+  .then((answers) => {
+    console.log(answers);
+  })
+  .catch(console.error);
