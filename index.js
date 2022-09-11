@@ -47,7 +47,7 @@ inquirer
       message: "Calidad:",
       choices: Array.from({ length: 10 }, (v, k) => ({
         name: (k + 1) * 10 + "%",
-        value: (k + 1) * 0.1,
+        value: ((k + 1) * 0.1).toFixed(1),
       })),
     },
 

@@ -113,7 +113,7 @@ async function front(obj, filename) {
 	text(s(desc), [100, 300], 40, "start", "#555", "italic");
 
 	text("tamaño", [1230, 110], 40, "center", "#555", "bold");
-	let label_size = obj.size;
+	let label_size = Number(obj.size).round();
 	if (obj.class == "explosivo") {
 		label_size = Number(obj.dimension).round();
 	}
@@ -123,7 +123,7 @@ async function front(obj, filename) {
 		label_thickness = Number(obj.thickness * 10).round() + " %";
 	}
 	text(label_thickness, [1260, 170], 40, "start");
-	const label_dimension = +(Math.round(obj.dimension + "e+1") + "e-1") + " D";
+	const label_dimension = Number(obj.dimension ).round() + " D";
 	text(label_dimension, [1260, 220], 40, "start");
 
 	//todo: set a color by parameter
