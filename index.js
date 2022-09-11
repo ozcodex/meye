@@ -21,7 +21,8 @@ console.log("-------");
 (async () => {
   const answer = {};
 
-  answer.name = await input({ message: "Nombre:" });
+  const name = await input({ message: "Nombre:" });
+  if (name) answer.name = name;
 
   answer.class = await select({
     message: "Clase:",
@@ -177,7 +178,7 @@ console.log("-------");
         break;
       case "range":
         const range = await input({ message: "Modificación del rango:" });
-        answer.modifications.range = range.slice(",");
+        answer.modifications.range = range.split(",");
         break;
       case "price":
         answer.modifications.price = {};
@@ -222,5 +223,15 @@ console.log("-------");
 
   console.log("-------");
   console.log(answer);
-  console.log(answer.modifications.restrictions);
+  const confirmation = await select({
+    message: "Esta seguro de crear este Objeto?:",
+    choices: [
+      { name: "Si", value: true },
+      { name: "No", value: false },
+    ],
+  });
+  if (confirmation) {
+    await render(create(answer));
+  }
+  console.log("Carta Creada!");
 })();

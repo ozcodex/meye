@@ -425,7 +425,7 @@ function applyMods(obj) {
 		}
 		if (mod == "range") {
 			obj.range = obj.range.map(
-				(ran, idx) => ran + obj.modifications.range[idx]
+				(ran, idx) => Number(ran) + Number(obj.modifications.range[idx])
 			);
 			return;
 		}
