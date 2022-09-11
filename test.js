@@ -9,7 +9,7 @@ const render = require("./src/render");
   await render.create_card(load("GArK", "FAOA"));
   await render.create_card(load("JAk1", "GAGA"));
   await render.create_card(load("GAg4", "EAAA"));
-  await render.create_card(load("GApa", "CA-4a"));
+  await render.create_card(load("GApa", "DgCA-4a"));
 })();
 
 //render.periodic_table()

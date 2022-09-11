@@ -100,7 +100,7 @@ async function front(obj, filename) {
 		suffix,
 	]
 		.filter((element) => {
-			return !["", "none", null, undefined,"desconocido"].includes(element);
+			return !["", "none", null, undefined, "desconocido"].includes(element);
 		})
 		.join(" ")
 		.toCap();
@@ -133,8 +133,7 @@ async function front(obj, filename) {
 	if (obj.extra?.origin) {
 		await image("origins/" + obj.extra.origin, [100, 375], [1300, 700]);
 	}
-	const id =
-		obj.code + (obj.custom_code ? "-" : "") + (obj.custom_code || "");
+	const id = obj.code + (obj.custom_code ? "-" : "") + (obj.custom_code || "");
 	if (fs.existsSync(`./src/img/objects/${id}.png`)) {
 		await image("objects/" + id, [100, 375], [1300, 700]);
 	} else {
@@ -142,14 +141,7 @@ async function front(obj, filename) {
 	}
 	if (obj.custom_code) {
 		strokeText(`#${obj.code}`, [110, 980], 40, "start", "#FFF", "bold");
-		strokeText(
-			`#${obj.custom_code}`,
-			[110, 1050],
-			40,
-			"start",
-			"#FFF",
-			"bold"
-		);
+		strokeText(`#${obj.custom_code}`, [110, 1050], 40, "start", "#FFF", "bold");
 	} else {
 		strokeText(`#${obj.code}`, [110, 1050], 40, "start", "#FFF", "bold");
 	}
@@ -177,19 +169,19 @@ async function front(obj, filename) {
 
 	text(obj.throwing.toFixed(0), [1030, 1200], 50, "end");
 	text(Number(obj.weight).round(), [1030, 1280], 50, "end");
-	let damping = obj.damping
-	if(!isNaN(damping)){
-		damping = Number(damping).round()
+	let damping = obj.damping;
+	if (!isNaN(damping)) {
+		damping = Number(damping).round();
 	}
 	text(damping, [1030, 1360], 50, "end");
-	let resistence = obj.resistence
-	if(!isNaN(resistence)){
-		resistence = Number(resistence).round()
+	let resistence = obj.resistence;
+	if (!isNaN(resistence)) {
+		resistence = Number(resistence).round();
 	}
 	text(resistence, [1030, 1440], 50, "end");
-	let useful_life = obj.useful_life
-	if(!isNaN(useful_life)){
-		useful_life = Number(useful_life).round()
+	let useful_life = obj.useful_life;
+	if (!isNaN(useful_life)) {
+		useful_life = Number(useful_life).round();
 	}
 	text(useful_life, [1030, 1520], 50, "end");
 
@@ -369,8 +361,8 @@ async function periodic_table() {
 }
 
 async function create_card(obj, filename) {
-	await front(obj, filename);
-	await back(obj, filename);
+	await front(obj, filename || obj.name || obj.code + "-" + obj.custom_code);
+	await back(obj, filename || obj.name || obj.code + "-" + obj.custom_code);
 }
 
 module.exports = {
