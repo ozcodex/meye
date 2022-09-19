@@ -1,1 +1,191 @@
-{"GArK-FAOA":{"name":"Espada Shishi","effects":[{"title":"Alquimia","description":"La espada ha sido tratada alquimicamente para poder contener una habilidad activa, ademas de mejorar su corte."},{"title":"Grafia","description":"El grabado al rededor de la guarda absorbe energia del ambiente y la acumula en como 20 puntos de calor en la pieza central"},{"title":"Lazado","description":"Luego de su activación el calor acumulado en la pieza central es transferido a la hoja concediedole 10, 15, 20 puntos de corte y daño por calor de forma progresiva."},{"title":"Historia","description":"Arma insignia de la guardia del sujmar del publo shishi. Representa el honor y la responsabilidad de protejer las tradiciones de los sujfi."},{"title":"Transfondo","description":"Creada bajo las enseñansas de Athor Amatz e inspirada por el arma legendaria Kozan."}],"modifications":{"slice":7,"restrictions":[{"restriction":"C","reduction":10}]}},"JAk1-GAGA":{"name":"Dagas Diperias","effects":[{"title":"Alquimia","description":"Alqumia empirica de tiempos remotos y efectos desconocidos."},{"title":"Lazado","description":"Lazado instintivo que dotó las dagas con la cualidad de energía oscura calida del aura de su creador"},{"title":"Propiedad","description":"Esta arma puede cortar cualquier expresion de energía inferior a nivel 10 y genera una perdida de energia por corte igual al nivel."},{"title":"Historia","description":"Dagas creadas prefundación de los reinos, catalagodas por cenobitas como objeto en posesión espectral. Los registros revelan que pueden inducir a la agresividad."},{"title":"Transfondo","description":"Reclamadas como propias por Tagnit."}],"modifications":{"damping":20,"restrictions":[{"restriction":"W","reduction":10}]}},"GAg4-EAAA":{"name":"Guardia Valstrak","effects":[{"title":"Transfondo","description":"Esta daga es usada por la guardia personal de la familia Valstrak como insignia. Por lo que no pueden ser obligados a abandonarla ya que los representa."},{"title":"Diseño","description":"Representa los arboles de Fuen y Fuvid, cuya leyenda dice que fueron traidos de la casa del Gran Padre y que los Valstrak guardan con recelo."}]},"ERXX-FAKI-62":{"name":"Escudo de Krall","effects":[{"title":"Construcción","description":"El refuerzo de acero esta construido para proteger las grafias. Ademas cuenta con cuchillas en los extremos del puño y del codo."},{"title":"Grafia","description":"Grabado con habilidad permite aligerar el peso del arma y una habilidad de Ilusion nivel tres"},{"title":"Alquimia","description":"Tratamiento alquimico para contener las grafias"},{"title":"Ilusion","description":"Hablidad activada automaticamente al asumir posicion defensiva. Crea tres copias del portador en formación de falange ocultando la ubicación original del usuario obligando al atacante a liberarse de la ilusion o atacar con probabilidad."},{"title":"Historia","description":"Escudo portado por Krall, lider de falanges de los Keikan durante las guerras de liberación de la nación Sujfi. Tras finalizar el conflicto, Krall decretó que el escudo solo será obtenido derrotando a su anterior poseedor."}],"modifications":{"damage":3,"slice":47,"bleeding":4,"weight":-3,"restrictions":[{"restriction":"C","reduction":5}]}},"BhY2-G/wA-91":{"name":"Arco Largo","effects":[{"title":"Construccion","description":"El refuerzo frontal de cobre para aumentar su resistencia a impactos, y la tension para un mayor daño."}],"modifications":{"damping":"10","damage":1}},"EAGn-GggA":{"name":"Flecha para A.Largo","effects":[],"modifications":{"bleeding":"1"}},"BFaJ-D++I-a2":{"name":"Uniforme Novato","effects":[{"title":"Transfondo","description":"Estos uniformes son entregados a los novatos de la escuela de Magia y Hechiceria de Stevfel que aun no han sido incorporados a una de las ocho casas."},{"title":"Graphy","description":"Las complejas grafias se encargan de proteger al estudiante, reduciendo o negando el daño causado por completo.Tambien permiten mantener un registro del estado de su portador."},{"title":"Lacing","description":"Mantiene un vinculo permanente a la sala de giroscopios del campus, transformando la energia del daño recibido."},{"title":"Alchemy","description":"Materiales tratados con alquimia de alto nivel para soportar las grafias y lazados, ademas de mejorar sus propiedades."},{"title":"Ilusion","description":"Crea en su portador la sensación de dolor o efectos del el daño rechazado."}],"modifications":{"resistence":"5","restrictions":[{"restriction":"R","reduction":"-4"}],"price":{"raw":"200","crafting":"1000","fee":"100"},"damping":"10"}},"GApa-DgKA-4a":{"name":"Espada de Kruget","effects":[{"title":"Grafia","description":"la grafias estan destinadas a detectar curacion por control vital en heridas causadas por el arma, y asi liberar el efecto del material, siendo este efecto equivalente a una habilidad de nivel cuatro."},{"title":"Alqumia","description":"Esta espada esta hecha de acero y cuenta con un alma de hierro de Pherros, tratado para dirigir la dispersion de energia a negar la curacion de las heridas causadas con la espada."},{"title":"Historia","description":"Espada forjada para Lord Kruget en el momento de su posesion como uno de los primeros veinticuatro Lord Terratenietes, Fue usada durante las batallas defensivas durante la Edad Oscura para proteger las murallas de Stevfel."}]}}
+{
+  "GArK-FAOA": {
+    "name": "Espada Shishi",
+    "effects": [
+      {
+        "title": "Alquimia",
+        "description": "La espada ha sido tratada alquimicamente para poder contener una habilidad activa, ademas de mejorar su corte."
+      },
+      {
+        "title": "Grafia",
+        "description": "El grabado al rededor de la guarda absorbe energia del ambiente y la acumula en como 20 puntos de calor en la pieza central"
+      },
+      {
+        "title": "Lazado",
+        "description": "Luego de su activación el calor acumulado en la pieza central es transferido a la hoja concediedole 10, 15, 20 puntos de corte y daño por calor de forma progresiva."
+      },
+      {
+        "title": "Historia",
+        "description": "Arma insignia de la guardia del sujmar del publo shishi. Representa el honor y la responsabilidad de protejer las tradiciones de los sujfi."
+      },
+      {
+        "title": "Transfondo",
+        "description": "Creada bajo las enseñansas de Athor Amatz e inspirada por el arma legendaria Kozan."
+      }
+    ],
+    "modifications": {
+      "slice": 7,
+      "restrictions": [{ "restriction": "C", "reduction": 10 }]
+    }
+  },
+  "JAk1-GAGA": {
+    "name": "Dagas Diperias",
+    "effects": [
+      {
+        "title": "Alquimia",
+        "description": "Alqumia empirica de tiempos remotos y efectos desconocidos."
+      },
+      {
+        "title": "Lazado",
+        "description": "Lazado instintivo que dotó las dagas con la cualidad de energía oscura calida del aura de su creador"
+      },
+      {
+        "title": "Propiedad",
+        "description": "Esta arma puede cortar cualquier expresion de energía inferior a nivel 10 y genera una perdida de energia por corte igual al nivel."
+      },
+      {
+        "title": "Historia",
+        "description": "Dagas creadas prefundación de los reinos, catalagodas por cenobitas como objeto en posesión espectral. Los registros revelan que pueden inducir a la agresividad."
+      },
+      {
+        "title": "Transfondo",
+        "description": "Reclamadas como propias por Tagnit."
+      }
+    ],
+    "modifications": {
+      "damping": 20,
+      "restrictions": [{ "restriction": "W", "reduction": 10 }]
+    }
+  },
+  "GAg4-EAAA": {
+    "name": "Guardia Valstrak",
+    "effects": [
+      {
+        "title": "Transfondo",
+        "description": "Esta daga es usada por la guardia personal de la familia Valstrak como insignia. Por lo que no pueden ser obligados a abandonarla ya que los representa."
+      },
+      {
+        "title": "Diseño",
+        "description": "Representa los arboles de Fuen y Fuvid, cuya leyenda dice que fueron traidos de la casa del Gran Padre y que los Valstrak guardan con recelo."
+      }
+    ]
+  },
+  "ERXX-FAKI-62": {
+    "name": "Escudo de Krall",
+    "effects": [
+      {
+        "title": "Construcción",
+        "description": "El refuerzo de acero esta construido para proteger las grafias. Ademas cuenta con cuchillas en los extremos del puño y del codo."
+      },
+      {
+        "title": "Grafia",
+        "description": "Grabado con habilidad permite aligerar el peso del arma y una habilidad de Ilusion nivel tres"
+      },
+      {
+        "title": "Alquimia",
+        "description": "Tratamiento alquimico para contener las grafias"
+      },
+      {
+        "title": "Ilusion",
+        "description": "Hablidad activada automaticamente al asumir posicion defensiva. Crea tres copias del portador en formación de falange ocultando la ubicación original del usuario obligando al atacante a liberarse de la ilusion o atacar con probabilidad."
+      },
+      {
+        "title": "Historia",
+        "description": "Escudo portado por Krall, lider de falanges de los Keikan durante las guerras de liberación de la nación Sujfi. Tras finalizar el conflicto, Krall decretó que el escudo solo será obtenido derrotando a su anterior poseedor."
+      }
+    ],
+    "modifications": {
+      "damage": 3,
+      "slice": 47,
+      "bleeding": 4,
+      "weight": -3,
+      "restrictions": [{ "restriction": "C", "reduction": 5 }]
+    }
+  },
+  "BhY2-G/wA-91": {
+    "name": "Arco Largo",
+    "effects": [
+      {
+        "title": "Construccion",
+        "description": "El refuerzo frontal de cobre para aumentar su resistencia a impactos, y la tension para un mayor daño."
+      }
+    ],
+    "modifications": { "damping": "10", "damage": 1 }
+  },
+  "EAGn-GggA": {
+    "name": "Flecha para A.Largo",
+    "effects": [],
+    "modifications": { "bleeding": "1" }
+  },
+  "BFaJ-D++I-a2": {
+    "name": "Uniforme Novato",
+    "effects": [
+      {
+        "title": "Transfondo",
+        "description": "Estos uniformes son entregados a los novatos de la escuela de Magia y Hechiceria de Stevfel que aun no han sido incorporados a una de las ocho casas."
+      },
+      {
+        "title": "Graphy",
+        "description": "Las complejas grafias se encargan de proteger al estudiante, reduciendo o negando el daño causado por completo.Tambien permiten mantener un registro del estado de su portador."
+      },
+      {
+        "title": "Lacing",
+        "description": "Mantiene un vinculo permanente a la sala de giroscopios del campus, transformando la energia del daño recibido."
+      },
+      {
+        "title": "Alchemy",
+        "description": "Materiales tratados con alquimia de alto nivel para soportar las grafias y lazados, ademas de mejorar sus propiedades."
+      },
+      {
+        "title": "Ilusion",
+        "description": "Crea en su portador la sensación de dolor o efectos del el daño rechazado."
+      }
+    ],
+    "modifications": {
+      "resistence": "5",
+      "restrictions": [{ "restriction": "R", "reduction": "-4" }],
+      "price": { "raw": "200", "crafting": "1000", "fee": "100" },
+      "damping": "10"
+    }
+  },
+  "GApa-DgKA-4a": {
+    "name": "Espada de Kruget",
+    "effects": [
+      {
+        "title": "Grafia",
+        "description": "la grafias estan destinadas a detectar curacion por control vital en heridas causadas por el arma, y asi liberar el efecto del material, siendo este efecto equivalente a una habilidad de nivel cuatro."
+      },
+      {
+        "title": "Alqumia",
+        "description": "Esta espada esta hecha de acero y cuenta con un alma de hierro de Pherros, tratado para dirigir la dispersion de energia a negar la curacion de las heridas causadas con la espada."
+      },
+      {
+        "title": "Historia",
+        "description": "Espada forjada para Lord Kruget en el momento de su posesion como uno de los primeros veinticuatro Lord Terratenietes, Fue usada durante las batallas defensivas durante la Edad Oscura para proteger las murallas de Stevfel."
+      }
+    ]
+  },
+  "GA1I-GCeA": {
+    "name": "Hachas Circulares",
+    "effects": [
+      {
+        "title": "Transfondo",
+        "description": "Estas armas son consideradas un trofeo en la colección de la familia principal de los Valstrak."
+      },
+      {
+        "title": "Historia",
+        "description": "Durante el final de las batallas del cierre de frontera entre el imperio vestkou de Kozam y el basto reino de Wettu, estas armas fueron entregadas a Jorkel Valstrak por el lider de una tribu contrincante como reconocimiento por su valía en batalla y simbolo de amistad y respeto."
+      },
+      { "title": "Graphy", "description": "Grabado con lazado permanente." },
+      {
+        "title": "Lacing",
+        "description": "Transmite el impulso aplicado sobre el hacha blandida en la misma dirección sobre el hacha arrojada."
+      },
+      {
+        "title": "Alchemy",
+        "description": "Tratamiento para soportar el lazado y las grafias, adicionalmente modifica su densidad para modificar su centro de masa."
+      }
+    ],
+    "modifications": { "throwing": "-10" }
+  }
+}
