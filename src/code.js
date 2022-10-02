@@ -58,9 +58,8 @@ function decodeCustom(code, item_class) {
 	const raw = atob(code.split("-")[0]);
 	const data =
 		raw.charCodeAt(2) + (raw.charCodeAt(1) << 8) + (raw.charCodeAt(0) << 16);
-
 	const result = {
-		origin: util.getKey(dict.origins, (data >> 17) & 0xf),
+		origin: util.getKey(dict.origins, (data >> 17) & 0x7f),
 		sub_type: util.getKey(
 			dict.classes[item_class].sub_types,
 			(data >> 13) & 0xf
@@ -79,7 +78,7 @@ function decodeCustom(code, item_class) {
 			ilusion: (data >> 3) & 0x1,
 			mental_manipulation: (data >> 2) & 0x1,
 			potentiation: (data >> 1) & 0x1,
-			vital_cotrol: data & 0x1,
+			vital_control: data & 0x1,
 		},
 	};
 	result.flags = Object.keys(result.flags).filter((key) => result.flags[key]);
@@ -109,7 +108,7 @@ function encodeCustom(params) {
 		result += params.extra.flags.includes("ilusion") << 3;
 		result += params.extra.flags.includes("mental_manipulation") << 2;
 		result += params.extra.flags.includes("potentiation") << 1;
-		result += params.extra.flags.includes("vital_cotrol") << 0;
+		result += params.extra.flags.includes("vital_control") << 0;
 	}
 	result = ntob(result);
 	if (params.extra.material && params.extra.thickness) {

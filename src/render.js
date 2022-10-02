@@ -281,10 +281,10 @@ async function back(obj, filename) {
 		);
 	}
 
-	let next_y = 250;
+	let next_y = 160;
 	obj.effects?.forEach((effect, idx) => {
-		text(effect.title, [100, next_y - 80], 40, "start", "#000", "bold");
-		next_y = 200 + multiline(effect.description, [100, next_y], 1100, 40);
+		text(effect.title, [100, next_y - 60], 40, "start", "#000", "bold");
+		next_y = 160 + multiline(effect.description, [100, next_y], 1100, 40);
 	});
 
 	text(s("Tierras de Meye"), [1400, 2075], 30, "end", "#FFF", "bold");

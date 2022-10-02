@@ -113,7 +113,10 @@ function calculateDamage(params) {
 			break;
 		case "de_tension":
 			//damage calculed by damping
-			base_damage = Math.max(0, Math.round((damping * params.dimension) / 10));
+			base_damage = Math.max(
+				0,
+				Math.round((damping * params.dimension) / 10)
+			);
 			break;
 		case "deflagrante":
 		case "detonante":
@@ -238,7 +241,9 @@ function calculateRange(params) {
 	switch (params.type) {
 		case "de_tension":
 			range_max =
-				Math.round(Math.abs(290 + 140 * Math.log(params.dimension)) / 10) * 10;
+				Math.round(
+					Math.abs(290 + 140 * Math.log(params.dimension)) / 10
+				) * 10;
 			break;
 		case "deflagrante":
 		case "detonante":
@@ -279,7 +284,10 @@ function calculateDamping(params) {
 	if (params.class == "explosivo") {
 		return material.damping * raw_material.size;
 	}
-	return Math.min((params.thickness / 5) * material.damping, material.damping);
+	return Math.min(
+		(params.thickness / 5) * material.damping,
+		material.damping
+	);
 }
 
 /*
@@ -309,7 +317,8 @@ function calculatePrice(params) {
 	const level = calculateRequiredLevel(params);
 	const raw = raw_material.price;
 	let crafting = Math.ceil(
-		raw_material.price * (0.2 + Math.abs(params.dimension - params.thickness))
+		raw_material.price *
+			(0.2 + Math.abs(params.dimension - params.thickness))
 	);
 	const fee = objects.crafting_level[level].fee;
 	if (params.class == "explosivo") {
@@ -379,7 +388,8 @@ function applyExtra(obj) {
 				reduction,
 			});
 		}
-		obj.thickness = Number(obj.thickness) + Number(obj.extra.thickness || 0);
+		obj.thickness =
+			Number(obj.thickness) + Number(obj.extra.thickness || 0);
 		//recalculate damage, bleeding and slicing, and trowing whith new thickness
 		obj.throwing = calculateThrowing(obj);
 		obj.damage = calculateDamage(obj);
@@ -397,7 +407,10 @@ function applyExtra(obj) {
 		if (obj.rarity != "sobrenatural" && obj.rarity != "legendario") {
 			obj.rarity = "especial";
 		}
-		if (obj.rarity != "legendario" && obj.extra.flags.includes("cenobism")) {
+		if (
+			obj.rarity != "legendario" &&
+			obj.extra.flags.includes("cenobism")
+		) {
 			obj.rarity = "sobrenatural";
 		}
 	}
@@ -536,7 +549,9 @@ function create(params) {
 	};
 	const result = applyExtra(applyMods(base_object));
 	const id =
-		result.code + (result.custom_code ? "-" : "") + (result.custom_code || "");
+		result.code +
+		(result.custom_code ? "-" : "") +
+		(result.custom_code || "");
 	if (params.name) {
 		db.upsert(id, params);
 	}
@@ -553,6 +568,7 @@ function load(base_code, custom_code) {
 	const params = code.decodeBase(base_code);
 	if (custom_code) {
 		params.extra = code.decodeCustom(custom_code, params.class);
+		console.log(params.extra,custom_code);
 	}
 	const data = db.find(`${base_code}-${custom_code}`);
 	if (data) {
