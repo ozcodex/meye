@@ -1,46 +1,37 @@
-# meye
+# Lands of Meye
 
-calculator to create items using the rules of the game.
+This project contais a set of tools to make easier the way how Lands of Meye is
+played.
 
-features:
-- allow to create weapons
-- allow tho create armors and shields
-- easy to maintain materials
-- more materials!!
-- item code, generate and recover
-- export card as image
-- common objects
-- item generator
-- custom code with origin, subtypes and flags for mystycs 
-- code extra material and thickness
-- change crafting level if have some extra flags
-- apply card modifications
-- show extras on card
-- create card reverse
+## Tools
+
+**Forge**_(WIP)_: Allows to create items of the game, mainly designed for armors and 
+weapons.
+
+**Academy**_(TBD)_: Where the heroes are created, allows to create new 
+characters, distribute experience points and even create npcs.
 
 ## To do
-smaller font in the card name
-charge numbers colors if a mod was applied
-create subtypes and specializations
-change flags to spanish
-change modifications to spanish
-mix object.json and dictionary.json
-añadir mas lugares
-fix restriction contatenating vs addition
 
-v2:
-add more types of common objects
-add components
-explosives
-poison, venom, toxins and acids
-
-v3:
-create and read qr codes
-graphical interface
-edibles
-fluids and containers
-write down all the rules for item creation
-generate tables (export data in csv)
+- POO refactor
+- smaller font in the card name
+- charge numbers colors if a mod was applied
+- create subtypes and specializations
+- change flags to spanish
+- change modifications to spanish
+- mix object.json and dictionary.json
+- añadir mas lugares
+- fix restriction contatenating vs addition
+- add more types of common objects
+- add components
+- explosives
+- poison, venom, toxins and acids
+- create and read qr codes
+- graphical interface
+- edibles
+- fluids and containers
+- write down all the rules for item creation
+- generate tables (export data in csv)
 
 ## Usage
 
