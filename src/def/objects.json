@@ -135,17 +135,41 @@
 					"weight_factor": 0.5
 				},
 				"solido": {
+					"weight_factor": 1.5
+				},
+				"instrumento_musical": {
+					"weight_factor": 0.8
+				},
+				"comestible": {
+					"weight_factor": 0.5
+				},
+				"contenedor": {
+					"weight_factor": 0.5
+				},
+				"utilitario": {
+					"weight_factor": 1
+				},
+				"escritura": {
+					"weight_factor": 1
+				},
+				"amuleto": {
+					"weight_factor": 1
+				},
+				"ornamento": {
 					"weight_factor": 1
 				}
 			},
 			"dimension": {
-				"pequenna": {
+				"diminito": {
+					"value": 0.1
+				},
+				"pequenno": {
 					"value": 0.25
 				},
-				"media_pieza": {
+				"mediano": {
 					"value": 0.5
 				},
-				"pieza_completa": {
+				"una_pieza": {
 					"value": 1
 				},
 				"grande": {

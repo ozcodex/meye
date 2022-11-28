@@ -96,7 +96,7 @@ async function front(obj, filename) {
 	}
 
 	const desc = [
-		obj.class,
+		obj.class == 'comun'? '': obj.class,
 		obj.type,
 		obj.class == "explosivo" ? material.get(obj.material).name : "",
 		obj.extra?.sub_type,
@@ -254,7 +254,7 @@ async function front(obj, filename) {
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	writeFileSync("./out/" + filename + "_front.png", buffer);
+	writeFileSync("./out/" + sanitizeFilename(filename) + "_front.png", buffer);
 }
 
 async function back(obj, filename) {
@@ -291,7 +291,7 @@ async function back(obj, filename) {
 
 	// render and save file
 	const buffer = canvas.toBuffer("image/png");
-	writeFileSync("./out/" + filename + "_back.png", buffer);
+	writeFileSync("./out/" + sanitizeFilename(filename) + "_back.png", buffer);
 }
 
 async function periodic_table() {

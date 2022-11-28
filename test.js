@@ -10,7 +10,7 @@ import { create_card, periodic_table } from "./src/render.js";
   // await create_card(load("BhY2", "G/wA-91"));
   // await create_card(load("EAGn", "GggA"));
   // await create_card(load("BFaJ", "D++I-a2"));
-  await create_card(load("BFeH","P/1B"))
+  //await create_card(load("BFeH","P/1B"))
+  await create_card(load("Bomm","Dp+A-11"))
   await periodic_table();
 })();
-
