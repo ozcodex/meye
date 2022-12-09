@@ -144,7 +144,7 @@ async function front(obj, filename) {
 	if (existsSync(`./src/img/objects/${id}.png`)) {
 		await image("objects/" + id, [100, 375], [1300, 700]);
 	} else {
-		await image("types/" + obj.type, [100, 375], [1300, 700]);
+		await image("objects/desconocido", [100, 375], [1300, 700]);
 	}
 	if (obj.custom_code) {
 		strokeText(`#${obj.code}`, [110, 980], 40, "start", "#FFF", "bold");
