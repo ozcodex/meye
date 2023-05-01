@@ -568,7 +568,6 @@ function load(base_code, custom_code) {
 	const params = code.decodeBase(base_code);
 	if (custom_code) {
 		params.extra = code.decodeCustom(custom_code, params.class);
-		console.log(params.extra,custom_code);
 	}
 	const data = db.find(`${base_code}-${custom_code}`);
 	if (data) {
