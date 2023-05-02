@@ -178,14 +178,12 @@ def test():
         print()
 
 if __name__ == '__main__':
-    phrase = "Clamo a ti señor Hafis, dios del saber, con humildad y sinceridaden mi ser, que escuches mi plegaria con atención, y descienda tu gracia sobre mi situación. Borra de las mentes de quienes nos persiguen, todo rastro de los delitos que aún nos afligen, y aunque seamos vistos como héroes redimidos, no queremos olvidar lo que nuestra historia ha sido. Te ruego que corrijas los registros escritos, y cualquier indicio que quede de nuestro delitos, Que nuestro pasado criminal sea enmendado, y así recuperemos lo que tanto hemos anhelado. Así te ruego Hafis, dios del conocimiento, que tus bendiciones lleguen a nuestro encuentro, que tus enseñanzas nos guíen en el camino, para lograr llegar así a un glorioso destino."
-    # split the phrase in words, using space as separator and keeping the punctuation
-    words = re.split(r'(\W+)', phrase)
-    # translate each word
-    for i in range(len(words)):
-        if re.match(r'\w+', words[i]):
-            words[i] = translate_to_sujfi(words[i])
-    # join the words in a single string
-    phrase = ''.join(words)
-    print(phrase)
+    # in a infinite loop ask for a word and translate it to sujfi
+    # if the word is 'exit' the program ends
+    while True:
+        word = input('Enter a word: ')
+        if word == 'exit':
+            break
+        print(split_syllables(word), '->', translate_syllables(split_syllables(word)))
+
     
