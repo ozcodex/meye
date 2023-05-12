@@ -1,3 +1,4 @@
+'''This module provides regular expression matching operations'''
 import re
 
 SUJFI = {
@@ -86,11 +87,11 @@ def translate_syllables(syllables):
     Takes a list of syllables and translate them to sujfi.
     if a letter is not in the dictionary, it is ignored.
     """
-    for i in range(len(syllables)):
-        if syllables[i] in SUJFI:
-            syllables[i] = SUJFI[syllables[i]]
+    for index, syllable in enumerate(syllables):
+        if syllable in SUJFI:
+            syllables[index] = SUJFI[syllable]
         else:
-            syllables[i] = '-' # ignore the syllable
+            syllables[index] = '-' # ignore the syllable
     return syllables
 
 def join_syllables(syllables):
@@ -99,7 +100,7 @@ def join_syllables(syllables):
     """
     word = ''
     for syllable in syllables:
-        word += syllable
+        word.join(syllable)
     return word
 
 def translate_to_sujfi(word):
@@ -134,9 +135,9 @@ def translate_from_sujfi(word):
         else:
             syllables.append('-')
             i += 1
-    for i in range(len(syllables)):
-        if syllables[i] in SUJFI.values():
-            syllables[i] = list(SUJFI.keys())[list(SUJFI.values()).index(syllables[i])]
+    for index, syllable in enumerate(syllables):
+        if syllable in SUJFI.values():
+            syllables[index] = list(SUJFI.keys())[list(SUJFI.values()).index(syllable)]
     return join_syllables(syllables)
 
 def dict_healt():
@@ -171,9 +172,9 @@ def test():
         'afliccion',
         'marina',
         ]
-    for test in test_cases:
-        result = translate_to_sujfi(test)
-        print(test, '->', result)
+    for test_case in test_cases:
+        result = translate_to_sujfi(test_case)
+        print(test_case, '->', result)
         print(result, '->', translate_from_sujfi(result))
         print()
 
@@ -181,9 +182,7 @@ if __name__ == '__main__':
     # in a infinite loop ask for a word and translate it to sujfi
     # if the word is 'exit' the program ends
     while True:
-        word = input('Enter a word: ')
-        if word == 'exit':
+        input_word = input('Enter a word: ')
+        if input_word == 'exit':
             break
-        print(split_syllables(word), '->', translate_syllables(split_syllables(word)))
-
-    
+        print(split_syllables(input_word), '->', translate_syllables(split_syllables(input_word)))
